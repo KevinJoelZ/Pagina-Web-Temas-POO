@@ -707,24 +707,14 @@ public class Main {
       <h2>Videos Educativos</h2>
       <div class="videos-grid">
         <div class="video-container">
-          <h3>Herencia en Java - Conceptos Fundamentales</h3>
+          <h3>ENCAPSULAMIENTO 💊 en la POO</h3>
           <div class="video-wrapper">
             <video controls width="100%" height="400" class="video-player">
-              <source src="videos/herencia.mp4" type="video/mp4">
-              Tu navegador no soporta la reproducción de video. <a href="videos/herencia.mp4" download>Descargar video</a>
+              <source src="videos/ENCAPSULAMIENTO 💊 en la POO.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/ENCAPSULAMIENTO 💊 en la POO.mp4" download>Descargar video</a>
             </video>
           </div>
-          <p>Aprende cómo crear jerarquías de clases con herencia, uso de super y constructores, y cómo reutilizar código de manera efectiva.</p>
-        </div>
-        <div class="video-container">
-          <h3>Polimorfismo y Sobrescritura de Métodos</h3>
-          <div class="video-wrapper">
-            <video controls width="100%" height="400" class="video-player">
-              <source src="videos/polimorfismo.mp4" type="video/mp4">
-              Tu navegador no soporta la reproducción de video. <a href="videos/polimorfismo.mp4" download>Descargar video</a>
-            </video>
-          </div>
-          <p>Descubre cómo el polimorfismo permite que objetos de diferentes tipos respondan al mismo método de maneras diferentes.</p>
+          <p>Aprende los conceptos fundamentales del encapsulamiento en Programación Orientada a Objetos y cómo aplicarlos correctamente.</p>
         </div>
       </div>
     </section>
@@ -737,6 +727,32 @@ public class Main {
   <footer class="site-footer">
     <p>&copy; Página web POO 2026 - Todos los derechos reservados.</p>
   </footer>
+  
+  <!-- Botones de navegación profesional -->
+  <div class="nav-buttons-container">
+    <button class="nav-button top" data-tooltip="Ir al principio" onclick="scrollToTop()">↑</button>
+    <button class="nav-button" data-tooltip="Subir página" onclick="scrollUp()">↑</button>
+    <button class="nav-button" data-tooltip="Bajar página" onclick="scrollDown()">↓</button>
+    <button class="nav-button bottom" data-tooltip="Ir al final" onclick="scrollToBottom()">↓</button>
+  </div>
+  
   <script src="js/main.js" defer></script>
+  <script>
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function scrollToBottom() {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    
+    function scrollUp() {
+      window.scrollBy({ top: -window.innerHeight * 0.8, behavior: 'smooth' });
+    }
+    
+    function scrollDown() {
+      window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>

@@ -1001,6 +1001,32 @@ public class TestAutomovil {
   <footer class="site-footer">
     <p>&copy; Página web POO 2026 - Todos los derechos reservados.</p>
   </footer>
+  
+  <!-- Botones de navegación profesional -->
+  <div class="nav-buttons-container">
+    <button class="nav-button top" data-tooltip="Ir al principio" onclick="scrollToTop()">↑</button>
+    <button class="nav-button" data-tooltip="Subir página" onclick="scrollUp()">↑</button>
+    <button class="nav-button" data-tooltip="Bajar página" onclick="scrollDown()">↓</button>
+    <button class="nav-button bottom" data-tooltip="Ir al final" onclick="scrollToBottom()">↓</button>
+  </div>
+  
   <script src="js/main.js" defer></script>
+  <script>
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function scrollToBottom() {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    
+    function scrollUp() {
+      window.scrollBy({ top: -window.innerHeight * 0.8, behavior: 'smooth' });
+    }
+    
+    function scrollDown() {
+      window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>

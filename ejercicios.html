@@ -644,24 +644,14 @@ public class Zoo {
       <h2>Videos Educativos</h2>
       <div class="videos-grid">
         <div class="video-container">
-          <h3>Ejercicios Prácticos: Modelado Paso a Paso</h3>
+          <h3>121 . Curso de Java II POO II Abstracción - clases y métodos abstractos</h3>
           <div class="video-wrapper">
             <video controls width="100%" height="400" class="video-player">
-              <source src="videos/ejercicios-modelado.mp4" type="video/mp4">
-              Tu navegador no soporta la reproducción de video. <a href="videos/ejercicios-modelado.mp4" download>Descargar video</a>
+              <source src="videos/121 . Curso de Java II POO II Abstracción - clases y métodos abstractos.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/121 . Curso de Java II POO II Abstracción - clases y métodos abstractos.mp4" download>Descargar video</a>
             </video>
           </div>
-          <p>Aprende cómo analizar un problema, diseñar la jerarquía, e implementar soluciones robustas con herencia y polimorfismo.</p>
-        </div>
-        <div class="video-container">
-          <h3>Debugging y Pruebas de Jerarquías</h3>
-          <div class="video-wrapper">
-            <video controls width="100%" height="400" class="video-player">
-              <source src="videos/debugging-jerarquias.mp4" type="video/mp4">
-              Tu navegador no soporta la reproducción de video. <a href="videos/debugging-jerarquias.mp4" download>Descargar video</a>
-            </video>
-          </div>
-          <p>Técnicas para debuggear código con herencia, validar polimorfismo y pruebas de colecciones polimórficas.</p>
+          <p>Aprende sobre la abstracción en Programación Orientada a Objetos, clases y métodos abstractos, y cómo aplicar estos conceptos en Java.</p>
         </div>
       </div>
     </section>
@@ -674,6 +664,32 @@ public class Zoo {
   <footer class="site-footer">
     <p>&copy; Página web POO 2026 - Todos los derechos reservados.</p>
   </footer>
+  
+  <!-- Botones de navegación profesional -->
+  <div class="nav-buttons-container">
+    <button class="nav-button top" data-tooltip="Ir al principio" onclick="scrollToTop()">↑</button>
+    <button class="nav-button" data-tooltip="Subir página" onclick="scrollUp()">↑</button>
+    <button class="nav-button" data-tooltip="Bajar página" onclick="scrollDown()">↓</button>
+    <button class="nav-button bottom" data-tooltip="Ir al final" onclick="scrollToBottom()">↓</button>
+  </div>
+  
   <script src="js/main.js" defer></script>
+  <script>
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function scrollToBottom() {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    
+    function scrollUp() {
+      window.scrollBy({ top: -window.innerHeight * 0.8, behavior: 'smooth' });
+    }
+    
+    function scrollDown() {
+      window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
