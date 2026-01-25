@@ -1,0 +1,726 @@
+<<<<<<< HEAD
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fundamentos - POO</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="brand"><a href="index.html">POO</a></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="fundamentos.html">Fundamentos</a></li>
+        <li><a href="instanciacion.html">Instanciación</a></li>
+        <li><a href="herencia.html">Herencia</a></li>
+        <li><a href="ejercicios.html">Ejercicios</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="content">
+    <h1>Fundamentos de la Programación Orientada a Objetos</h1>
+
+    <p>En esta página profundizaremos en <strong>Encapsulación</strong> y <strong>Abstracción</strong>. Verás definiciones formales, ventajas, buenas prácticas en Java, diagramas ilustrativos y ejemplos prácticos listos para ejecutar.</p>
+
+    <section id="encapsulacion">
+      <h2>Encapsulación</h2>
+      <p><strong>Definición:</strong> La encapsulación es el mecanismo de <em>ocultar</em> los datos internos de una clase y exponer sólo lo necesario mediante una interfaz pública. Esto protege la integridad del objeto y permite cambiar la implementación interna sin afectar a los consumidores del objeto.</p>
+
+      <h3>¿Por qué es importante?</h3>
+      <ul>
+        <li>Protege invariantes del objeto (por ejemplo, que un saldo no sea negativo).</li>
+        <li>Reduce el acoplamiento entre módulos.</li>
+        <li>Permite validar y sanitizar datos en puntos controlados (setters o constructores).</li>
+        <li>Facilita el mantenimiento y la evolución del código.</li>
+      </ul>
+
+      <div class="figure">
+        <svg class="svg-illustration" viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Encapsulación - diagrama">
+          <rect x="6" y="6" width="688" height="168" rx="14" fill="#ffffff" stroke="#dceffd" />
+          <text x="26" y="36" font-size="16" fill="#0f1724" font-weight="700">BankAccount (encapsulado)</text>
+          <text x="40" y="66" font-size="13" fill="#374151">Campos privados: balance, owner</text>
+          <text x="40" y="86" font-size="13" fill="#374151">Métodos públicos: deposit(), withdraw(), getBalance()</text>
+          <g>
+            <rect x="480" y="46" width="176" height="86" rx="8" fill="#f1f9ff" stroke="#c8e4ff" />
+            <text x="494" y="72" font-size="12" fill="#0f1724">API pública</text>
+            <text x="494" y="92" font-size="12" fill="#374151">(lo que usan otras clases)</text>
+          </g>
+          <path d="M 420 80 L 480 80" stroke="#9aaed0" stroke-width="2" stroke-dasharray="6 4" />
+          <text x="332" y="120" font-size="11" fill="#6b7280">Implementación interna oculta</text>
+        </svg>
+      </div>
+
+      <h3>Modificadores de acceso en Java</h3>
+      <p>Usa <code>private</code> para datos internos; métodos públicos (<code>public</code>) para la interfaz; <code>protected</code> cuando quieras permitir acceso a subclases dentro del paquete; el modificador por defecto (package-private) restringe al paquete. Prefiere mantener el mínimo acceso necesario.</p>
+
+      <h3>Ejemplo práctico (BankAccount)</h3>
+      <pre><code class="language-java">public class BankAccount {
+    private double balance; // estado encapsulado
+    private final String owner;
+
+    public BankAccount(String owner, double initial) {
+        this.owner = owner;
+        this.balance = Math.max(0, initial);
+    }
+
+    public String getOwner() { return owner; }
+
+    public double getBalance() { return balance; }
+
+    public void deposit(double amount) {
+        if (amount &gt; 0) balance += amount;
+    }
+
+    public boolean withdraw(double amount) {
+        if (amount &gt; 0 &amp;&amp; amount &lt;= balance) {
+            balance -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    // método interno no accesible desde fuera
+    private boolean hasSufficientFunds(double amount) {
+        return amount &lt;= balance;
+    }
+}
+</code></pre>
+
+      <p>Observa cómo mantenemos la lógica (validaciones y estados) dentro de la clase.</p>
+
+      <h3>Cards de Refuerzo: Encapsulación</h3>
+      <div class="cards-grid-teoricos">
+        <div class="card-teorico">
+          <h4>Modificadores de Acceso</h4>
+          <p><code>private</code>: solo la clase. <code>protected</code>: clase y subclases. <code>public</code>: cualquier lugar. <code>default</code>: mismo paquete. Usa siempre el más restrictivo posible para maximizar la seguridad del código y ocultar detalles de implementación.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Getters y Setters</h4>
+          <p>Proporcionan control sobre atributos privados. Los setters pueden validar datos antes de asignar, garantizando invariantes. Los getters pueden retornar copias defensivas para evitar mutaciones externas no deseadas del estado interno.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Inmutabilidad</h4>
+          <p>Las clases inmutables no pueden cambiar después de su creación. Usa <code>final</code> en atributos y no proporciones setters. Beneficios: seguridad en multi-threading, caché seguro y lógica más predecible.</p>
+        </div>
+      </div>
+
+      <h3>Cómo usar Encapsulación en la Práctica</h3>
+      <div class="info-box">
+        <ol>
+          <li><strong>Declara atributos como privados:</strong> usa <code>private</code> para todos los datos internos que no necesiten acceso externo directo.</li>
+          <li><strong>Proporciona métodos públicos:</strong> crea getters para lectura y setters para escritura, ambos con validación si es necesario.</li>
+          <li><strong>Valida en los setters:</strong> asegúrate de que los datos cumplan con las reglas de negocio antes de ser asignados.</li>
+          <li><strong>Retorna copias en getters:</strong> cuando regreses objetos mutables (como listas), retorna copias para evitar modificaciones externas no deseadas.</li>
+          <li><strong>Usa constructores para inicializar:</strong> inicializa el estado válido del objeto desde el constructor.</li>
+        </ol>
+      </div>
+
+      <h3>Buenas Prácticas de Encapsulación</h3>
+      <div class="cards-grid-teoricos">
+        <div class="card-teorico">
+          <h4>Principio de Mínimo Privilegio</h4>
+          <p>Solo expone lo necesario. Evita hacer públicos atributos o métodos internos. Cada exposición innecesaria aumenta el acoplamiento y dificulta el mantenimiento futuro del código.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Validación de Datos</h4>
+          <p>Realiza validaciones robustas en constructores y setters. Lanza excepciones con mensajes claros cuando los datos no cumplan con los requisitos. Ejemplo: lanzar <code>IllegalArgumentException</code> si un saldo es negativo.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Documentación Clara</h4>
+          <p>Documenta con Javadoc los métodos públicos indicando qué validan, qué excepciones pueden lanzar y qué retornan. Facilita el uso correcto por otros programadores.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Copias Defensivas</h4>
+          <p>Cuando regreses objetos mutables (listas, arrays), retorna copias en lugar del original. Así evitas que código externo modifique el estado interno sin pasar por los setters validadores.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Invariantes del Objeto</h4>
+          <p>Define condiciones que siempre deben ser ciertas (p. ej., saldo ≥ 0). Garantiza estas condiciones mediante validación en constructores y setters para mantener la integridad del objeto.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Evita Acceso Directo a Datos</h4>
+          <p>Nunca hagas públicos los atributos aunque no tengan setter. Usa getters/setters siempre. Esto permite cambiar la implementación interna sin afectar a los consumidores del código.</p>
+        </div>
+      </div>
+
+    <section id="abstraccion">
+      <h2>Abstracción</h2>
+      <p><strong>Definición:</strong> La abstracción reduce la complejidad concentrándose en los aspectos relevantes de un objeto para un contexto determinado. En Java se implementa con interfaces y clases abstractas que especifican contratos y comportamientos sin detallar la implementación.</p>
+
+      <h3>Abstract class vs Interface (cuando usar cada una)</h3>
+      <ul>
+        <li><strong>Interface:</strong> define un contrato puro; permite múltiples implementaciones; ideal para comportamientos que varias clases no relacionadas deben ofrecer.</li>
+        <li><strong>Clase abstracta:</strong> útil cuando existe una relación semántica (is-a) y se desea compartir código común entre implementaciones.</li>
+      </ul>
+
+      <div class="figure">
+        <svg class="svg-illustration" viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Abstracción - diagrama">
+          <rect x="8" y="8" width="180" height="60" rx="10" fill="#eef6ff" stroke="#b7d7ff" />
+          <text x="20" y="38" font-size="14" fill="#0f1724" font-weight="700">Drawable (interface)</text>
+
+          <rect x="240" y="8" width="160" height="60" rx="10" fill="#fff7ed" stroke="#ffd7a7" />
+          <text x="252" y="38" font-size="14" fill="#0f1724" font-weight="700">CanvasCircle</text>
+
+          <rect x="480" y="8" width="160" height="60" rx="10" fill="#effaf5" stroke="#bff0d0" />
+          <text x="492" y="38" font-size="14" fill="#0f1724" font-weight="700">SvgRectangle</text>
+
+          <path d="M188 38 L240 38" stroke="#9aaed0" stroke-width="2" />
+          <path d="M400 38 L480 38" stroke="#9aaed0" stroke-width="2" />
+        </svg>
+      </div>
+
+      <h3>Ejemplo en Java (interfaz y uso)</h3>
+      <pre><code class="language-java">public interface Pagable {
+    double calcularPago();
+}
+
+public class Empleado implements Pagable {
+    private String nombre;
+    private double salario; // salario bruto
+
+    public Empleado(String nombre, double salario) {
+        this.nombre = nombre;
+        this.salario = Math.max(0, salario);
+    }
+
+    public String getNombre() { return nombre; }
+    public double getSalario() { return salario; }
+
+    public void setSalario(double salario) {
+        if (salario &gt;= 0) this.salario = salario;
+    }
+
+    @Override
+    public double calcularPago() {
+        // ejemplo simple: retención del 10%
+        return salario * 0.90;
+    }
+}
+</code></pre>
+
+      <p>Gracias a la abstracción, cualquier código que dependa de <code>Pagable</code> puede trabajar con empleados, facturas u otros objetos que implementen el contrato sin conocer detalles internos.</p>
+
+      <h3>Cards de Refuerzo: Abstracción</h3>
+      <div class="cards-grid-teoricos">
+        <div class="card-teorico">
+          <h4>Clases Abstractas</h4>
+          <p>Define comportamiento común compartido entre subclases relacionadas. Usa <code>abstract</code> para especificar contratos que las subclases deben implementar. Ideal cuando existe relación "is-a" y deseas compartir código funcional.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Interfaces y Contratos</h4>
+          <p>Una interfaz define un contrato puro sin implementación. Permite múltiples implementaciones y desacoplamiento. Ideal para comportamientos que varias clases no relacionadas deben ofrecer de forma polimórfica.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Polimorfismo</h4>
+          <p>Permite objetos de diferentes tipos responder al mismo mensaje de manera apropiada. Gracias a la abstracción, código genérico puede trabajar con muchos tipos distintos sin conocer detalles específicos de cada implementación.</p>
+        </div>
+      </div>
+
+      <h3>Cómo usar Abstracción en la Práctica</h3>
+      <div class="info-box">
+        <ol>
+          <li><strong>Identifica abstracciones comunes:</strong> observa qué comportamientos compartirán varias clases (p. ej., calcular, dibujar, procesar).</li>
+          <li><strong>Define contratos con interfaces:</strong> crea interfaces que especifiquen qué métodos deben implementar las clases.</li>
+          <li><strong>Usa clases abstractas para comportamiento común:</strong> cuando varias clases comparten código e implementación, usa una clase abstracta base.</li>
+          <li><strong>Programa hacia abstracciones:</strong> depende de interfaces o clases abstractas, no de implementaciones concretas, para mayor flexibilidad.</li>
+          <li><strong>Aplica polimorfismo:</strong> escribe código que trabaje con tipos abstractos; en tiempo de ejecución responderán diferente según su tipo real.</li>
+        </ol>
+      </div>
+
+      <h3>Buenas Prácticas de Abstracción</h3>
+      <div class="cards-grid-teoricos">
+        <div class="card-teorico">
+          <h4>Segregación de Interfaces</h4>
+          <p>Crea interfaces pequeñas y enfocadas en un único propósito. Evita interfaces "gordas" que obliguen a implementaciones innecesarias. Ejemplo: es mejor tener <code>Dibujable</code> y <code>Movible</code> separadas.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Principio Abierto/Cerrado</h4>
+          <p>Diseña clases e interfaces abiertas a extensión pero cerradas a modificación. Nuevas implementaciones deben agregarse sin cambiar código existente. Esto reduce riesgos de romper código funcional.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Principio de Sustitución de Liskov</h4>
+          <p>Las subclases deben poder reemplazar a sus superclases sin romper el funcionamiento. Respeta el contrato de la clase base en tus implementaciones. Evita comportamientos inesperados.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Entiende el Contexto de Uso</h4>
+          <p>Abstrae solo lo relevante para el problema. Una abstracción demasiado genérica es difícil de usar; una demasiado específica reduce reutilización. Balance es clave.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Evita Jerarquías Profundas</h4>
+          <p>Mantén las jerarquías de herencia planas y simples. Jerarquías muy profundas son difíciles de entender y mantener. Si necesitas múltiples comportamientos, considera composición sobre herencia.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Composición sobre Herencia</h4>
+          <p>Cuando sea posible, prefiere composición (tener objetos) sobre herencia. Es más flexible, evita el acoplamiento y permite cambiar comportamiento en tiempo de ejecución.</p>
+        </div>
+      </div>
+
+    <section id="ejercicio">
+      <h2>Ejercicio práctico (resuelto)</h2>
+      <p>Enunciado: crear <code>Empleado</code>, <code>Pagable</code> y una clase <code>Test</code> que muestre los pagos por consola. A continuación la solución completa y comentada.</p>
+
+      <div class="solution">
+        <h3>Solución: código Java</h3>
+        <pre><code class="language-java">// Pagable.java
+public interface Pagable {
+    double calcularPago();
+}
+
+// Empleado.java
+public class Empleado implements Pagable {
+    private String nombre;
+    private double salario; // salario bruto
+
+    public Empleado(String nombre, double salario) {
+        if (nombre == null || nombre.isBlank()) throw new IllegalArgumentException("Nombre inválido");
+        this.nombre = nombre;
+        this.salario = Math.max(0, salario);
+    }
+
+    public String getNombre() { return nombre; }
+    public double getSalario() { return salario; }
+
+    public void setSalario(double salario) {
+        if (salario &lt; 0) throw new IllegalArgumentException("Salario no puede ser negativo");
+        this.salario = salario;
+    }
+
+    @Override
+    public double calcularPago() {
+        // ejemplo simple: descuento de 10% por retenciones
+        return salario * 0.90;
+    }
+}
+
+// Test.java
+public class Test {
+    public static void main(String[] args) {
+        Empleado e1 = new Empleado("Ana", 1200);
+        Empleado e2 = new Empleado("Luis", 950);
+        Empleado e3 = new Empleado("María", 1500);
+
+        Empleado[] empleados = { e1, e2, e3 };
+        for (Empleado e : empleados) {
+            System.out.printf("%s -> Salario bruto: %.2f, Pago neto: %.2f\n", e.getNombre(), e.getSalario(), e.calcularPago());
+        }
+    }
+}
+</code></pre>
+
+        <h4>Explicación:</h4>
+        <p>La clase valida entrada en el constructor y en <code>setSalario</code>, lo que garantiza el estado válido (encapsulación). La interfaz <code>Pagable</code> abstrae el cálculo del pago; podríamos implementar la interfaz para otros tipos de pagos (por ejemplo, <code>ContratoPorHoras</code>).</p>
+
+        <h4>Salida esperada (ejemplo):</h4>
+        <pre><code>Ana -> Salario bruto: 1200.00, Pago neto: 1080.00
+Luis -> Salario bruto: 950.00, Pago neto: 855.00
+María -> Salario bruto: 1500.00, Pago neto: 1350.00
+</code></pre>
+      </div>
+
+      <p>Este ejemplo cubre tanto <strong>encapsulación</strong> (control de acceso y validaciones) como <strong>abstracción</strong> (contrato <code>Pagable</code>).</p>
+    </section>
+
+    <section id="videos-educativos">
+      <h2>Videos Educativos</h2>
+      <div class="videos-grid">
+        <div class="video-container">
+          <h3>Encapsulamiento en la POO</h3>
+          <div class="video-wrapper">
+            <video controls width="100%" height="400" class="video-player">
+              <source src="videos/ENCAPSULAMIENTO 💊 en la POO.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/ENCAPSULAMIENTO 💊 en la POO.mp4" download>Descargar video</a>
+            </video>
+          </div>
+          <p>Aprende los fundamentos de la encapsulación: modificadores de acceso, getters y setters, y cómo proteger la integridad de los datos.</p>
+        </div>
+        <div class="video-container">
+          <h3>Abstracción - Clases y Métodos Abstractos</h3>
+          <div class="video-wrapper">
+            <video controls width="100%" height="400" class="video-player">
+              <source src="videos/121 . Curso de Java II POO II Abstracción - clases y métodos abstractos.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/121 . Curso de Java II POO II Abstracción - clases y métodos abstractos.mp4" download>Descargar video</a>
+            </video>
+          </div>
+          <p>Descubre cómo usar clases abstractas e interfaces para simplificar la complejidad y crear código más flexible y mantenible.</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="muted">Recursos adicionales: <a href="https://docs.oracle.com/javase/tutorial/java/IandI/" target="_blank" rel="noopener">Interfaces y Clases Abstractas (Oracle)</a> • <a href="https://www.geeksforgeeks.org/encapsulation-in-java/" target="_blank" rel="noopener">Encapsulation in Java (GeeksforGeeks)</a></p>
+
+    <p><a href="index.html">Volver al inicio</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; Página web POO 2026 - Todos los derechos reservados.</p>
+  </footer>
+  <script src="js/main.js" defer></script>
+</body>
+=======
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fundamentos - POO</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="brand"><a href="index.html">POO</a></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="fundamentos.html">Fundamentos</a></li>
+        <li><a href="instanciacion.html">Instanciación</a></li>
+        <li><a href="herencia.html">Herencia</a></li>
+        <li><a href="ejercicios.html">Ejercicios</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="content">
+    <h1>Fundamentos de la Programación Orientada a Objetos</h1>
+
+    <p>En esta página profundizaremos en <strong>Encapsulación</strong> y <strong>Abstracción</strong>. Verás definiciones formales, ventajas, buenas prácticas en Java, diagramas ilustrativos y ejemplos prácticos listos para ejecutar.</p>
+
+    <section id="encapsulacion">
+      <h2>Encapsulación</h2>
+      <p><strong>Definición:</strong> La encapsulación es el mecanismo de <em>ocultar</em> los datos internos de una clase y exponer sólo lo necesario mediante una interfaz pública. Esto protege la integridad del objeto y permite cambiar la implementación interna sin afectar a los consumidores del objeto.</p>
+
+      <h3>¿Por qué es importante?</h3>
+      <ul>
+        <li>Protege invariantes del objeto (por ejemplo, que un saldo no sea negativo).</li>
+        <li>Reduce el acoplamiento entre módulos.</li>
+        <li>Permite validar y sanitizar datos en puntos controlados (setters o constructores).</li>
+        <li>Facilita el mantenimiento y la evolución del código.</li>
+      </ul>
+
+      <div class="figure">
+        <svg class="svg-illustration" viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Encapsulación - diagrama">
+          <rect x="6" y="6" width="688" height="168" rx="14" fill="#ffffff" stroke="#dceffd" />
+          <text x="26" y="36" font-size="16" fill="#0f1724" font-weight="700">BankAccount (encapsulado)</text>
+          <text x="40" y="66" font-size="13" fill="#374151">Campos privados: balance, owner</text>
+          <text x="40" y="86" font-size="13" fill="#374151">Métodos públicos: deposit(), withdraw(), getBalance()</text>
+          <g>
+            <rect x="480" y="46" width="176" height="86" rx="8" fill="#f1f9ff" stroke="#c8e4ff" />
+            <text x="494" y="72" font-size="12" fill="#0f1724">API pública</text>
+            <text x="494" y="92" font-size="12" fill="#374151">(lo que usan otras clases)</text>
+          </g>
+          <path d="M 420 80 L 480 80" stroke="#9aaed0" stroke-width="2" stroke-dasharray="6 4" />
+          <text x="332" y="120" font-size="11" fill="#6b7280">Implementación interna oculta</text>
+        </svg>
+      </div>
+
+      <h3>Modificadores de acceso en Java</h3>
+      <p>Usa <code>private</code> para datos internos; métodos públicos (<code>public</code>) para la interfaz; <code>protected</code> cuando quieras permitir acceso a subclases dentro del paquete; el modificador por defecto (package-private) restringe al paquete. Prefiere mantener el mínimo acceso necesario.</p>
+
+      <h3>Ejemplo práctico (BankAccount)</h3>
+      <pre><code class="language-java">public class BankAccount {
+    private double balance; // estado encapsulado
+    private final String owner;
+
+    public BankAccount(String owner, double initial) {
+        this.owner = owner;
+        this.balance = Math.max(0, initial);
+    }
+
+    public String getOwner() { return owner; }
+
+    public double getBalance() { return balance; }
+
+    public void deposit(double amount) {
+        if (amount &gt; 0) balance += amount;
+    }
+
+    public boolean withdraw(double amount) {
+        if (amount &gt; 0 &amp;&amp; amount &lt;= balance) {
+            balance -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    // método interno no accesible desde fuera
+    private boolean hasSufficientFunds(double amount) {
+        return amount &lt;= balance;
+    }
+}
+</code></pre>
+
+      <p>Observa cómo mantenemos la lógica (validaciones y estados) dentro de la clase.</p>
+
+      <h3>Cards de Refuerzo: Encapsulación</h3>
+      <div class="cards-grid-teoricos">
+        <div class="card-teorico">
+          <h4>Modificadores de Acceso</h4>
+          <p><code>private</code>: solo la clase. <code>protected</code>: clase y subclases. <code>public</code>: cualquier lugar. <code>default</code>: mismo paquete. Usa siempre el más restrictivo posible para maximizar la seguridad del código y ocultar detalles de implementación.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Getters y Setters</h4>
+          <p>Proporcionan control sobre atributos privados. Los setters pueden validar datos antes de asignar, garantizando invariantes. Los getters pueden retornar copias defensivas para evitar mutaciones externas no deseadas del estado interno.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Inmutabilidad</h4>
+          <p>Las clases inmutables no pueden cambiar después de su creación. Usa <code>final</code> en atributos y no proporciones setters. Beneficios: seguridad en multi-threading, caché seguro y lógica más predecible.</p>
+        </div>
+      </div>
+
+      <h3>Cómo usar Encapsulación en la Práctica</h3>
+      <div class="info-box">
+        <ol>
+          <li><strong>Declara atributos como privados:</strong> usa <code>private</code> para todos los datos internos que no necesiten acceso externo directo.</li>
+          <li><strong>Proporciona métodos públicos:</strong> crea getters para lectura y setters para escritura, ambos con validación si es necesario.</li>
+          <li><strong>Valida en los setters:</strong> asegúrate de que los datos cumplan con las reglas de negocio antes de ser asignados.</li>
+          <li><strong>Retorna copias en getters:</strong> cuando regreses objetos mutables (como listas), retorna copias para evitar modificaciones externas no deseadas.</li>
+          <li><strong>Usa constructores para inicializar:</strong> inicializa el estado válido del objeto desde el constructor.</li>
+        </ol>
+      </div>
+
+      <h3>Buenas Prácticas de Encapsulación</h3>
+      <div class="cards-grid-teoricos">
+        <div class="card-teorico">
+          <h4>Principio de Mínimo Privilegio</h4>
+          <p>Solo expone lo necesario. Evita hacer públicos atributos o métodos internos. Cada exposición innecesaria aumenta el acoplamiento y dificulta el mantenimiento futuro del código.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Validación de Datos</h4>
+          <p>Realiza validaciones robustas en constructores y setters. Lanza excepciones con mensajes claros cuando los datos no cumplan con los requisitos. Ejemplo: lanzar <code>IllegalArgumentException</code> si un saldo es negativo.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Documentación Clara</h4>
+          <p>Documenta con Javadoc los métodos públicos indicando qué validan, qué excepciones pueden lanzar y qué retornan. Facilita el uso correcto por otros programadores.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Copias Defensivas</h4>
+          <p>Cuando regreses objetos mutables (listas, arrays), retorna copias en lugar del original. Así evitas que código externo modifique el estado interno sin pasar por los setters validadores.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Invariantes del Objeto</h4>
+          <p>Define condiciones que siempre deben ser ciertas (p. ej., saldo ≥ 0). Garantiza estas condiciones mediante validación en constructores y setters para mantener la integridad del objeto.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Evita Acceso Directo a Datos</h4>
+          <p>Nunca hagas públicos los atributos aunque no tengan setter. Usa getters/setters siempre. Esto permite cambiar la implementación interna sin afectar a los consumidores del código.</p>
+        </div>
+      </div>
+
+    <section id="abstraccion">
+      <h2>Abstracción</h2>
+      <p><strong>Definición:</strong> La abstracción reduce la complejidad concentrándose en los aspectos relevantes de un objeto para un contexto determinado. En Java se implementa con interfaces y clases abstractas que especifican contratos y comportamientos sin detallar la implementación.</p>
+
+      <h3>Abstract class vs Interface (cuando usar cada una)</h3>
+      <ul>
+        <li><strong>Interface:</strong> define un contrato puro; permite múltiples implementaciones; ideal para comportamientos que varias clases no relacionadas deben ofrecer.</li>
+        <li><strong>Clase abstracta:</strong> útil cuando existe una relación semántica (is-a) y se desea compartir código común entre implementaciones.</li>
+      </ul>
+
+      <div class="figure">
+        <svg class="svg-illustration" viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Abstracción - diagrama">
+          <rect x="8" y="8" width="180" height="60" rx="10" fill="#eef6ff" stroke="#b7d7ff" />
+          <text x="20" y="38" font-size="14" fill="#0f1724" font-weight="700">Drawable (interface)</text>
+
+          <rect x="240" y="8" width="160" height="60" rx="10" fill="#fff7ed" stroke="#ffd7a7" />
+          <text x="252" y="38" font-size="14" fill="#0f1724" font-weight="700">CanvasCircle</text>
+
+          <rect x="480" y="8" width="160" height="60" rx="10" fill="#effaf5" stroke="#bff0d0" />
+          <text x="492" y="38" font-size="14" fill="#0f1724" font-weight="700">SvgRectangle</text>
+
+          <path d="M188 38 L240 38" stroke="#9aaed0" stroke-width="2" />
+          <path d="M400 38 L480 38" stroke="#9aaed0" stroke-width="2" />
+        </svg>
+      </div>
+
+      <h3>Ejemplo en Java (interfaz y uso)</h3>
+      <pre><code class="language-java">public interface Pagable {
+    double calcularPago();
+}
+
+public class Empleado implements Pagable {
+    private String nombre;
+    private double salario; // salario bruto
+
+    public Empleado(String nombre, double salario) {
+        this.nombre = nombre;
+        this.salario = Math.max(0, salario);
+    }
+
+    public String getNombre() { return nombre; }
+    public double getSalario() { return salario; }
+
+    public void setSalario(double salario) {
+        if (salario &gt;= 0) this.salario = salario;
+    }
+
+    @Override
+    public double calcularPago() {
+        // ejemplo simple: retención del 10%
+        return salario * 0.90;
+    }
+}
+</code></pre>
+
+      <p>Gracias a la abstracción, cualquier código que dependa de <code>Pagable</code> puede trabajar con empleados, facturas u otros objetos que implementen el contrato sin conocer detalles internos.</p>
+
+      <h3>Cards de Refuerzo: Abstracción</h3>
+      <div class="cards-grid-teoricos">
+        <div class="card-teorico">
+          <h4>Clases Abstractas</h4>
+          <p>Define comportamiento común compartido entre subclases relacionadas. Usa <code>abstract</code> para especificar contratos que las subclases deben implementar. Ideal cuando existe relación "is-a" y deseas compartir código funcional.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Interfaces y Contratos</h4>
+          <p>Una interfaz define un contrato puro sin implementación. Permite múltiples implementaciones y desacoplamiento. Ideal para comportamientos que varias clases no relacionadas deben ofrecer de forma polimórfica.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Polimorfismo</h4>
+          <p>Permite objetos de diferentes tipos responder al mismo mensaje de manera apropiada. Gracias a la abstracción, código genérico puede trabajar con muchos tipos distintos sin conocer detalles específicos de cada implementación.</p>
+        </div>
+      </div>
+
+      <h3>Cómo usar Abstracción en la Práctica</h3>
+      <div class="info-box">
+        <ol>
+          <li><strong>Identifica abstracciones comunes:</strong> observa qué comportamientos compartirán varias clases (p. ej., calcular, dibujar, procesar).</li>
+          <li><strong>Define contratos con interfaces:</strong> crea interfaces que especifiquen qué métodos deben implementar las clases.</li>
+          <li><strong>Usa clases abstractas para comportamiento común:</strong> cuando varias clases comparten código e implementación, usa una clase abstracta base.</li>
+          <li><strong>Programa hacia abstracciones:</strong> depende de interfaces o clases abstractas, no de implementaciones concretas, para mayor flexibilidad.</li>
+          <li><strong>Aplica polimorfismo:</strong> escribe código que trabaje con tipos abstractos; en tiempo de ejecución responderán diferente según su tipo real.</li>
+        </ol>
+      </div>
+
+      <h3>Buenas Prácticas de Abstracción</h3>
+      <div class="cards-grid-teoricos">
+        <div class="card-teorico">
+          <h4>Segregación de Interfaces</h4>
+          <p>Crea interfaces pequeñas y enfocadas en un único propósito. Evita interfaces "gordas" que obliguen a implementaciones innecesarias. Ejemplo: es mejor tener <code>Dibujable</code> y <code>Movible</code> separadas.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Principio Abierto/Cerrado</h4>
+          <p>Diseña clases e interfaces abiertas a extensión pero cerradas a modificación. Nuevas implementaciones deben agregarse sin cambiar código existente. Esto reduce riesgos de romper código funcional.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Principio de Sustitución de Liskov</h4>
+          <p>Las subclases deben poder reemplazar a sus superclases sin romper el funcionamiento. Respeta el contrato de la clase base en tus implementaciones. Evita comportamientos inesperados.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Entiende el Contexto de Uso</h4>
+          <p>Abstrae solo lo relevante para el problema. Una abstracción demasiado genérica es difícil de usar; una demasiado específica reduce reutilización. Balance es clave.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Evita Jerarquías Profundas</h4>
+          <p>Mantén las jerarquías de herencia planas y simples. Jerarquías muy profundas son difíciles de entender y mantener. Si necesitas múltiples comportamientos, considera composición sobre herencia.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Composición sobre Herencia</h4>
+          <p>Cuando sea posible, prefiere composición (tener objetos) sobre herencia. Es más flexible, evita el acoplamiento y permite cambiar comportamiento en tiempo de ejecución.</p>
+        </div>
+      </div>
+
+    <section id="ejercicio">
+      <h2>Ejercicio práctico (resuelto)</h2>
+      <p>Enunciado: crear <code>Empleado</code>, <code>Pagable</code> y una clase <code>Test</code> que muestre los pagos por consola. A continuación la solución completa y comentada.</p>
+
+      <div class="solution">
+        <h3>Solución: código Java</h3>
+        <pre><code class="language-java">// Pagable.java
+public interface Pagable {
+    double calcularPago();
+}
+
+// Empleado.java
+public class Empleado implements Pagable {
+    private String nombre;
+    private double salario; // salario bruto
+
+    public Empleado(String nombre, double salario) {
+        if (nombre == null || nombre.isBlank()) throw new IllegalArgumentException("Nombre inválido");
+        this.nombre = nombre;
+        this.salario = Math.max(0, salario);
+    }
+
+    public String getNombre() { return nombre; }
+    public double getSalario() { return salario; }
+
+    public void setSalario(double salario) {
+        if (salario &lt; 0) throw new IllegalArgumentException("Salario no puede ser negativo");
+        this.salario = salario;
+    }
+
+    @Override
+    public double calcularPago() {
+        // ejemplo simple: descuento de 10% por retenciones
+        return salario * 0.90;
+    }
+}
+
+// Test.java
+public class Test {
+    public static void main(String[] args) {
+        Empleado e1 = new Empleado("Ana", 1200);
+        Empleado e2 = new Empleado("Luis", 950);
+        Empleado e3 = new Empleado("María", 1500);
+
+        Empleado[] empleados = { e1, e2, e3 };
+        for (Empleado e : empleados) {
+            System.out.printf("%s -> Salario bruto: %.2f, Pago neto: %.2f\n", e.getNombre(), e.getSalario(), e.calcularPago());
+        }
+    }
+}
+</code></pre>
+
+        <h4>Explicación:</h4>
+        <p>La clase valida entrada en el constructor y en <code>setSalario</code>, lo que garantiza el estado válido (encapsulación). La interfaz <code>Pagable</code> abstrae el cálculo del pago; podríamos implementar la interfaz para otros tipos de pagos (por ejemplo, <code>ContratoPorHoras</code>).</p>
+
+        <h4>Salida esperada (ejemplo):</h4>
+        <pre><code>Ana -> Salario bruto: 1200.00, Pago neto: 1080.00
+Luis -> Salario bruto: 950.00, Pago neto: 855.00
+María -> Salario bruto: 1500.00, Pago neto: 1350.00
+</code></pre>
+      </div>
+
+      <p>Este ejemplo cubre tanto <strong>encapsulación</strong> (control de acceso y validaciones) como <strong>abstracción</strong> (contrato <code>Pagable</code>).</p>
+    </section>
+
+    <section id="videos-educativos">
+      <h2>Videos Educativos</h2>
+      <div class="videos-grid">
+        <div class="video-container">
+          <h3>Encapsulamiento en la POO</h3>
+          <div class="video-wrapper">
+            <video controls width="100%" height="400" class="video-player">
+              <source src="videos/ENCAPSULAMIENTO 💊 en la POO.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/ENCAPSULAMIENTO 💊 en la POO.mp4" download>Descargar video</a>
+            </video>
+          </div>
+          <p>Aprende los fundamentos de la encapsulación: modificadores de acceso, getters y setters, y cómo proteger la integridad de los datos.</p>
+        </div>
+        <div class="video-container">
+          <h3>Abstracción - Clases y Métodos Abstractos</h3>
+          <div class="video-wrapper">
+            <video controls width="100%" height="400" class="video-player">
+              <source src="videos/121 . Curso de Java II POO II Abstracción - clases y métodos abstractos.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/121 . Curso de Java II POO II Abstracción - clases y métodos abstractos.mp4" download>Descargar video</a>
+            </video>
+          </div>
+          <p>Descubre cómo usar clases abstractas e interfaces para simplificar la complejidad y crear código más flexible y mantenible.</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="muted">Recursos adicionales: <a href="https://docs.oracle.com/javase/tutorial/java/IandI/" target="_blank" rel="noopener">Interfaces y Clases Abstractas (Oracle)</a> • <a href="https://www.geeksforgeeks.org/encapsulation-in-java/" target="_blank" rel="noopener">Encapsulation in Java (GeeksforGeeks)</a></p>
+
+    <p><a href="index.html">Volver al inicio</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; Página web POO 2026 - Todos los derechos reservados.</p>
+  </footer>
+  <script src="js/main.js" defer></script>
+</body>
+>>>>>>> d66c44f330585b18b34e71ab7be7a2a7a5fc472c
+</html>
