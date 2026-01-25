@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicios Prácticos - POO</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="brand"><a href="index.html">POO</a></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="fundamentos.html">Fundamentos</a></li>
+        <li><a href="instanciacion.html">Instanciación</a></li>
+        <li><a href="herencia.html">Herencia</a></li>
+        <li><a href="ejercicios.html">Ejercicios</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="content">
+    <h1>Ejercicios Prácticos: Modelado de Clases usando Herencia y Polimorfismo</h1>
+
+    <p>Esta página te guía a través de ejercicios prácticos completos donde aplicarás herencia, polimorfismo y buenas prácticas de diseño. Cada ejercicio incluye análisis previo, diseño de la jerarquía, implementación y pruebas.</p>
+
+    <section id="principios-ejercicios">
+      <h2>Principios para Resolver Ejercicios</h2>
+      <p>Antes de escribir código, debes analizar el problema, identificar las entidades, sus relaciones y comportamientos comunes. Este enfoque te garantiza un diseño robusto y extensible.</p>
+
+      <h3>Pasos para Modelar Clases</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>1. Identificar Entidades</h4>
+          <p>Del enunciado, lista todos los sustantivos: empleados, vehículos, animales, etc. Cada entidad potencial es una clase. Pregúntate: ¿es una cosa concreta que el sistema debe representar?</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>2. Encontrar Relaciones "es-un"</h4>
+          <p>Busca jerarquías naturales. ¿Un Empleado es-un Persona? ¿Un Perro es-un Animal? Las relaciones "es-un" sugieren herencia. No fuerces herencia si no hay verdadera relación.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>3. Definir Atributos Comunes</h4>
+          <p>¿Qué datos comparten todas las subclases? Eso va en la superclase. Ej: Todos los Vehículos tienen marca, modelo, año. Atributos específicos van en subclases.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>4. Identificar Comportamientos</h4>
+          <p>¿Qué acciones hacen los objetos? Esto son métodos. ¿Todos hacen la misma acción de forma diferente? Entonces es polimorfismo. Usa métodos abstractos en superclase, implementa en subclases.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>5. Diseñar Jerarquía</h4>
+          <p>Dibuja un diagrama mostrando superclase(s) y subclases. Verifica que la estructura sea clara, lógica y no demasiado profunda (máximo 3 niveles). Asegúrate que cada relación es "es-un".</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h4>✓ Checklist de Diseño</h4>
+        <ul>
+          <li>¿Cada clase tiene una única responsabilidad?</li>
+          <li>¿Las relaciones de herencia son auténticas (es-un)?</li>
+          <li>¿La superclase contiene lo común; subclases lo específico?</li>
+          <li>¿Los métodos abstractos están en la superclase?</li>
+          <li>¿Se puede iterar polimórficamente sobre una colección?</li>
+          <li>¿El código es fácil de entender y extender?</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="ejercicio-1">
+      <h2>Ejercicio 1: Sistema de Gestión de Empresa</h2>
+      <p><strong>Enunciado:</strong> Desarrolla un sistema para una empresa que gestiona diferentes tipos de empleados: administrativos, vendedores e ingenieros. Cada tipo tiene salario base, pero calcula bono de forma diferente. El sistema debe calcular el costo total de nómina y generar reportes.</p>
+
+      <h3>Análisis Previo</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Entidades Identificadas</h4>
+          <p><strong>Persona:</strong> base con nombre, apellido. <strong>Empleado:</strong> hereda de Persona, agrega salario, ID. <strong>Administrativo, Vendedor, Ingeniero:</strong> heredan de Empleado, con bonus diferente.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Atributos Compartidos</h4>
+          <p>En Empleado: id, salario, departamento. En subclases: datos específicos (Vendedor tiene ventasRealizadas, Ingeniero tiene tecnologías, Administrativo tiene horasExtra).</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Métodos Polimórficos</h4>
+          <p>Método <code>calcularBonus()</code> abstract en Empleado. Cada subclase implementa su propia lógica. Método <code>obtenerCostoTotal()</code> en empresa usa polimorfismo sin conocer tipos específicos.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Comportamientos Adicionales</h4>
+          <p><code>toString()</code> para mostrar detalles. <code>generarReporte()</code> para imprimir información. Métodos que no varían están en la superclase (reutilización).</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Estructura de Clases</h4>
+          <p>Persona (superclase) → Empleado (abstracta) → {Administrativo, Vendedor, Ingeniero}. Empresa contiene una lista de Empleados y métodos de gestión.</p>
+        </div>
+      </div>
+
+      <h3>Solución Completa</h3>
+      <div class="solution">
+        <h4>1. Clase Persona (Superclase Base)</h4>
+        <pre><code class="language-java">public class Persona {
+    protected String nombre;
+    protected String apellido;
+    protected int edad;
+
+    public Persona(String nombre, String apellido, int edad) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+    }
+
+    public String getNombre() { return nombre; }
+    public String getApellido() { return apellido; }
+    public int getEdad() { return edad; }
+
+    public String obtenerNombreCompleto() {
+        return nombre + " " + apellido;
+    }
+
+    @Override
+    public String toString() {
+        return obtenerNombreCompleto() + " (" + edad + " años)";
+    }
+}
+</code></pre>
+
+        <h4>2. Clase Empleado (Abstracta)</h4>
+        <pre><code class="language-java">public abstract class Empleado extends Persona {
+    protected String id;
+    protected double salario;
+    protected String departamento;
+
+    public Empleado(String nombre, String apellido, int edad, String id, double salario, String departamento) {
+        super(nombre, apellido, edad);
+        this.id = id;
+        this.salario = Math.max(0, salario);
+        this.departamento = departamento;
+    }
+
+    public String getId() { return id; }
+    public double getSalario() { return salario; }
+    public String getDepartamento() { return departamento; }
+
+    public abstract double calcularBonus();
+
+    public double obtenerCostoTotal() {
+        return salario + calcularBonus();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " - ID: " + id + " - Salario: $" + salario;
+    }
+}
+</code></pre>
+
+        <h4>3. Subclases Específicas</h4>
+        <pre><code class="language-java">public class Administrativo extends Empleado {
+    private int horasExtra;
+
+    public Administrativo(String nombre, String apellido, int edad, String id, double salario, String departamento, int horasExtra) {
+        super(nombre, apellido, edad, id, salario, departamento);
+        this.horasExtra = horasExtra;
+    }
+
+    @Override
+    public double calcularBonus() {
+        return salario * 0.10 + (horasExtra * 25);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (Administrativo) - Horas Extra: " + horasExtra;
+    }
+}
+
+public class Vendedor extends Empleado {
+    private double ventasRealizadas;
+
+    public Vendedor(String nombre, String apellido, int edad, String id, double salario, String departamento, double ventasRealizadas) {
+        super(nombre, apellido, edad, id, salario, departamento);
+        this.ventasRealizadas = Math.max(0, ventasRealizadas);
+    }
+
+    @Override
+    public double calcularBonus() {
+        return ventasRealizadas * 0.08; // 8% de comisión
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (Vendedor) - Ventas: $" + ventasRealizadas;
+    }
+}
+
+public class Ingeniero extends Empleado {
+    private int proyectosCompletos;
+    private String lenguajePrincipal;
+
+    public Ingeniero(String nombre, String apellido, int edad, String id, double salario, String departamento, int proyectosCompletos, String lenguajePrincipal) {
+        super(nombre, apellido, edad, id, salario, departamento);
+        this.proyectosCompletos = proyectosCompletos;
+        this.lenguajePrincipal = lenguajePrincipal;
+    }
+
+    @Override
+    public double calcularBonus() {
+        return salario * 0.20 + (proyectosCompletos * 500);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (Ingeniero) - Proyectos: " + proyectosCompletos + " - Lenguaje: " + lenguajePrincipal;
+    }
+}
+</code></pre>
+
+        <h4>4. Clase Empresa (Gestor Polimórfico)</h4>
+        <pre><code class="language-java">import java.util.ArrayList;
+import java.util.List;
+
+public class Empresa {
+    private String nombre;
+    private List&lt;Empleado&gt; empleados;
+
+    public Empresa(String nombre) {
+        this.nombre = nombre;
+        this.empleados = new ArrayList&lt;&gt;();
+    }
+
+    public void agregarEmpleado(Empleado e) {
+        empleados.add(e);
+        System.out.println(e.obtenerNombreCompleto() + " agregado a " + nombre);
+    }
+
+    public double obtenerCostoMensual() {
+        double total = 0;
+        for (Empleado e : empleados) {
+            total += e.obtenerCostoTotal();
+        }
+        return total;
+    }
+
+    public void generarReporte() {
+        System.out.println("=== REPORTE DE EMPRESA: " + nombre + " ===");
+        System.out.println("Total de empleados: " + empleados.size());
+        System.out.println();
+
+        double totalSalarios = 0, totalBonus = 0;
+
+        for (Empleado e : empleados) {
+            System.out.println(e);
+            System.out.println("  Bonus: $" + String.format("%.2f", e.calcularBonus()));
+            System.out.println("  Costo Total: $" + String.format("%.2f", e.obtenerCostoTotal()));
+            System.out.println();
+
+            totalSalarios += e.getSalario();
+            totalBonus += e.calcularBonus();
+        }
+
+        System.out.println("--- RESUMEN ---");
+        System.out.println("Salarios Totales: $" + String.format("%.2f", totalSalarios));
+        System.out.println("Bonus Total: $" + String.format("%.2f", totalBonus));
+        System.out.println("Costo Mensual Total: $" + String.format("%.2f", obtenerCostoMensual()));
+    }
+
+    public List&lt;Empleado&gt; obtenerEmpleados() {
+        return new ArrayList&lt;&gt;(empleados);
+    }
+}
+</code></pre>
+
+        <h4>5. Programa Principal</h4>
+        <pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        Empresa empresa = new Empresa("TechCorp");
+
+        empresa.agregarEmpleado(new Administrativo("Ana", "García", 35, "ADM001", 1500, "Administración", 8));
+        empresa.agregarEmpleado(new Vendedor("Carlos", "López", 40, "VEN001", 1200, "Ventas", 50000));
+        empresa.agregarEmpleado(new Ingeniero("María", "Martínez", 28, "ING001", 2500, "Desarrollo", 5, "Java"));
+        empresa.agregarEmpleado(new Administrativo("Juan", "Pérez", 32, "ADM002", 1400, "Administración", 5));
+        empresa.agregarEmpleado(new Vendedor("Rosa", "Díaz", 38, "VEN002", 1300, "Ventas", 75000));
+
+        empresa.generarReporte();
+    }
+}
+</code></pre>
+      </div>
+
+      <h3>Puntos Clave del Ejercicio</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Herencia en Cascada</h4>
+          <p>Persona → Empleado → Subclases. Cada nivel agrega responsabilidades. Subclases heredan atributos/métodos del padre.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Clase Abstracta</h4>
+          <p>Empleado no puede instanciarse directamente. Obliga a subclases a implementar <code>calcularBonus()</code>. Define contrato común.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Polimorfismo</h4>
+          <p>En Empresa, <code>obtenerCostoMensual()</code> itera sobre una lista de Empleados sin conocer tipos específicos. Cada uno responde apropiadamente.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Extensibilidad</h4>
+          <p>Agregar nuevo tipo (Director, Pasante) es fácil: extend Empleado, implementa calcularBonus(). Nada se rompe en código existente.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Encapsulación</h4>
+          <p>Atributos protected/private, acceso mediante getters. Validaciones en constructores (salario ≥ 0). Estado consistente siempre.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ejercicio-2">
+      <h2>Ejercicio 2: Sistema de Transportes Públicos</h2>
+      <p><strong>Enunciado:</strong> Modela un sistema de transporte público con diferentes vehículos: autobuses, metros y taxis. Cada uno calcula tarifa diferente, tiene capacidad específica, y reporta estado de ocupación. Implementa un gestor que calcule ingresos totales y validar capacidades.</p>
+
+      <h3>Análisis y Diseño</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-green">
+          <h4>Jerarquía Identificada</h4>
+          <p>VehículoTransporte (superclase abstracta) con métodos calcularTarifa(), embarcar(), desembarcar(). Subclases: Autobús, Metro, Taxi con comportamientos específicos.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Polimorfismo de Tarifa</h4>
+          <p>Cada vehículo calcula tarifa diferente: Autobús (fija), Metro (zona), Taxi (distancia). Método abstracto obliga implementación. Calculo polimórfico sin conocer tipo.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Manejo de Capacidad</h4>
+          <p>Cada vehículo tiene capacidad máxima y ocupación actual. Validar antes de embarcar. Generar alertas si está lleno. Control de estado del vehículo.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Sistema de Gestión</h4>
+          <p>Clase SistemaTransportes con colección de vehículos. Métodos: obtenerTarifaTotal(), generarReporte(), buscar vehículos disponibles, ruta óptima.</p>
+        </div>
+      </div>
+
+      <h3>Implementación</h3>
+      <pre><code class="language-java">// Superclase abstracta
+public abstract class VehículoTransporte {
+    protected String id;
+    protected String ruta;
+    protected int capacidadMaxima;
+    protected int ocupacionActual;
+    protected double tarifaBase;
+
+    public VehículoTransporte(String id, String ruta, int capacidad, double tarifa) {
+        this.id = id;
+        this.ruta = ruta;
+        this.capacidadMaxima = capacidad;
+        this.ocupacionActual = 0;
+        this.tarifaBase = tarifa;
+    }
+
+    public abstract double calcularTarifa();
+    public abstract String obtenerTipo();
+
+    public boolean embarcar() {
+        if (ocupacionActual < capacidadMaxima) {
+            ocupacionActual++;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean desembarcar() {
+        if (ocupacionActual > 0) {
+            ocupacionActual--;
+            return true;
+        }
+        return false;
+    }
+
+    public int getOcupacionActual() { return ocupacionActual; }
+    public double getPorcentajeOcupación() {
+        return (ocupacionActual * 100.0) / capacidadMaxima;
+    }
+
+    public String getEstado() {
+        String estado = "Disponible";
+        if (getPorcentajeOcupación() >= 100) estado = "Lleno";
+        else if (getPorcentajeOcupación() >= 75) estado = "Casi lleno";
+        else if (getPorcentajeOcupación() >= 50) estado = "Medio lleno";
+        return estado;
+    }
+
+    @Override
+    public String toString() {
+        return obtenerTipo() + " [" + id + "] Ruta: " + ruta + " - Ocupación: " + ocupacionActual + "/" + capacidadMaxima + " (" + String.format("%.1f", getPorcentajeOcupación()) + "%) - " + getEstado();
+    }
+}
+
+// Subclases
+public class Autobús extends VehículoTransporte {
+    public Autobús(String id, String ruta, int capacidad) {
+        super(id, ruta, capacidad, 1.50);
+    }
+
+    @Override
+    public double calcularTarifa() {
+        return tarifaBase; // Tarifa fija
+    }
+
+    @Override
+    public String obtenerTipo() { return "Autobús"; }
+}
+
+public class Metro extends VehículoTransporte {
+    private int zona;
+
+    public Metro(String id, String ruta, int capacidad, int zona) {
+        super(id, ruta, capacidad, 0.50);
+        this.zona = zona;
+    }
+
+    @Override
+    public double calcularTarifa() {
+        return tarifaBase * zona; // Tarifa por zona
+    }
+
+    @Override
+    public String obtenerTipo() { return "Metro"; }
+}
+
+public class Taxi extends VehículoTransporte {
+    private double distancia;
+
+    public Taxi(String id, String ruta, double distancia) {
+        super(id, ruta, 4, 2.00);
+        this.distancia = distancia;
+    }
+
+    public void setDistancia(double dist) { this.distancia = dist; }
+
+    @Override
+    public double calcularTarifa() {
+        return tarifaBase + (distancia * 0.50); // Base + por km
+    }
+
+    @Override
+    public String obtenerTipo() { return "Taxi"; }
+}
+</code></pre>
+
+      <h3>Gestor del Sistema</h3>
+      <pre><code class="language-java">public class SistemaTransportes {
+    private List&lt;VehículoTransporte&gt; vehículos;
+
+    public SistemaTransportes() {
+        this.vehículos = new ArrayList&lt;&gt;();
+    }
+
+    public void agregarVehículo(VehículoTransporte v) {
+        vehículos.add(v);
+    }
+
+    public double obtenerIngresosTotales() {
+        double total = 0;
+        for (VehículoTransporte v : vehículos) {
+            total += v.calcularTarifa() * v.getOcupacionActual();
+        }
+        return total;
+    }
+
+    public void generarReporte() {
+        System.out.println("=== REPORTE DEL SISTEMA DE TRANSPORTES ===");
+        for (VehículoTransporte v : vehículos) {
+            System.out.println(v);
+            System.out.println("  Tarifa: $" + String.format("%.2f", v.calcularTarifa()));
+            System.out.println("  Ingresos: $" + String.format("%.2f", v.calcularTarifa() * v.getOcupacionActual()));
+            System.out.println();
+        }
+        System.out.println("INGRESOS TOTALES: $" + String.format("%.2f", obtenerIngresosTotales()));
+    }
+}
+</code></pre>
+    </section>
+
+    <section id="ejercicio-3">
+      <h2>Ejercicio 3: Zoo - Gestión de Animales</h2>
+      <p><strong>Enunciado:</strong> Implementa un sistema para un zoo que gestiona diferentes animales (carnívoros, herbívoros, omnívoros). Cada animal tiene nombre, edad, dieta, y comportamientos específicos (comer, dormir, hacer sonido). El sistema debe calcular cantidad de alimento diario y generar reporte de cuidado.</p>
+
+      <h3>Solución Clave</h3>
+      <pre><code class="language-java">public abstract class Animal {
+    protected String nombre;
+    protected int edad;
+    protected double peso;
+
+    public Animal(String nombre, int edad, double peso) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.peso = peso;
+    }
+
+    public abstract String getTipo(); // Ej: Carnívoro, Herbívoro
+    public abstract double calcularAlimentoDiario(); // kg necesarios
+    public abstract void hacerSonido();
+
+    public void dormir() {
+        System.out.println(nombre + " está durmiendo...");
+    }
+
+    public void comer(double cantidad) {
+        System.out.println(nombre + " está comiendo " + cantidad + " kg");
+    }
+
+    public void hacerActividad(String actividad) {
+        System.out.println(nombre + " está " + actividad);
+    }
+}
+
+public class Carnívoro extends Animal {
+    public Carnívoro(String nombre, int edad, double peso) {
+        super(nombre, edad, peso);
+    }
+
+    @Override
+    public String getTipo() { return "Carnívoro"; }
+
+    @Override
+    public double calcularAlimentoDiario() {
+        return peso * 0.05; // 5% del peso
+    }
+
+    @Override
+    public void hacerSonido() {
+        System.out.println(nombre + " ruge: ¡ROOOAAARRR!");
+    }
+}
+
+public class Herbívoro extends Animal {
+    public Herbívoro(String nombre, int edad, double peso) {
+        super(nombre, edad, peso);
+    }
+
+    @Override
+    public String getTipo() { return "Herbívoro"; }
+
+    @Override
+    public double calcularAlimentoDiario() {
+        return peso * 0.08; // 8% del peso (comen más)
+    }
+
+    @Override
+    public void hacerSonido() {
+        System.out.println(nombre + " emite un sonido suave");
+    }
+}
+
+public class Zoo {
+    private String nombre;
+    private List&lt;Animal&gt; animales;
+
+    public Zoo(String nombre) {
+        this.nombre = nombre;
+        this.animales = new ArrayList&lt;&gt;();
+    }
+
+    public void agregarAnimal(Animal a) {
+        animales.add(a);
+    }
+
+    public double obtenerAlimentoTotalDiario() {
+        double total = 0;
+        for (Animal a : animales) {
+            total += a.calcularAlimentoDiario();
+        }
+        return total;
+    }
+
+    public void generarReporteCuidado() {
+        System.out.println("=== REPORTE DE CUIDADO DEL ZOO: " + nombre + " ===");
+        for (Animal a : animales) {
+            System.out.println(a.nombre + " (" + a.getTipo() + ") - Alimento diario: " + String.format("%.2f", a.calcularAlimentoDiario()) + " kg");
+            a.hacerSonido();
+        }
+        System.out.println("\nAlimento total diario requerido: " + String.format("%.2f", obtenerAlimentoTotalDiario()) + " kg");
+    }
+}
+</code></pre>
+    </section>
+
+    <h3>Resumen de Patrones Aplicados</h3>
+    <div class="cards-grid-teoricos">
+      <div class="card-teorico">
+        <h4>Jerarquía Clara</h4>
+        <p>Superclase define estructura común, subclases especializan. Relaciones "es-un" auténticas. Máximo 3 niveles de profundidad.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>Métodos Abstractos</h4>
+        <p>Define contratos en superclase. Cada subclase implementa según su lógica. Polimorfismo garantizado sin conocer tipos específicos.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>Colecciones Polimórficas</h4>
+        <p>Una lista de Empleados, Vehículos, Animales puede contener cualquier subclase. Itera y cada uno responde apropiadamente.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>Encapsulación</h4>
+        <p>Atributos private/protected con getters/setters. Validaciones en constructores. Estado consistente siempre.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>Responsabilidad Única</h4>
+        <p>Cada clase hace una cosa bien. Empleado gestiona datos de empleado, Empresa gestiona empleados. Separación clara.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>Extensibilidad</h4>
+        <p>Agregar nuevas subclases es fácil sin modificar código existente. Sigue principio Open/Closed: abierto a extensión, cerrado a modificación.</p>
+      </div>
+    </div>
+
+    <section id="buenas-practicas-ejercicios">
+      <h2>Buenas Prácticas en Ejercicios</h2>
+      <div class="info-box">
+        <ol>
+          <li><strong>Antes de codificar:</strong> Dibuja la jerarquía. Lista atributos y métodos en cada clase. Verifica relaciones.</li>
+          <li><strong>Usa clases abstractas:</strong> Cuando varios tipos comparten comportamiento pero lo implementan diferente.</li>
+          <li><strong>Métodos abstractos:</strong> Define en superclase, implementa en subclases. Garantiza contrato.</li>
+          <li><strong>Polimorfismo en iteración:</strong> Usa colecciones de la superclase. Cada objeto responde según su tipo.</li>
+          <li><strong>Validación en constructores:</strong> Asegura estado válido desde el inicio. Evita bugs posteriores.</li>
+          <li><strong>toString() descriptivo:</strong> Implementa en todas las clases. Facilita debugging y reportes.</li>
+          <li><strong>Separación de responsabilidades:</strong> Clase base para datos comunes, subclases para comportamiento específico, gestores para lógica de negocio.</li>
+          <li><strong>Reutilización sobre duplicación:</strong> Si una subclase necesita código similar a otra, muévelo a la superclase.</li>
+          <li><strong>Evita jerarquías profundas:</strong> Máximo 3 niveles. Después, considera composición sobre herencia.</li>
+          <li><strong>Documenta la jerarquía:</strong> Comentarios claros explicando relaciones y propósito de cada clase.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="desafios-propuestos">
+      <h2>Desafíos Propuestos</h2>
+      <p>Intenta resolver estos desafíos aplicando lo aprendido:</p>
+
+      <h3>Desafío 1: Sistema Bancario Avanzado</h3>
+      <p>Crea cuentas: Ahorros, Corriente, Inversión. Cada una calcula interés diferente, tiene límites y comisiones diferentes. Implementa transferencias entre cuentas, historial de movimientos y reportes de rentabilidad.</p>
+
+      <h3>Desafío 2: Juego RPG</h3>
+      <p>Personajes: Guerrero, Mago, Arquero. Cada uno atacar diferente, tiene habilidades especiales, puntos de vida y mana. Implementa combate polimórfico donde cada personaje ataca según su tipo.</p>
+
+      <h3>Desafío 3: Plataforma de Streaming</h3>
+      <p>Contenido: Series, Películas, Documentales. Cada uno tiene duración diferente, género, calificación. Usuario puede ver contenido (tracking de reproducción). Implementa recomendaciones basadas en historial.</p>
+    </section>
+
+    <section id="videos-educativos">
+      <h2>Videos Educativos</h2>
+      <div class="videos-grid">
+        <div class="video-container">
+          <h3>Ejercicios Prácticos: Modelado Paso a Paso</h3>
+          <div class="video-wrapper">
+            <video controls width="100%" height="400" class="video-player">
+              <source src="videos/ejercicios-modelado.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/ejercicios-modelado.mp4" download>Descargar video</a>
+            </video>
+          </div>
+          <p>Aprende cómo analizar un problema, diseñar la jerarquía, e implementar soluciones robustas con herencia y polimorfismo.</p>
+        </div>
+        <div class="video-container">
+          <h3>Debugging y Pruebas de Jerarquías</h3>
+          <div class="video-wrapper">
+            <video controls width="100%" height="400" class="video-player">
+              <source src="videos/debugging-jerarquias.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/debugging-jerarquias.mp4" download>Descargar video</a>
+            </video>
+          </div>
+          <p>Técnicas para debuggear código con herencia, validar polimorfismo y pruebas de colecciones polimórficas.</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="muted">Recursos adicionales: <a href="https://docs.oracle.com/javase/tutorial/java/IandI/" target="_blank" rel="noopener">Interfaces and Classes (Oracle)</a> • <a href="https://www.geeksforgeeks.org/polymorphism-in-java/" target="_blank" rel="noopener">Polymorphism in Java (GeeksforGeeks)</a></p>
+
+    <p><a href="index.html">Volver al inicio</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; Página web POO 2026 - Todos los derechos reservados.</p>
+  </footer>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instanciación de Objetos - POO</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="brand"><a href="index.html">POO</a></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="fundamentos.html">Fundamentos</a></li>
+        <li><a href="instanciacion.html">Instanciación</a></li>
+        <li><a href="herencia.html">Herencia</a></li>
+        <li><a href="ejercicios.html">Ejercicios</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="content">
+    <h1>Instanciación de Objetos y Manipulación de Atributos y Métodos</h1>
+
+    <p>En esta página aprenderás cómo crear instancias de objetos en Java, cómo manipular sus atributos (propiedades) y cómo invocar sus métodos. La instanciación es el proceso fundamental que convierte una clase (plantilla) en objetos reales con los que trabajamos en nuestros programas.</p>
+
+    <section id="que-es-instanciacion">
+      <h2>¿Qué es la Instanciación?</h2>
+      <p><strong>Definición:</strong> La instanciación es el proceso de crear un objeto concreto a partir de una clase. Una clase es un plano o plantilla; una instancia es un objeto real en memoria con su propio estado (valores de atributos). Cada instancia es independiente de las demás, aunque comparten la misma estructura definida en la clase.</p>
+
+      <h3>Clase vs Instancia</h3>
+      <ul>
+        <li><strong>Clase:</strong> es el tipo, el molde, la especificación de qué atributos y métodos tendrá cada objeto.</li>
+        <li><strong>Instancia (objeto):</strong> es una copia concreta de esa clase con valores específicos para sus atributos.</li>
+      </ul>
+
+      <div class="figure">
+        <svg class="svg-illustration" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Clase vs Instancia">
+          <rect x="20" y="20" width="240" height="160" rx="10" fill="#eef6ff" stroke="#48bb78" stroke-width="2"/>
+          <text x="40" y="50" font-size="16" font-weight="700" fill="#0f1724">Clase: Persona</text>
+          <text x="40" y="75" font-size="13" fill="#374151">atributos:</text>
+          <text x="50" y="95" font-size="12" fill="#374151">- nombre: String</text>
+          <text x="50" y="110" font-size="12" fill="#374151">- edad: int</text>
+          <text x="50" y="125" font-size="12" fill="#374151">- correo: String</text>
+          <text x="40" y="155" font-size="12" fill="#6b7280" font-style="italic">Plantilla/Molde</text>
+
+          <rect x="340" y="20" width="150" height="70" rx="8" fill="#fff7ed" stroke="#fbbf24" stroke-width="2"/>
+          <text x="360" y="45" font-size="14" font-weight="700" fill="#0f1724">Ana</text>
+          <text x="360" y="62" font-size="12" fill="#374151">edad: 28</text>
+          <text x="360" y="77" font-size="12" fill="#374151">correo: ana@email.com</text>
+
+          <rect x="340" y="110" width="150" height="70" rx="8" fill="#fff7ed" stroke="#fbbf24" stroke-width="2"/>
+          <text x="360" y="135" font-size="14" font-weight="700" fill="#0f1724">Luis</text>
+          <text x="360" y="152" font-size="12" fill="#374151">edad: 35</text>
+          <text x="360" y="167" font-size="12" fill="#374151">correo: luis@email.com</text>
+
+          <path d="M260 50 L340 50" stroke="#9aaed0" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <path d="M260 140 L340 140" stroke="#9aaed0" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#9aaed0"/>
+            </marker>
+          </defs>
+
+          <text x="280" y="40" font-size="11" fill="#6b7280">instancia 1</text>
+          <text x="280" y="135" font-size="11" fill="#6b7280">instancia 2</text>
+        </svg>
+      </div>
+
+      <h3>¿Cómo crear una instancia?</h3>
+      <p>En Java, usamos la palabra clave <code>new</code> seguida del constructor de la clase para crear una instancia:</p>
+      <pre><code class="language-java">// Sintaxis general
+TipoClase nombreVariable = new TipoClase(argumentosDelConstructor);
+
+// Ejemplo
+Persona ana = new Persona("Ana", 28, "ana@email.com");
+Persona luis = new Persona("Luis", 35, "luis@email.com");
+</code></pre>
+
+      <p>Cada variable (<code>ana</code>, <code>luis</code>) apunta a una instancia diferente en memoria con su propio estado.</p>
+
+      <h3>Conceptos Clave en Instanciación</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Operador new</h4>
+          <p>Palabra clave que asigna memoria en el heap para el nuevo objeto. Invoca automáticamente el constructor apropiado. <strong>Siempre</strong> debes usar <code>new</code> para crear objetos (excepto String que tiene casos especiales).</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Referencia vs Objeto</h4>
+          <p>La variable que declares es una <strong>referencia</strong> (apuntador) al objeto, no el objeto en sí. Múltiples referencias pueden apuntar al mismo objeto. Asignar una variable a otra copia la referencia, no clona el objeto.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Null: Referencia Vacía</h4>
+          <p>Una variable de referencia puede contener <code>null</code>, lo que significa "no apunta a nada". Acceder a métodos/atributos de <code>null</code> causa <code>NullPointerException</code>. Siempre valida antes de usar referencias.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Independencia de Estado</h4>
+          <p>Cada instancia tiene su propio estado (valores de atributos) completamente independiente. Cambiar un atributo en una instancia no afecta a otras, aunque sean de la misma clase.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Inicialización en Constructor</h4>
+          <p>El constructor ejecuta código de inicialización cuando se crea el objeto. Es el lugar ideal para validar datos, establecer valores iniciales válidos y garantizar que el objeto nace en un estado consistente.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="constructores">
+      <h2>Constructores: Inicializando Objetos</h2>
+      <p><strong>Definición:</strong> Un constructor es un método especial que se ejecuta cuando creas una instancia. Se usa para inicializar el estado del objeto. Todo constructor tiene el mismo nombre que la clase.</p>
+
+      <h3>Tipos de Constructores</h3>
+      
+      <div class="cards-grid-teoricos">
+        <div class="card-teorico">
+          <h4>Constructor por Defecto (sin argumentos)</h4>
+          <p>Si no defines ningún constructor, Java proporciona uno automáticamente que inicializa atributos con valores por defecto (0, null, false, etc.). Puedes definir explícitamente uno vacío para mayor control.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Constructor Parametrizado</h4>
+          <p>Acepta parámetros para inicializar atributos con valores específicos. Es lo más común. Permite crear objetos con estado válido desde el inicio.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Sobrecarga de Constructores</h4>
+          <p>Puedes definir múltiples constructores con diferentes firmas (diferentes números o tipos de parámetros). Java elige el correcto según los argumentos que pases al usar <code>new</code>.</p>
+        </div>
+      </div>
+
+      <h3>Ejemplo: Clase con Constructores</h3>
+      <pre><code class="language-java">public class Estudiante {
+    private String nombre;
+    private int edad;
+    private double promedio;
+
+    // Constructor vacío (por defecto)
+    public Estudiante() {
+        this.nombre = "Desconocido";
+        this.edad = 0;
+        this.promedio = 0.0;
+    }
+
+    // Constructor parametrizado (común)
+    public Estudiante(String nombre, int edad, double promedio) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.promedio = Math.max(0, Math.min(100, promedio)); // validación: 0-100
+    }
+
+    // Constructor alternativo (más parámetros)
+    public Estudiante(String nombre, int edad) {
+        this(nombre, edad, 0.0); // delegar a otro constructor
+    }
+
+    // Getters
+    public String getNombre() { return nombre; }
+    public int getEdad() { return edad; }
+    public double getPromedio() { return promedio; }
+
+    // Setters
+    public void setPromedio(double promedio) {
+        this.promedio = Math.max(0, Math.min(100, promedio));
+    }
+}
+</code></pre>
+
+      <h3>Usando los Constructores</h3>
+      <pre><code class="language-java">// Crear instancia con constructor vacío
+Estudiante est1 = new Estudiante();
+
+// Crear instancia con parámetros
+Estudiante est2 = new Estudiante("Carlos", 20, 85.5);
+
+// Crear instancia con constructor alternativo
+Estudiante est3 = new Estudiante("Marta", 19);
+</code></pre>
+
+      <h3>Patrones Comunes en Constructores</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Delegación con this()</h4>
+          <p>Un constructor puede invocar otro constructor de la misma clase usando <code>this(parámetros)</code>. Útil para evitar duplicación de código. <code>this()</code> debe ser la primera línea del constructor.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Validación en Constructor</h4>
+          <p>Valida todos los parámetros antes de asignarlos a atributos. Lanza <code>IllegalArgumentException</code> si los datos son inválidos. Garantiza que todo objeto nace en estado válido, sin datos inconsistentes.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Constructor de Copia</h4>
+          <p>Constructor que recibe otro objeto de la misma clase y copia su estado. Útil para crear clones: <code>new Persona(otraPersona)</code>. Evita compartir referencias a objetos mutables.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Constructores Sobrecargados</h4>
+          <p>Múltiples constructores con diferentes firmas. Java elige automáticamente según los argumentos. Permite máxima flexibilidad: crear objetos con datos completos o parciales según la situación.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Inicialización de Campos Finales</h4>
+          <p>Los campos declarados <code>final</code> deben inicializarse en el constructor o en la declaración. Después no pueden cambiar. Ideal para valores inmutables como IDs o nombres que nunca deben variar.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ciclo-vida">
+      <h2>Ciclo de Vida de un Objeto</h2>
+      <p>Todo objeto en Java sigue un ciclo de vida bien definido: nacimiento, vida útil y muerte. Entender este ciclo es fundamental para escribir código eficiente y sin fugas de memoria.</p>
+
+      <h3>Fases del Ciclo de Vida</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>1. Creación (new)</h4>
+          <p><strong>Cuándo:</strong> Ejecutas <code>new NombreClase()</code>. <strong>Qué ocurre:</strong> Se asigna memoria en el heap, se inicializan atributos a valores por defecto, se ejecuta el constructor. <strong>Resultado:</strong> Objeto listo en memoria.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>2. Vida Útil (uso)</h4>
+          <p><strong>Cuándo:</strong> Tienes referencias válidas al objeto y lo usas. <strong>Qué ocurre:</strong> Invocas métodos, lees/escribes atributos, el objeto cambia de estado. <strong>Duración:</strong> Mientras exista al menos una referencia activa.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>3. Pérdida de Referencias</h4>
+          <p><strong>Cuándo:</strong> El objeto sale de scope o todas sus referencias se eliminan. <strong>Qué ocurre:</strong> El objeto se vuelve inaccesible desde el código. Java marca el objeto para garbage collection.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>4. Garbage Collection</h4>
+          <p><strong>Cuándo:</strong> El garbage collector (JVM) necesita liberar memoria. <strong>Qué ocurre:</strong> Se ejecuta <code>finalize()</code> (en versiones antiguas) y se libera la memoria. <strong>Cuándo:</strong> No es determinístico, ocurre cuando la JVM lo decide.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>5. Destrucción (finalize)</h4>
+          <p><strong>Método finalize():</strong> Se ejecuta antes de que el garbage collector libere el objeto. Rara vez se usa en código moderno. Mejor usar try-with-resources o métodos cleanup() explícitos para liberar recursos.</p>
+        </div>
+      </div>
+
+      <h3>Ejemplo Visual del Ciclo de Vida</h3>
+      <pre><code class="language-java">public class EjemploCicloVida {
+    public static void main(String[] args) {
+        // FASE 1: Creación - new invoca constructor
+        Persona p1 = new Persona("Ana", 28);
+        System.out.println("1. Objeto creado: " + p1.getNombre());
+
+        // FASE 2: Vida útil - usamos el objeto
+        p1.setEdad(29);
+        System.out.println("2. Edad modificada: " + p1.getEdad());
+
+        // FASE 3: Pérdida de referencia - reasignamos la variable
+        Persona p2 = new Persona("Luis", 35);
+        p1 = p2;  // p1 ya no apunta al primer objeto, ese objeto es garbage
+        // "Ana" ahora es inaccesible y será recolectada
+
+        System.out.println("3. p1 ahora es: " + p1.getNombre());
+        
+        // FASE 4 y 5: Cuando el programa termina, todos los objetos sin referencias
+        // son recolectados por garbage collection automáticamente
+    }
+}
+</code></pre>
+    </section>
+
+    <section id="relaciones-objetos">
+      <h2>Relaciones entre Objetos</h2>
+      <p>En programación orientada a objetos, los objetos no existen aislados. Interactúan con otros objetos formando relaciones que modelan el mundo real. Las relaciones permiten crear estructuras complejas y reutilizables.</p>
+
+      <h3>Tipos Principales de Relaciones</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Asociación</h4>
+          <p>Una clase "usa" o tiene referencia a otra. Ejemplo: <code>Persona</code> tiene una referencia a <code>Dirección</code>. Las clases son independientes; pueden existir por separado. La relación es débil, sin dependencia fuerte.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Composición</h4>
+          <p>Una clase "contiene" objetos de otra como partes componentes. Ejemplo: <code>Auto</code> contiene <code>Motor</code>, <code>Ruedas</code>, etc. Si la clase padre se destruye, las partes también. Relación fuerte: "tiene-a".</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Agregación</h4>
+          <p>Similar a composición, pero más débil. El todo no "posee" las partes; simplemente las agrupa. Ejemplo: <code>Equipo</code> contiene <code>Jugadores</code>. Los jugadores pueden existir sin el equipo.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Herencia</h4>
+          <p>Una clase "extiende" o hereda de otra. Ejemplo: <code>Empleado</code> hereda de <code>Persona</code>. Relación "es-un": <code>Empleado es un Persona</code>. Reutiliza código y crea jerarquías.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Dependencia</h4>
+          <p>Una clase depende de otra para funcionar, pero sin poseerla. Ejemplo: Un método recibe un parámetro de otra clase. Relación de corta duración; típicamente dentro de un método.</p>
+        </div>
+      </div>
+
+      <h3>Ejemplo: Composición</h3>
+      <pre><code class="language-java">// Clase Dirección
+public class Dirección {
+    private String calle;
+    private String ciudad;
+    private String codigoPostal;
+
+    public Dirección(String calle, String ciudad, String codigoPostal) {
+        this.calle = calle;
+        this.ciudad = ciudad;
+        this.codigoPostal = codigoPostal;
+    }
+
+    @Override
+    public String toString() {
+        return calle + ", " + ciudad + " " + codigoPostal;
+    }
+}
+
+// Clase Persona - COMPONE una Dirección
+public class Persona {
+    private String nombre;
+    private int edad;
+    private Dirección dirección;  // COMPOSICIÓN
+
+    public Persona(String nombre, int edad, Dirección dirección) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.dirección = dirección;
+    }
+
+    public void mostrarInfo() {
+        System.out.println(nombre + ", " + edad + " años");
+        System.out.println("Vive en: " + dirección);
+    }
+}
+
+// Uso
+public class Main {
+    public static void main(String[] args) {
+        Dirección dir = new Dirección("Calle Principal 123", "Madrid", "28001");
+        Persona p = new Persona("Ana", 28, dir);
+        p.mostrarInfo();
+        // Salida: Ana, 28 años
+        //         Vive en: Calle Principal 123, Madrid 28001
+    }
+}
+</code></pre>
+    </section>
+
+    <section id="atributos">
+      <h2>Manipulación de Atributos</h2>
+      <p>Los atributos (campos) son variables que almacenan el estado de un objeto. Se manipulan principalmente a través de getters (lectura) y setters (escritura). Una buena manipulación de atributos es fundamental para la encapsulación y el mantenimiento del código.</p>
+
+      <h3>Principios de Acceso a Atributos</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Atributos Privados</h4>
+          <p>Siempre usa <code>private</code> para los atributos de datos. Esto impide acceso directo no controlado desde fuera de la clase. Obliga a usar getters/setters, dándote control total sobre validación y consistencia de datos.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Getter: Lectura Segura</h4>
+          <p>Método público que retorna el valor de un atributo privado. Por convención, se nombra <code>get</code> + nombre capitalizado. <strong>Nunca</strong> modifiques el estado en un getter. Pueden retornar copias defensivas si es necesario.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Setter: Escritura Validada</h4>
+          <p>Método público que modifica un atributo privado con validación. Por convención, se nombra <code>set</code> + nombre. Siempre valida el nuevo valor antes de asignarlo. Lanza excepciones si el valor es inválido.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Copias Defensivas</h4>
+          <p>Si un atributo es mutable (lista, array, objeto), retorna una copia en el getter, no la original. Así evitas que código externo modifique el estado interno sin pasar por validaciones. Importante para mantener la integridad.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Atributos Inmutables (final)</h4>
+          <p>Un atributo <code>final</code> no puede cambiar después de inicializarse. Ideal para valores que deben ser constantes: IDs, nombres únicos, etc. No necesita setter. Simplifica el razonamiento sobre el código.</p>
+        </div>
+      </div>
+      
+      <div class="cards-grid-teoricos">
+        <div class="card-teorico">
+          <h4>Getter (Método de Lectura)</h4>
+          <p>Retorna el valor actual de un atributo privado. Por convención, el nombre es <code>get</code> seguido del nombre del atributo con primera letra mayúscula. Ej: <code>getNombre()</code>, <code>getEdad()</code>.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Setter (Método de Escritura)</h4>
+          <p>Modifica el valor de un atributo privado. Por convención, el nombre es <code>set</code> seguido del nombre del atributo. Incluye validaciones para garantizar que el nuevo valor es válido antes de asignarlo.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Atributos Privados</h4>
+          <p>Usa <code>private</code> para los atributos de datos. Esto obliga a otros a usar getters/setters, permitiéndote controlar el acceso y validar. Nunca hagas públicos los atributos de datos.</p>
+        </div>
+      </div>
+
+      <h3>Ejemplo: Validación en Setters</h3>
+      <pre><code class="language-java">public class CuentaBancaria {
+    private String titular;
+    private double saldo;
+
+    public CuentaBancaria(String titular, double saldoInicial) {
+        this.titular = titular;
+        this.saldo = Math.max(0, saldoInicial); // no negativo
+    }
+
+    // Getter
+    public double getSaldo() {
+        return saldo;
+    }
+
+    // Setter con validación
+    public void setSaldo(double nuevoSaldo) {
+        if (nuevoSaldo >= 0) {
+            this.saldo = nuevoSaldo;
+        } else {
+            System.out.println("Error: el saldo no puede ser negativo");
+        }
+    }
+
+    // Método que modifica atributo internamente
+    public void depositar(double cantidad) {
+        if (cantidad > 0) {
+            saldo += cantidad;
+            System.out.println("Depósito de $" + cantidad + " exitoso. Saldo: $" + saldo);
+        }
+    }
+
+    public void retirar(double cantidad) {
+        if (cantidad > 0 && cantidad <= saldo) {
+            saldo -= cantidad;
+            System.out.println("Retiro de $" + cantidad + " exitoso. Saldo: $" + saldo);
+        } else {
+            System.out.println("Operación rechazada: fondos insuficientes o cantidad inválida");
+        }
+    }
+}
+</code></pre>
+
+      <h3>Uso de Getters y Setters</h3>
+      <pre><code class="language-java">CuentaBancaria miCuenta = new CuentaBancaria("Juan", 1000);
+
+// Leer atributo (getter)
+System.out.println("Saldo: $" + miCuenta.getSaldo()); // Saldo: $1000
+
+// Modificar atributo (setter)
+miCuenta.setSaldo(1500); // Saldo válido, se acepta
+miCuenta.setSaldo(-500); // Saldo inválido, se rechaza (error)
+
+// Usar métodos que modifican atributos
+miCuenta.depositar(250);  // Depósito de $250 exitoso. Saldo: $1250
+miCuenta.retirar(100);    // Retiro de $100 exitoso. Saldo: $1150
+miCuenta.retirar(2000);   // Error: fondos insuficientes
+</code></pre>
+
+      <h3>Validación en Setters</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Validación por Rango</h4>
+          <p>Verifica que valores numéricos estén dentro de un rango válido. Ejemplo: edad entre 0 y 150, precio mayor a 0. Usa condicionales: <code>if (valor < minimo || valor > maximo) throw new Exception()</code>.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Validación de Null</h4>
+          <p>Para atributos String o de referencia, valida que no sean null. Usa <code>if (valor == null) throw new NullPointerException()</code> o Java 16+: <code>Objects.requireNonNull(valor)</code>. Previene errores posteriores.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Validación de Formato</h4>
+          <p>Para strings, valida formato con regex o métodos. Ejemplo: emails con patrón, teléfonos con longitud. Garantiza que los datos cumplen estructura esperada antes de guardarlos.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Excepciones Descriptivas</h4>
+          <p>Lanza excepciones con mensajes claros. Ejemplo: <code>throw new IllegalArgumentException("Edad debe ser entre 0 y 150")</code>. El mensaje ayuda a los desarrolladores a entender y arreglar el problema rápido.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Validación Combinada</h4>
+          <p>Combina múltiples validaciones cuando sea necesario. Valida primero lo más crítico. Usa métodos privados para encapsular lógica de validación compleja.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="mutabilidad">
+      <h2>Mutabilidad e Inmutabilidad</h2>
+      <p>La mutabilidad define si el estado de un objeto puede cambiar después de su creación. Es un concepto crucial para escribir código seguro, especialmente en programas multi-threaded.</p>
+
+      <h3>Objetos Mutables vs Inmutables</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Objeto Mutable</h4>
+          <p>Su estado puede cambiar después de crearlo. Ejemplo: <code>CuentaBancaria</code> (el saldo puede cambiar), <code>ArrayList</code> (se pueden agregar/eliminar elementos). Más flexible, pero requiere más cuidado con la sincronización.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Objeto Inmutable</h4>
+          <p>Su estado no puede cambiar después de crearlo. Ejemplo: <code>String</code>, <code>Integer</code> en Java. Más seguro en multi-threading. Si necesitas "cambiar" su estado, creas un nuevo objeto con los nuevos valores.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Crear una Clase Inmutable</h4>
+          <p><strong>Pasos:</strong> 1) Declara la clase <code>final</code>. 2) Todos los atributos <code>private final</code>. 3) Inicializa en constructor, sin setters. 4) Retorna copias defensivas en getters para objetos mutables. 5) Override <code>hashCode()</code> y <code>equals()</code>.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Ventajas de Inmutabilidad</h4>
+          <p><strong>1) Seguridad en threads:</strong> No necesita sincronización. <strong>2) Cache seguro:</strong> Se puede guardar sin preocupaciones. <strong>3) Simplicidad:</strong> Estado no cambia, fácil de razonar. <strong>4) Hash seguro:</strong> hashCode() nunca cambia.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Desventajas de Inmutabilidad</h4>
+          <p><strong>1) Uso de memoria:</strong> Crear nuevo objeto por cada cambio consume más memoria. <strong>2) Menos flexible:</strong> No puedes "actualizar" propiedades, debes recrear. <strong>3) Complejidad:</strong> Requiere copias defensivas, lo que puede ser tedioso.</p>
+        </div>
+      </div>
+
+      <h3>Ejemplo: Clase Inmutable</h3>
+      <pre><code class="language-java">public final class Fecha {  // final: no puede heredarse
+    private final int dia;
+    private final int mes;
+    private final int anio;
+
+    public Fecha(int dia, int mes, int anio) {
+        if (!esValida(dia, mes, anio)) {
+            throw new IllegalArgumentException("Fecha inválida");
+        }
+        this.dia = dia;
+        this.mes = mes;
+        this.anio = anio;
+    }
+
+    // Getters - sin setters
+    public int getDia() { return dia; }
+    public int getMes() { return mes; }
+    public int getAnio() { return anio; }
+
+    // Validar fecha
+    private static boolean esValida(int d, int m, int a) {
+        return m >= 1 && m <= 12 && d >= 1 && d <= 31 && a > 0;
+    }
+
+    // Si necesitas "cambiar" la fecha, creas una nueva instancia
+    public Fecha agregarDias(int dias) {
+        // cálculo del nuevo día...
+        return new Fecha(nuevoDia, nuevoMes, nuevoAnio);
+    }
+
+    @Override
+    public String toString() {
+        return dia + "/" + mes + "/" + anio;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Fecha)) return false;
+        Fecha otra = (Fecha) obj;
+        return dia == otra.dia && mes == otra.mes && anio == otra.anio;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(dia, mes, anio);
+    }
+}
+
+// Uso
+public class Main {
+    public static void main(String[] args) {
+        Fecha f1 = new Fecha(15, 6, 2024);
+        System.out.println(f1);  // 15/6/2024
+        
+        // No puedo hacer f1.setDia(20) - no existe setter
+        // Si necesito otra fecha, creo una nueva
+        Fecha f2 = f1.agregarDias(5);  // retorna nueva instancia
+        System.out.println(f2);  // 20/6/2024 (f1 sigue siendo 15/6/2024)
+    }
+}
+</code></pre>
+    </section>
+
+    <section id="metodos">
+      <h2>Manipulación de Métodos</h2>
+      <p>Los métodos son funciones que definen el comportamiento de un objeto. Se invocan usando la notación de punto: <code>objeto.metodo()</code>. Un buen diseño de métodos es clave para crear código mantenible, reutilizable y fácil de entender.</p>
+
+      <h3>Clasificación de Métodos</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Métodos sin Retorno (void)</h4>
+          <p>Ejecutan una acción pero no retornan valor. Sintaxis: <code>public void nombreMetodo() { ... }</code>. Se usan para modificar el estado interno o realizar operaciones sin resultado. Ejemplo: <code>depositar()</code>, <code>saludar()</code>.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Métodos con Retorno</h4>
+          <p>Ejecutan cálculos/consultas y devuelven un resultado. Especifican el tipo: <code>int</code>, <code>String</code>, <code>boolean</code>, objetos, etc. Sintaxis: <code>public TipoRetorno nombreMetodo() { return valor; }</code>. Ejemplo: <code>calcularSaldo()</code>.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Métodos con Parámetros</h4>
+          <p>Reciben uno o más argumentos para procesarlos. Aumentan la reutilización: mismo método, diferentes datos. Sintaxis: <code>public void metodo(Tipo param1, Tipo param2) { ... }</code>. Los parámetros son locales al método.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Métodos Privados</h4>
+          <p>Usa <code>private</code> para métodos que solo la clase usa internamente. Encapsulan lógica compleja y detalles de implementación. No son parte de la interfaz pública. Facilita cambios internos sin afectar otros códigos.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Métodos Estáticos</h4>
+          <p>Declarados con <code>static</code>. Pertenecen a la clase, no a instancias. Se invocan en la clase: <code>NombreClase.metodo()</code>. Útiles para utilidades: <code>Math.max()</code>, <code>System.out.println()</code>. No pueden acceder a atributos de instancia.</p>
+        </div>
+      </div>
+      
+      <div class="cards-grid-teoricos">
+        <div class="card-teorico">
+          <h4>Métodos sin Retorno (void)</h4>
+          <p>Ejecutan una acción pero no devuelven un resultado. Ejemplo: <code>depositar()</code>, <code>saludar()</code>. Se usan para modificar el estado o realizar operaciones sin necesidad de valores de salida.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Métodos con Retorno</h4>
+          <p>Ejecutan una acción y devuelven un valor. El tipo de retorno especifica qué tipo de dato retorna: <code>int</code>, <code>String</code>, <code>boolean</code>, etc. Se usan para cálculos, búsquedas y consultas.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Métodos con Parámetros</h4>
+          <p>Reciben uno o más argumentos para procesar. Los parámetros permiten que un método se comporte diferente según los datos que reciba. Facilita la reutilización de código.</p>
+        </div>
+      </div>
+
+      <h3>Estructura de un Método</h3>
+      <pre><code class="language-java">modificador tipoRetorno nombreMetodo(parametro1, parametro2, ...) {
+    // cuerpo del método
+    return valor; // si tipoRetorno != void
+}
+
+// Ejemplos
+public void saludar(String nombre) {
+    System.out.println("¡Hola, " + nombre + "!");
+}
+
+public int sumar(int a, int b) {
+    return a + b;
+}
+
+public boolean esAdulto(int edad) {
+    return edad >= 18;
+}
+
+public String obtenerInfo() {
+    return "Información del objeto";
+}
+</code></pre>
+
+      <h3>Invocación de Métodos</h3>
+      <pre><code class="language-java">public class Persona {
+    private String nombre;
+    private int edad;
+
+    public Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    // Método sin parámetros ni retorno
+    public void saludar() {
+        System.out.println("Hola, soy " + nombre);
+    }
+
+    // Método con parámetros, sin retorno
+    public void cumpleanios() {
+        edad++;
+        System.out.println(nombre + " ahora tiene " + edad + " años");
+    }
+
+    // Método con retorno
+    public boolean esAdulto() {
+        return edad >= 18;
+    }
+
+    // Método con parámetros y retorno
+    public String presentarse(String saludo) {
+        return saludo + ", me llamo " + nombre + " y tengo " + edad + " años";
+    }
+}
+
+// Usar los métodos
+public class Main {
+    public static void main(String[] args) {
+        Persona p = new Persona("Ana", 25);
+
+        p.saludar();                           // Hola, soy Ana
+        p.cumpleanios();                       // Ana ahora tiene 26 años
+        System.out.println(p.esAdulto());      // true
+        System.out.println(p.presentarse("Buenos días")); // Buenos días, me llamo Ana...
+    }
+}
+</code></pre>
+    </section>
+
+    <section id="buenas-practicas-metodos">
+      <h2>Buenas Prácticas en Métodos</h2>
+      <p>El diseño de métodos es crítico para la calidad del código. Métodos bien diseñados son fáciles de entender, probar, mantener y reutilizar.</p>
+
+      <h3>Principios de Buen Diseño de Métodos</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Responsabilidad Única</h4>
+          <p><strong>Single Responsibility Principle (SRP):</strong> Cada método debe hacer una sola cosa bien. Si un método hace múltiples cosas, divídelo en varios métodos. Un método con una responsabilidad clara es fácil de entender, probar y mantener.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Nombres Descriptivos</h4>
+          <p>Nombres deben ser verbos que describan la acción: <code>calcular</code>, <code>validar</code>, <code>obtener</code>, <code>establecer</code>. Evita nombres genéricos como <code>procesar</code> o <code>hacer</code>. Un buen nombre es documentación en sí misma; debe ser auto-explicativo.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Parámetros Mínimos</h4>
+          <p>Limita el número de parámetros (idealmente ≤ 3). Muchos parámetros hace métodos confusos y difíciles de invocar. Si necesitas muchos, agrúpalos en un objeto: <code>metodo(ConfiguracionObjeto config)</code> en lugar de <code>metodo(int a, int b, int c, ...)</code>.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Sin Efectos Secundarios</h4>
+          <p>Métodos no deberían modificar estado global o externo inesperadamente. Si un método dice "obtener", debería solo retornar sin cambiar nada. Si modifica estado, el nombre debe indicarlo: <code>depositar()</code> en lugar de solo <code>obtenerSaldo()</code>.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Documentación con Javadoc</h4>
+          <p>Documenta métodos públicos con Javadoc: <code>/** ... @param ... @return ... @throws ... */</code>. Especifica qué hace, parámetros, retorno y excepciones. Herramientas generan documentación automáticamente. Facilita uso correcto por otros desarrolladores.</p>
+        </div>
+      </div>
+
+      <h3>Ejemplo: Método Bien Diseñado</h3>
+      <pre><code class="language-java">/**
+ * Valida y procesa un depósito en la cuenta.
+ * 
+ * @param monto el cantidad a depositar, debe ser mayor a 0
+ * @throws IllegalArgumentException si monto es negativo o cero
+ * @return true si el depósito fue exitoso, false en caso contrario
+ */
+public boolean procesarDeposito(double monto) {
+    // Una responsabilidad clara: procesar depósito
+    if (monto <= 0) {
+        throw new IllegalArgumentException("Monto debe ser positivo");
+    }
+    
+    saldo += monto;
+    registrarTransacción("Depósito", monto);
+    return true;
+}
+
+/**
+ * Método privado auxiliar: encapsula la lógica de registrar transacciones.
+ * No forma parte de la interfaz pública.
+ */
+private void registrarTransacción(String tipo, double monto) {
+    System.out.println("[" + LocalDateTime.now() + "] " + tipo + ": $" + monto);
+}
+</code></pre>
+
+      <h3>Patrones Comunes de Métodos</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Constructor</h4>
+          <p><code>public NombreClase(...)</code>. Método especial que inicializa objetos. Mismo nombre que la clase. Ejecuta automáticamente con <code>new</code>. Encapsula lógica de inicialización.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Getter</h4>
+          <p><code>public Tipo get NombreAtributo()</code>. Retorna valor de atributo privado. Lectura segura. Por convención: <code>getNombre()</code>, <code>getEdad()</code>. Puede validar o retornar copia.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Setter</h4>
+          <p><code>public void setNombreAtributo(Tipo valor)</code>. Modifica atributo con validación. Escritura segura. Por convención: <code>setNombre()</code>. Lanza excepciones si datos inválidos.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>toString()</h4>
+          <p><code>public String toString()</code>. Retorna representación en texto del objeto. Útil para debugging y logging. Sobrescribe el método de <code>Object</code>. Ejemplo: <code>"Persona{nombre='Ana', edad=28}"</code>.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>equals()</h4>
+          <p><code>public boolean equals(Object obj)</code>. Compara si dos objetos son iguales lógicamente. Sobrescribe el método de <code>Object</code>. Importante para colecciones: List, Set, Map. Siempre paired con <code>hashCode()</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ejercicios">
+      <h2>Ejercicios Prácticos</h2>
+
+      <h3>Ejercicio 1: Crear una Clase Producto</h3>
+      <p><strong>Enunciado:</strong> Crea una clase <code>Producto</code> con atributos nombre, precio y cantidad. Implementa constructores, getters, setters con validación, y métodos para calcular el valor total del inventario (<code>valorTotalInventario()</code>).</p>
+
+      <div class="solution">
+        <h3>Solución</h3>
+        <pre><code class="language-java">public class Producto {
+    private String nombre;
+    private double precio;
+    private int cantidad;
+
+    // Constructor parametrizado
+    public Producto(String nombre, double precio, int cantidad) {
+        if (nombre == null || nombre.isBlank()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
+        }
+        this.nombre = nombre;
+        setPrecio(precio);
+        setCantidad(cantidad);
+    }
+
+    // Getters
+    public String getNombre() { return nombre; }
+    public double getPrecio() { return precio; }
+    public int getCantidad() { return cantidad; }
+
+    // Setters con validación
+    public void setPrecio(double precio) {
+        if (precio < 0) {
+            throw new IllegalArgumentException("El precio no puede ser negativo");
+        }
+        this.precio = precio;
+    }
+
+    public void setCantidad(int cantidad) {
+        if (cantidad < 0) {
+            throw new IllegalArgumentException("La cantidad no puede ser negativa");
+        }
+        this.cantidad = cantidad;
+    }
+
+    // Método para calcular valor total del inventario
+    public double valorTotalInventario() {
+        return precio * cantidad;
+    }
+
+    // Método para aumentar stock
+    public void agregarStock(int cantidad) {
+        if (cantidad > 0) {
+            this.cantidad += cantidad;
+            System.out.println("Se agregaron " + cantidad + " unidades de " + nombre);
+        }
+    }
+
+    // Método para vender
+    public boolean vender(int cantidad) {
+        if (cantidad > 0 && cantidad <= this.cantidad) {
+            this.cantidad -= cantidad;
+            System.out.println("Se vendieron " + cantidad + " unidades de " + nombre);
+            return true;
+        }
+        System.out.println("No hay suficiente stock disponible");
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto: " + nombre + " | Precio: $" + precio + " | Cantidad: " + cantidad + " | Valor total: $" + valorTotalInventario();
+    }
+}
+
+// Prueba
+public class TestProducto {
+    public static void main(String[] args) {
+        Producto p1 = new Producto("Laptop", 800, 5);
+        System.out.println(p1); // Producto: Laptop | Precio: $800.0 | Cantidad: 5 | Valor total: $4000.0
+
+        p1.agregarStock(3);     // Se agregaron 3 unidades de Laptop
+        p1.vender(2);           // Se vendieron 2 unidades de Laptop
+        System.out.println(p1); // Producto: Laptop | Precio: $800.0 | Cantidad: 6 | Valor total: $4800.0
+    }
+}
+</code></pre>
+      </div>
+
+      <h3>Ejercicio 2: Clase Automóvil con Métodos</h3>
+      <p><strong>Enunciado:</strong> Crea una clase <code>Automovil</code> con marca, modelo, año y velocidad actual. Implementa métodos para acelerar, frenar, obtener velocidad máxima según el modelo. Valida que la velocidad no sea negativa.</p>
+
+      <div class="solution">
+        <h3>Solución</h3>
+        <pre><code class="language-java">public class Automovil {
+    private String marca;
+    private String modelo;
+    private int anio;
+    private double velocidadActual;
+    private static final double VEL_MAX_DEPORTIVO = 280;
+    private static final double VEL_MAX_SEDAN = 200;
+    private static final double VEL_MAX_SUV = 210;
+
+    public Automovil(String marca, String modelo, int anio) {
+        if (marca == null || modelo == null) {
+            throw new IllegalArgumentException("Marca y modelo no pueden ser nulos");
+        }
+        this.marca = marca;
+        this.modelo = modelo;
+        this.anio = anio;
+        this.velocidadActual = 0;
+    }
+
+    // Getters
+    public String getMarca() { return marca; }
+    public String getModelo() { return modelo; }
+    public int getAnio() { return anio; }
+    public double getVelocidadActual() { return velocidadActual; }
+
+    // Determinar velocidad máxima según modelo
+    public double getVelocidadMaxima() {
+        if (modelo.toLowerCase().contains("deportivo")) return VEL_MAX_DEPORTIVO;
+        if (modelo.toLowerCase().contains("sedan")) return VEL_MAX_SEDAN;
+        if (modelo.toLowerCase().contains("suv")) return VEL_MAX_SUV;
+        return VEL_MAX_SEDAN; // default
+    }
+
+    // Acelerar
+    public void acelerar(double incremento) {
+        if (incremento <= 0) {
+            System.out.println("El incremento de velocidad debe ser positivo");
+            return;
+        }
+        double nuevaVelocidad = velocidadActual + incremento;
+        if (nuevaVelocidad > getVelocidadMaxima()) {
+            velocidadActual = getVelocidadMaxima();
+            System.out.println("Velocidad máxima alcanzada: " + velocidadActual + " km/h");
+        } else {
+            velocidadActual = nuevaVelocidad;
+            System.out.println("Acelerando a " + velocidadActual + " km/h");
+        }
+    }
+
+    // Frenar
+    public void frenar(double decremento) {
+        if (decremento <= 0) {
+            System.out.println("El decremento debe ser positivo");
+            return;
+        }
+        velocidadActual = Math.max(0, velocidadActual - decremento);
+        System.out.println("Frenando... Velocidad actual: " + velocidadActual + " km/h");
+    }
+
+    // Detener completamente
+    public void detener() {
+        velocidadActual = 0;
+        System.out.println("Vehículo detenido");
+    }
+
+    @Override
+    public String toString() {
+        return marca + " " + modelo + " (" + anio + ") - Velocidad: " + velocidadActual + " km/h";
+    }
+}
+
+// Prueba
+public class TestAutomovil {
+    public static void main(String[] args) {
+        Automovil auto = new Automovil("Toyota", "Sedan", 2023);
+        System.out.println("Velocidad máxima: " + auto.getVelocidadMaxima() + " km/h");
+        
+        auto.acelerar(50);  // Acelerando a 50.0 km/h
+        auto.acelerar(80);  // Acelerando a 130.0 km/h
+        auto.acelerar(100); // Velocidad máxima alcanzada: 200.0 km/h
+        auto.frenar(30);    // Frenando... Velocidad actual: 170.0 km/h
+        auto.detener();     // Vehículo detenido
+        System.out.println(auto); // Toyota Sedan (2023) - Velocidad: 0.0 km/h
+    }
+}
+</code></pre>
+      </div>
+    </section>
+
+    <h3>Cards de Refuerzo: Instanciación y Manipulación</h3>
+    <div class="cards-grid-teoricos">
+      <div class="card-teorico">
+        <h4>Operador new</h4>
+        <p>Crea una nueva instancia de una clase en memoria. Sintaxis: <code>new NombreClase(argumentos)</code>. Invoca automáticamente el constructor que coincida con los argumentos proporcionados.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>Constructor</h4>
+        <p>Método especial que inicializa un objeto. Tiene el mismo nombre que la clase. Se ejecuta automáticamente al crear una instancia. Puede validar datos y establecer valores iniciales.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>Sobrecarga de Constructores</h4>
+        <p>Múltiples constructores con diferentes firmas. Java elige el correcto según los argumentos. Permite flexibilidad en cómo crear objetos con distintos conjuntos de datos iniciales.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>Getters y Setters</h4>
+        <p>Métodos públicos para acceder (get) y modificar (set) atributos privados. Los setters pueden validar datos. Es la forma encapsulada y segura de acceder a los datos de un objeto.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>Referencias de Objetos</h4>
+        <p>Las variables que guardan objetos son referencias (apuntadores) a ubicaciones en memoria, no copias. Múltiples variables pueden apuntar al mismo objeto. Asignar a otra variable copia la referencia, no el objeto.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>Estado Independiente</h4>
+        <p>Cada instancia tiene su propio estado (valores de atributos) independiente. Cambiar un atributo en una instancia no afecta a otras, aunque sean de la misma clase.</p>
+      </div>
+    </div>
+
+    <h3>Buenas Prácticas</h3>
+    <div class="info-box">
+      <ol>
+        <li><strong>Usa constructores para inicializar:</strong> establece valores iniciales válidos en el constructor, no después de crear el objeto.</li>
+        <li><strong>Valida en constructores y setters:</strong> asegúrate de que los datos sean válidos antes de asignarlos. Lanza excepciones si es necesario.</li>
+        <li><strong>Mantén atributos privados:</strong> siempre usa <code>private</code> para atributos de datos; proporciona getters/setters públicos para acceso controlado.</li>
+        <li><strong>Nombra getters/setters convencionalmente:</strong> usa <code>getNombre()</code>, <code>setNombre()</code> para que otros programadores reconozcan fácilmente estos métodos.</li>
+        <li><strong>Evita lógica compleja en getters/setters:</strong> estos métodos deben ser simples. Si necesitas lógica compleja, crea métodos separados.</li>
+        <li><strong>Proporciona constructores útiles:</strong> crea múltiples constructores (sobrecarga) para permitir diferentes formas de crear objetos con datos iniciales relevantes.</li>
+        <li><strong>Usa <code>this</code> explícitamente en constructores:</strong> especifica <code>this.atributo = parametro</code> para claridad al leer el código.</li>
+      </ol>
+    </div>
+
+    <section id="videos-educativos">
+      <h2>Videos Educativos</h2>
+      <div class="videos-grid">
+        <div class="video-container">
+          <h3>Curso Java desde cero - Instanciación de Objetos</h3>
+          <div class="video-wrapper">
+            <video controls width="100%" height="400" class="video-player">
+              <source src="videos/54- Curso Java desde cero- Declaración, instanciación e inicialización de un obj.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/54- Curso Java desde cero- Declaración, instanciación e inicialización de un obj.mp4" download>Descargar video</a>
+            </video>
+          </div>
+          <p>Aprende cómo declarar, instanciar e inicializar objetos en Java desde cero.</p>
+        </div>
+        <div class="video-container">
+          <h3>POO - Ejemplo Práctico en Java</h3>
+          <div class="video-wrapper">
+            <video controls width="100%" height="400" class="video-player">
+              <source src="videos/POO 2 - Ejemplo práctico (Clases, objetos, atributos y métodos). - Java.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/POO 2 - Ejemplo práctico (Clases, objetos, atributos y métodos). - Java.mp4" download>Descargar video</a>
+            </video>
+          </div>
+          <p>Ejemplo práctico completo de cómo trabajar con clases, objetos, atributos y métodos en Java.</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="muted">Recursos adicionales: <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html" target="_blank" rel="noopener">Classes and Objects (Oracle)</a> • <a href="https://www.geeksforgeeks.org/constructors-in-java/" target="_blank" rel="noopener">Constructors in Java (GeeksforGeeks)</a></p>
+
+    <p><a href="index.html">Volver al inicio</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; Página web POO 2026 - Todos los derechos reservados.</p>
+  </footer>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

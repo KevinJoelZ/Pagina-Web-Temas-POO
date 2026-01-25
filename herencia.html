@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Herencia en POO - POO</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="brand"><a href="index.html">POO</a></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="fundamentos.html">Fundamentos</a></li>
+        <li><a href="instanciacion.html">Instanciación</a></li>
+        <li><a href="herencia.html">Herencia</a></li>
+        <li><a href="ejercicios.html">Ejercicios</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="content">
+    <h1>Conceptos Fundamentales de Herencia en POO</h1>
+
+    <p>La herencia es uno de los pilares de la Programación Orientada a Objetos. Permite que una clase herede atributos y métodos de otra, promoviendo reutilización de código, extensibilidad y creación de jerarquías bien estructuradas. En esta página aprenderás cómo funcionan las relaciones "es-un" entre clases.</p>
+
+    <section id="que-es-herencia">
+      <h2>¿Qué es la Herencia?</h2>
+      <p><strong>Definición:</strong> La herencia es un mecanismo que permite que una clase (subclase o clase derivada) herede atributos y métodos de otra clase (superclase o clase base). La subclase extiende la funcionalidad de la superclase y puede agregar nuevos atributos y métodos, así como sobrescribir métodos existentes.</p>
+
+      <h3>Relación "es-un"</h3>
+      <p>La herencia modelar una relación "es-un". Por ejemplo: un <strong>Empleado es-un Persona</strong>, un <strong>Auto es-un Vehículo</strong>. Esta relación indica que la subclase es un tipo especial de la superclase, heredando todas sus características.</p>
+
+      <div class="figure">
+        <svg class="svg-illustration" viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Herencia - Superclase y Subclases">
+          <rect x="250" y="20" width="200" height="80" rx="10" fill="#eef6ff" stroke="#0369a1" stroke-width="2"/>
+          <text x="270" y="50" font-size="16" font-weight="700" fill="#0f1724">Persona (Superclase)</text>
+          <text x="270" y="70" font-size="12" fill="#374151">nombre, edad</text>
+          <text x="270" y="85" font-size="12" fill="#374151">saludar(), trabajar()</text>
+
+          <rect x="50" y="150" width="180" height="80" rx="10" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+          <text x="70" y="180" font-size="14" font-weight="700" fill="#0f1724">Empleado</text>
+          <text x="70" y="200" font-size="12" fill="#374151">+ salario, puesto</text>
+          <text x="70" y="215" font-size="12" fill="#374151">+ calcularBono()</text>
+
+          <rect x="310" y="150" width="180" height="80" rx="10" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+          <text x="330" y="180" font-size="14" font-weight="700" fill="#0f1724">Estudiante</text>
+          <text x="330" y="200" font-size="12" fill="#374151">+ matricula, promedio</text>
+          <text x="330" y="215" font-size="12" fill="#374151">+ estudiar()</text>
+
+          <rect x="570" y="150" width="180" height="80" rx="10" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
+          <text x="590" y="180" font-size="14" font-weight="700" fill="#0f1724">Doctor</text>
+          <text x="590" y="200" font-size="12" fill="#374151">+ especialidad, licencia</text>
+          <text x="590" y="215" font-size="12" fill="#374151">+ diagnosticar()</text>
+
+          <path d="M350 100 L140 150" stroke="#374151" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowhead2)"/>
+          <path d="M350 100 L400 150" stroke="#374151" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowhead2)"/>
+          <path d="M370 100 L660 150" stroke="#374151" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowhead2)"/>
+
+          <defs>
+            <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#374151"/>
+            </marker>
+          </defs>
+
+          <text x="200" y="125" font-size="11" fill="#6b7280" font-style="italic">extiende</text>
+          <text x="360" y="125" font-size="11" fill="#6b7280" font-style="italic">extiende</text>
+          <text x="500" y="125" font-size="11" fill="#6b7280" font-style="italic">extiende</text>
+        </svg>
+      </div>
+
+      <h3>Conceptos Básicos de Herencia</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Superclase (Clase Base)</h4>
+          <p>Clase de la que otras heredan. Define atributos y métodos comunes. Ejemplo: <code>Persona</code> es la superclase de <code>Empleado</code>, <code>Estudiante</code> y <code>Doctor</code>. Proporciona la estructura general y comportamiento compartido.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Subclase (Clase Derivada)</h4>
+          <p>Clase que hereda de otra. Reutiliza código de la superclase y agrega funcionalidad específica. Ejemplo: <code>Empleado</code> hereda de <code>Persona</code> y agrega atributos como <code>salario</code>. Usa palabra clave <code>extends</code>.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Herencia Simple vs Múltiple</h4>
+          <p><strong>Java soporta herencia simple:</strong> una clase extiende solo una superclase. <strong>Herencia múltiple:</strong> no permitida en Java (para evitar ambigüedades), pero se logra mediante interfaces. En Java: <code>class Subclase extends Superclase</code>.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Reutilización de Código</h4>
+          <p>No repites código: si <code>Persona</code> tiene método <code>saludar()</code>, todos sus subclases lo heredan automáticamente. Esto reduce duplicación, facilita mantenimiento y asegura consistencia en toda la jerarquía.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Extensibilidad</h4>
+          <p>Puedes agregar nuevos métodos y atributos en subclases sin modificar la superclase. Facilita la evolución del código: nuevas subclases pueden crearse según cambien los requerimientos sin afectar código existente.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sintaxis-herencia">
+      <h2>Sintaxis de Herencia en Java</h2>
+      <p>La herencia en Java se declara con la palabra clave <code>extends</code>. Una clase que hereda extiende una superclase y obtiene acceso a todos sus miembros públicos y protegidos.</p>
+
+      <h3>Estructura Básica</h3>
+      <pre><code class="language-java">// Superclase
+public class Persona {
+    private String nombre;
+    private int edad;
+
+    public Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    public String getNombre() { return nombre; }
+    public int getEdad() { return edad; }
+
+    public void saludar() {
+        System.out.println("Hola, soy " + nombre);
+    }
+}
+
+// Subclase - extiende Persona
+public class Empleado extends Persona {
+    private double salario;
+    private String puesto;
+
+    // Constructor de Empleado
+    public Empleado(String nombre, int edad, double salario, String puesto) {
+        super(nombre, edad); // Llama al constructor de la superclase
+        this.salario = salario;
+        this.puesto = puesto;
+    }
+
+    public double getSalario() { return salario; }
+    public String getPuesto() { return puesto; }
+
+    // Método nuevo en Empleado
+    public double calcularBono() {
+        return salario * 0.10;
+    }
+}
+</code></pre>
+
+      <h3>Elementos Clave en la Sintaxis</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Palabra Clave extends</h4>
+          <p>Sintaxis: <code>public class Subclase extends Superclase { ... }</code>. Indica que <code>Subclase</code> hereda de <code>Superclase</code>. Java permite una sola superclase por clase. Define relación "es-un".</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Palabra Clave super</h4>
+          <p>Referencia a la superclase. Úsala para: 1) Llamar constructor de superclase: <code>super(parámetros)</code>. 2) Acceder métodos de superclase: <code>super.método()</code>. 3) Acceder atributos: <code>super.atributo</code>. Debes usar <code>super()</code> como primera línea en constructor de subclase.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Accesibilidad: private vs protected</h4>
+          <p><code>private</code>: solo la clase, NO heredable. <code>protected</code>: la clase, subclases y mismo paquete, SÍ heredable. <code>public</code>: heredable desde cualquier lugar. <code>default</code>: heredable solo en mismo paquete. Para herencia, prefiere <code>protected</code> en superclases.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Modificador final</h4>
+          <p><code>final</code> en clase: no puede ser extendida. <code>final</code> en método: no puede ser sobrescrito. <code>final</code> en atributo: no puede cambiar. Usa <code>final</code> cuando NO quieras que se hereden o modifiquen. Ejemplo: <code>String</code> en Java es final.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Constructor en Herencia</h4>
+          <p>Subclases NO heredan constructores automáticamente. Debes definir tu propio constructor en subclase y llamar <code>super(parámetros)</code> para inicializar la superclase. Si superclase tiene constructor sin parámetros, Java llama automáticamente.</p>
+        </div>
+      </div>
+
+      <h3>Ejemplo Completo: Jerarquía de Vehículos</h3>
+      <pre><code class="language-java">// Superclase
+public class Vehículo {
+    private String marca;
+    private String modelo;
+    private int año;
+
+    public Vehículo(String marca, String modelo, int año) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.año = año;
+    }
+
+    public void mostrarInfo() {
+        System.out.println(marca + " " + modelo + " (" + año + ")");
+    }
+
+    public void arrancar() {
+        System.out.println("El vehículo está arrancando...");
+    }
+}
+
+// Subclase 1
+public class Auto extends Vehículo {
+    private int puertas;
+
+    public Auto(String marca, String modelo, int año, int puertas) {
+        super(marca, modelo, año);
+        this.puertas = puertas;
+    }
+
+    public int getPuertas() { return puertas; }
+
+    public void abrirMaletero() {
+        System.out.println("Maletero del auto abierto");
+    }
+}
+
+// Subclase 2
+public class Moto extends Vehículo {
+    private boolean tieneSidecar;
+
+    public Moto(String marca, String modelo, int año, boolean tieneSidecar) {
+        super(marca, modelo, año);
+        this.tieneSidecar = tieneSidecar;
+    }
+
+    public boolean tieneSidecar() { return tieneSidecar; }
+
+    public void hacerCaballito() {
+        System.out.println("¡La moto está haciendo caballito!");
+    }
+}
+
+// Uso
+public class Main {
+    public static void main(String[] args) {
+        Auto auto = new Auto("Toyota", "Corolla", 2023, 4);
+        auto.mostrarInfo();    // Heredado de Vehículo
+        auto.arrancar();       // Heredado de Vehículo
+        auto.abrirMaletero();  // Método de Auto
+
+        Moto moto = new Moto("Honda", "CB500", 2022, false);
+        moto.mostrarInfo();    // Heredado de Vehículo
+        moto.hacerCaballito(); // Método de Moto
+    }
+}
+</code></pre>
+    </section>
+
+    <section id="sobrescritura-metodos">
+      <h2>Sobrescritura (Override) de Métodos</h2>
+      <p>La sobrescritura permite que una subclase proporcione su propia implementación de un método heredado. El método de la subclase reemplaza el de la superclase cuando se invoca en un objeto de la subclase. Es fundamental para polimorfismo.</p>
+
+      <h3>Principios de Sobrescritura</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Override Annotation</h4>
+          <p>Usa <code>@Override</code> para indicar que sobrescribes un método. No es obligatorio pero es buena práctica. El compilador verifica que el método existe en la superclase. Si cometes error en la firma, el compilador lo detecta.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Firma Idéntica</h4>
+          <p>El método sobrescrito debe tener exactamente la misma firma: mismo nombre, mismos parámetros, mismo tipo de retorno. Si cambias la firma, NO es sobrescritura, es sobrecarga (otro concepto). La firma debe ser idéntica para que el polimorfismo funcione.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Acceso Más Permisivo</h4>
+          <p>El modificador de acceso del método sobrescrito debe ser igual o más permisivo. Ejemplo: si superclase tiene <code>protected</code>, subclase puede tener <code>protected</code> o <code>public</code>, pero NO <code>private</code>. Garantiza que subclases no restrinjan acceso.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>No Cambiar Tipo de Retorno</h4>
+          <p>El tipo de retorno debe ser idéntico o covariant (subtipo del tipo original). Java permite que retornes un subtipo del retorno original. Ejemplo: si superclase retorna <code>Persona</code>, subclase puede retornar <code>Empleado</code> (si Empleado extiende Persona).</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Excepciones Lanzadas</h4>
+          <p>El método sobrescrito puede lanzar excepciones iguales o más específicas (subtipos) que el método de la superclase. No puedes lanzar excepciones más generales. Esto asegura compatibilidad: código que usa el método no se sorprende con excepciones inesperadas.</p>
+        </div>
+      </div>
+
+      <h3>Ejemplo: Sobrescritura en Acción</h3>
+      <pre><code class="language-java">// Superclase
+public class Animal {
+    private String nombre;
+
+    public Animal(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombre() { return nombre; }
+
+    public void hacerSonido() {
+        System.out.println("El animal hace un sonido genérico");
+    }
+}
+
+// Subclase 1
+public class Perro extends Animal {
+    public Perro(String nombre) {
+        super(nombre);
+    }
+
+    @Override  // Sobrescribimos hacerSonido()
+    public void hacerSonido() {
+        System.out.println(getNombre() + " ladra: ¡guau guau!");
+    }
+}
+
+// Subclase 2
+public class Gato extends Animal {
+    public Gato(String nombre) {
+        super(nombre);
+    }
+
+    @Override  // Sobrescribimos hacerSonido()
+    public void hacerSonido() {
+        System.out.println(getNombre() + " maúlla: ¡miau!");
+    }
+}
+
+// Uso - Polimorfismo en acción
+public class Main {
+    public static void main(String[] args) {
+        Animal perro = new Perro("Max");
+        Animal gato = new Gato("Misi");
+
+        perro.hacerSonido();  // Max ladra: ¡guau guau!
+        gato.hacerSonido();   // Misi maúlla: ¡miau!
+        
+        // Ambos son Animal, pero cada uno se comporta diferente
+        // El método invocado depende del tipo real en tiempo de ejecución
+    }
+}
+</code></pre>
+    </section>
+
+    <section id="polimorfismo">
+      <h2>Polimorfismo mediante Herencia</h2>
+      <p>Polimorfismo significa "muchas formas". En el contexto de herencia, permite que objetos de diferentes subclases respondan al mismo mensaje (método) de manera diferente. Es una consecuencia poderosa de la herencia y sobrescritura de métodos.</p>
+
+      <h3>Tipos y Beneficios del Polimorfismo</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>Polimorfismo de Compilación (Sobrecarga)</h4>
+          <p>Múltiples métodos con el mismo nombre pero diferentes parámetros. El compilador elige cuál invocar según los argumentos. Ocurre en tiempo de compilación. Ejemplo: <code>System.out.println()</code> acepta int, String, double, etc.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>Polimorfismo de Ejecución (Sobrescritura)</h4>
+          <p>Método invocado en tiempo de ejecución según el tipo real del objeto, NO el tipo de la variable. Requiere herencia y sobrescritura. Ejemplo: <code>Animal a = new Perro()</code>; <code>a.hacerSonido()</code> invoca el método de Perro, no el de Animal.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>Referencia Superclase, Objeto Subclase</h4>
+          <p>Puedes asignar objeto de subclase a variable de tipo superclase: <code>Persona p = new Empleado(...)</code>. La variable <code>p</code> ve solo miembros de Persona, pero invoca métodos del Empleado real. Fundamental para diseño flexible.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>Beneficios del Polimorfismo</h4>
+          <p><strong>1) Flexibilidad:</strong> Código genérico funciona con múltiples tipos. <strong>2) Extensibilidad:</strong> Agregar nuevas subclases sin cambiar código existente. <strong>3) Mantenibilidad:</strong> Menos duplicación, cambios en un lugar. <strong>4) Reusabilidad:</strong> Métodos genéricos reutilizables.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Ejemplo: Colecciones Polimórficas</h4>
+          <p>Puedes almacenar diferentes subclases en un contenedor de la superclase: <code>List&lt;Animal&gt; animales = new ArrayList&lt;&gt;()</code>; <code>animales.add(new Perro(...))</code>; <code>animales.add(new Gato(...))</code>. Itera y invoca métodos: cada objeto responde apropiadamente.</p>
+        </div>
+      </div>
+
+      <h3>Ejemplo Completo: Gestión de Empleados</h3>
+      <pre><code class="language-java">// Superclase
+public abstract class Empleado {
+    protected String nombre;
+    protected double salario;
+
+    public Empleado(String nombre, double salario) {
+        this.nombre = nombre;
+        this.salario = salario;
+    }
+
+    public abstract double calcularBonus(); // Método abstracto
+
+    @Override
+    public String toString() {
+        return nombre + " - Salario: $" + salario;
+    }
+}
+
+// Subclase 1
+public class EmpleadoOficina extends Empleado {
+    private int horasExtra;
+
+    public EmpleadoOficina(String nombre, double salario, int horasExtra) {
+        super(nombre, salario);
+        this.horasExtra = horasExtra;
+    }
+
+    @Override
+    public double calcularBonus() {
+        return salario * 0.15 + (horasExtra * 50);
+    }
+}
+
+// Subclase 2
+public class Vendedor extends Empleado {
+    private double ventasRealizadas;
+
+    public Vendedor(String nombre, double salario, double ventasRealizadas) {
+        super(nombre, salario);
+        this.ventasRealizadas = ventasRealizadas;
+    }
+
+    @Override
+    public double calcularBonus() {
+        return ventasRealizadas * 0.05; // 5% de comisión
+    }
+}
+
+// Sistema de gestión
+public class GestorEmpleados {
+    private List&lt;Empleado&gt; empleados = new ArrayList&lt;&gt;();
+
+    public void agregarEmpleado(Empleado e) {
+        empleados.add(e);
+    }
+
+    public void mostrarBonus() {
+        for (Empleado e : empleados) {
+            System.out.println(e + " - Bonus: $" + e.calcularBonus());
+        }
+    }
+}
+
+// Uso
+public class Main {
+    public static void main(String[] args) {
+        GestorEmpleados gestor = new GestorEmpleados();
+
+        gestor.agregarEmpleado(new EmpleadoOficina("Ana", 2000, 10));
+        gestor.agregarEmpleado(new Vendedor("Carlos", 1500, 5000));
+
+        gestor.mostrarBonus();
+        // Ana - Salario: $2000.0 - Bonus: $500.0
+        // Carlos - Salario: $1500.0 - Bonus: $250.0
+    }
+}
+</code></pre>
+    </section>
+
+    <section id="modificadores-acceso">
+      <h2>Modificadores de Acceso en Herencia</h2>
+      <p>Los modificadores de acceso (<code>private</code>, <code>protected</code>, <code>public</code>, default) controlan qué miembros de una clase son accesibles en subclases. Entender esto es crucial para un buen diseño de jerarquías de herencia.</p>
+
+      <h3>Modificadores de Acceso Explicados</h3>
+      <div class="cards-grid-profesional">
+        <div class="card-profesional-blue">
+          <h4>private (Privado)</h4>
+          <p>Acceso <strong>solo en la clase.</strong> <strong>NO heredable.</strong> Subclases NO pueden acceder directamente. Para acceder, debe ir a través de métodos públicos/protegidos. Proporciona máxima encapsulación. Ejemplo: detalles internos de implementación.</p>
+        </div>
+        <div class="card-profesional-green">
+          <h4>protected (Protegido)</h4>
+          <p>Acceso en: la clase, subclases, mismo paquete. <strong>SÍ heredable.</strong> Ideal para members que quieres que hereden subclases pero no sean públicos. Menos restrictivo que private. Úsalo en superclases para datos/métodos que subclases necesitan.</p>
+        </div>
+        <div class="card-profesional-purple">
+          <h4>public (Público)</h4>
+          <p>Acceso <strong>desde cualquier lugar.</strong> <strong>SÍ heredable.</strong> Parte de la interfaz pública de la clase. Úsalo para métodos de API que todas las clases usan. Menos restrictivo. Cambios pueden afectar mucho código externo.</p>
+        </div>
+        <div class="card-profesional-amber">
+          <h4>default (Sin modificador)</h4>
+          <p>Acceso en la clase y <strong>mismo paquete.</strong> <strong>SÍ heredable dentro del paquete.</strong> Si subclase está en otro paquete, NO hereda. Útil para miembros que son internos al paquete pero no públicos globalmente.</p>
+        </div>
+        <div class="card-profesional-rose">
+          <h4>Tabla de Acceso en Herencia</h4>
+          <p><code>private</code>: ❌ NO heredable. <code>protected</code>: ✅ Heredable. <code>public</code>: ✅ Heredable. <code>default</code>: ✅ Heredable (mismo paquete solo). Regla: prefiere el nivel de acceso más restrictivo posible para maximizar seguridad.</p>
+        </div>
+      </div>
+
+      <h3>Ejemplo: Modificadores en Jerarquía</h3>
+      <pre><code class="language-java">public class Persona {
+    private String numeroDocumento;    // NO heredable
+    protected String nombre;            // Heredable
+    public int edad;                    // Heredable
+    int id;                            // Heredable (default, si mismo paquete)
+
+    protected void saludar() {
+        System.out.println("Hola");
+    }
+
+    private void detallePersonal() {
+        System.out.println("Este es privado");
+    }
+}
+
+public class Empleado extends Persona {
+    public void mostrarDatos() {
+        System.out.println(nombre);              // ✅ OK - protected heredado
+        System.out.println(edad);                // ✅ OK - public
+        // System.out.println(numeroDocumento);  // ❌ ERROR - private NO heredable
+        saludar();                               // ✅ OK - protected heredado
+        // detallePersonal();                    // ❌ ERROR - private NO heredable
+    }
+}
+</code></pre>
+    </section>
+
+    <section id="ejercicios">
+      <h2>Ejercicios Prácticos</h2>
+
+      <h3>Ejercicio 1: Jerarquía de Figuras Geométricas</h3>
+      <p><strong>Enunciado:</strong> Crea una superclase <code>Figura</code> con método abstracto <code>calcularArea()</code> y <code>calcularPerimetro()</code>. Implementa subclases <code>Rectángulo</code> y <code>Círculo</code>. Crea un programa que calcule área y perímetro de diferentes figuras.</p>
+
+      <div class="solution">
+        <h3>Solución</h3>
+        <pre><code class="language-java">public abstract class Figura {
+    protected String nombre;
+
+    public Figura(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public abstract double calcularArea();
+    public abstract double calcularPerimetro();
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+}
+
+public class Rectángulo extends Figura {
+    private double ancho;
+    private double alto;
+
+    public Rectángulo(double ancho, double alto) {
+        super("Rectángulo");
+        this.ancho = ancho;
+        this.alto = alto;
+    }
+
+    @Override
+    public double calcularArea() {
+        return ancho * alto;
+    }
+
+    @Override
+    public double calcularPerimetro() {
+        return 2 * (ancho + alto);
+    }
+}
+
+public class Círculo extends Figura {
+    private double radio;
+
+    public Círculo(double radio) {
+        super("Círculo");
+        this.radio = radio;
+    }
+
+    @Override
+    public double calcularArea() {
+        return Math.PI * radio * radio;
+    }
+
+    @Override
+    public double calcularPerimetro() {
+        return 2 * Math.PI * radio;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;Figura&gt; figuras = new ArrayList&lt;&gt;();
+        figuras.add(new Rectángulo(5, 3));
+        figuras.add(new Círculo(4));
+
+        for (Figura f : figuras) {
+            System.out.println(f + " - Área: " + String.format("%.2f", f.calcularArea()));
+            System.out.println(f + " - Perímetro: " + String.format("%.2f", f.calcularPerimetro()));
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+      </div>
+
+      <h3>Ejercicio 2: Sistema Bancario con Herencia</h3>
+      <p><strong>Enunciado:</strong> Crea clase <code>CuentaBancaria</code> como superclase con <code>depositar()</code>, <code>retirar()</code> y <code>calcularInteres()</code>. Crea subclases <code>CuentaAhorro</code> (interés bajo) y <code>CuentaCorriente</code> (sin interés, permite descubierto). Implementa polimorfismo.</p>
+
+      <div class="solution">
+        <h3>Solución</h3>
+        <pre><code class="language-java">public abstract class CuentaBancaria {
+    protected String numero;
+    protected String titular;
+    protected double saldo;
+
+    public CuentaBancaria(String numero, String titular, double saldoInicial) {
+        this.numero = numero;
+        this.titular = titular;
+        this.saldo = saldoInicial;
+    }
+
+    public void depositar(double monto) {
+        if (monto > 0) {
+            saldo += monto;
+            System.out.println("Depósito de $" + monto + " realizado. Saldo: $" + saldo);
+        }
+    }
+
+    public abstract boolean retirar(double monto);
+    public abstract double calcularInteres();
+
+    public double getSaldo() { return saldo; }
+
+    @Override
+    public String toString() {
+        return "Cuenta " + numero + " (" + titular + ") - Saldo: $" + saldo;
+    }
+}
+
+public class CuentaAhorro extends CuentaBancaria {
+    private static final double TASA_INTERES = 0.05; // 5% anual
+
+    public CuentaAhorro(String numero, String titular, double saldoInicial) {
+        super(numero, titular, saldoInicial);
+    }
+
+    @Override
+    public boolean retirar(double monto) {
+        if (monto > 0 && monto <= saldo) {
+            saldo -= monto;
+            System.out.println("Retiro de $" + monto + " realizado. Saldo: $" + saldo);
+            return true;
+        }
+        System.out.println("Retiro rechazado: fondos insuficientes");
+        return false;
+    }
+
+    @Override
+    public double calcularInteres() {
+        return saldo * TASA_INTERES;
+    }
+}
+
+public class CuentaCorriente extends CuentaBancaria {
+    private double limiteDescubierto;
+
+    public CuentaCorriente(String numero, String titular, double saldoInicial, double limiteDescubierto) {
+        super(numero, titular, saldoInicial);
+        this.limiteDescubierto = limiteDescubierto;
+    }
+
+    @Override
+    public boolean retirar(double monto) {
+        if (monto > 0 && monto <= (saldo + limiteDescubierto)) {
+            saldo -= monto;
+            System.out.println("Retiro de $" + monto + " realizado. Saldo: $" + saldo);
+            return true;
+        }
+        System.out.println("Retiro rechazado: límite de descubierto excedido");
+        return false;
+    }
+
+    @Override
+    public double calcularInteres() {
+        return 0; // Cuenta corriente no genera interés
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;CuentaBancaria&gt; cuentas = new ArrayList&lt;&gt;();
+        cuentas.add(new CuentaAhorro("001", "Ana", 1000));
+        cuentas.add(new CuentaCorriente("002", "Carlos", 500, 300));
+
+        for (CuentaBancaria c : cuentas) {
+            System.out.println(c);
+            System.out.println("Interés: $" + c.calcularInteres());
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+      </div>
+    </section>
+
+    <h3>Cards de Refuerzo: Herencia</h3>
+    <div class="cards-grid-teoricos">
+      <div class="card-teorico">
+        <h4>Herencia: Reutilización</h4>
+        <p>Evita repetición de código compartiendo estructura entre clases relacionadas. Cambia en un lugar, afecta a todas las subclases. Menos bugs, más mantenible.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>extends: Una Superclase</h4>
+        <p>Java permite una sola superclase por clase. Una subclase hereda de exactamente una clase. Crea jerarquías simples, fáciles de seguir y entender.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>super: Conexión a Superclase</h4>
+        <p>Referencia a miembros de la superclase. Llama constructor de superclase en primera línea de constructor de subclase. Accede métodos sobrescritos si necesitas.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>@Override: Sobrescritura Explícita</h4>
+        <p>Anotación que indica intención de sobrescribir. Compilador verifica la firma. Si cometes error, el compilador lo detecta. Buena práctica de código claro.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>Polimorfismo: Muchas Formas</h4>
+        <p>Código genérico con referencias de superclase trabaja con múltiples subclases. Cada objeto responde apropiadamente según su tipo real. Flexible y extensible.</p>
+      </div>
+      <div class="card-teorico">
+        <h4>protected: Para Subclases</h4>
+        <p>Miembros protected son heredables. Usa en superclases para datos que subclases necesitan acceder directamente, pero que no deben ser públicos.</p>
+      </div>
+    </div>
+
+    <h3>Buenas Prácticas en Herencia</h3>
+    <div class="info-box">
+      <ol>
+        <li><strong>Relación "es-un" auténtica:</strong> Solo hereda si existe relación verdadera. No fuerces herencia solo para reutilizar código; considera composición.</li>
+        <li><strong>Evita jerarquías profundas:</strong> Mantén profundidad ≤ 3 niveles. Jerarquías profundas son complejas y difíciles de mantener.</li>
+        <li><strong>Usa classes abstractas para definir contratos:</strong> Si una clase no debe instanciarse directamente, hazla <code>abstract</code>. Define métodos abstractos para obligar a subclases a implementarlos.</li>
+        <li><strong>Preferir composición cuando sea apropiado:</strong> Si necesitas múltiples comportamientos, composición es más flexible que herencia múltiple (que Java no soporta).</li>
+        <li><strong>Documenta la jerarquía:</strong> Deja clara la relación entre superclase y subclases. Especifica qué métodos heredan, cuáles se sobreescriben.</li>
+        <li><strong>No violes el contrato de la superclase:</strong> Métodos sobrescritos deben mantener semántica compatible. No cambies comportamiento esperado de manera radical.</li>
+        <li><strong>Usa final juiciosamente:</strong> Hazlo <code>final</code> si no quieres que se herede o si herede rompe contrato. Pero no lo hagas por defecto.</li>
+      </ol>
+    </div>
+
+    <section id="videos-educativos">
+      <h2>Videos Educativos</h2>
+      <div class="videos-grid">
+        <div class="video-container">
+          <h3>Herencia en Java - Conceptos Fundamentales</h3>
+          <div class="video-wrapper">
+            <video controls width="100%" height="400" class="video-player">
+              <source src="videos/herencia.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/herencia.mp4" download>Descargar video</a>
+            </video>
+          </div>
+          <p>Aprende cómo crear jerarquías de clases con herencia, uso de super y constructores, y cómo reutilizar código de manera efectiva.</p>
+        </div>
+        <div class="video-container">
+          <h3>Polimorfismo y Sobrescritura de Métodos</h3>
+          <div class="video-wrapper">
+            <video controls width="100%" height="400" class="video-player">
+              <source src="videos/polimorfismo.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/polimorfismo.mp4" download>Descargar video</a>
+            </video>
+          </div>
+          <p>Descubre cómo el polimorfismo permite que objetos de diferentes tipos respondan al mismo método de maneras diferentes.</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="muted">Recursos adicionales: <a href="https://docs.oracle.com/javase/tutorial/java/IandI/subclasses.html" target="_blank" rel="noopener">Subclasses (Oracle)</a> • <a href="https://www.geeksforgeeks.org/inheritance-in-java/" target="_blank" rel="noopener">Inheritance in Java (GeeksforGeeks)</a></p>
+
+    <p><a href="index.html">Volver al inicio</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; Página web POO 2026 - Todos los derechos reservados.</p>
+  </footer>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
