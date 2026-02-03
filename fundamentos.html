@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fundamentos - POO</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -56,37 +58,72 @@
       <h3>Modificadores de acceso en Java</h3>
       <p>Usa <code>private</code> para datos internos; métodos públicos (<code>public</code>) para la interfaz; <code>protected</code> cuando quieras permitir acceso a subclases dentro del paquete; el modificador por defecto (package-private) restringe al paquete. Prefiere mantener el mínimo acceso necesario.</p>
 
-      <h3>Ejemplo práctico (BankAccount)</h3>
-      <pre><code class="language-java">public class BankAccount {
-    private double balance; // estado encapsulado
+      <h3>Ejemplo práctico compilable (BankAccount)</h3>
+      <p><strong>Explicación:</strong> BankAccount demuestra encapsulación: balance privado, métodos públicos controlan acceso. Método privado hasSufficientFunds() es interno. Main ejecutable directo.</p>
+      <pre><code class="language-java">// Clase BankAccount: demuestra encapsulación efectiva
+public class BankAccount {
+    // Atributo private: solo accesible dentro de esta clase
+    private double balance;
+    // Atributo private final: no puede modificarse después de inicializar
     private final String owner;
 
+    // Constructor: inicializa la cuenta con dueño y saldo inicial
     public BankAccount(String owner, double initial) {
+        // Asigna el nombre del dueño
         this.owner = owner;
+        // Asegura balance no negativo usando Math.max
         this.balance = Math.max(0, initial);
     }
 
+    // Getter: retorna el nombre del dueño
     public String getOwner() { return owner; }
-
+    // Getter: retorna el saldo actual
     public double getBalance() { return balance; }
 
+    // Método público: depositar dinero (incrementa balance si amount > 0)
     public void deposit(double amount) {
-        if (amount &gt; 0) balance += amount;
+        // Valida que amount sea positivo antes de sumar
+        if (amount > 0) balance += amount;
     }
 
+    // Método público: retirar dinero (decrementa balance si hay fondos suficientes)
     public boolean withdraw(double amount) {
-        if (amount &gt; 0 &amp;&amp; amount &lt;= balance) {
-            balance -= amount;
+        // Verifica que amount sea positivo AND hay fondos suficientes
+        if (amount > 0 && amount <= balance) {
+            // Resta el amount del balance
+            balance -= amount; 
+            // Retorna true indicando retiro exitoso
             return true;
         }
+        // Si no se puede retirar, retorna false
         return false;
     }
 
-    // método interno no accesible desde fuera
-    private boolean hasSufficientFunds(double amount) {
-        return amount &lt;= balance;
+    // Método private: solo usado internamente (no accesible desde fuera)
+    private boolean hasSufficientFunds(double amount) { 
+        // Retorna true si hay fondos suficientes
+        return amount <= balance; 
+    }
+
+    // Main: método de entrada compilable en OnlineJava
+    public static void main(String[] args) {
+        // Crea una nueva cuenta de Juan Pérez con saldo inicial $1000
+        BankAccount account = new BankAccount("Juan Pérez", 1000);
+        // Imprime información inicial de la cuenta
+        System.out.println("Cuenta: " + account.getOwner() + " | Balance: $" + account.getBalance());
+        
+        // Realiza un depósito de $500
+        account.deposit(500);
+        // Imprime nuevo balance después del depósito
+        System.out.println("Después de depositar: $" + account.getBalance());
+        
+        // Realiza un retiro de $200 (guarda resultado en variable)
+        boolean retiro = account.withdraw(200);
+        // Imprime resultado del retiro y nuevo balance
+        System.out.println("Retiro exitoso: " + retiro + " | Balance: $" + account.getBalance());
     }
 }
+</code></pre>
 </code></pre>
 
       <p>Observa cómo mantenemos la lógica (validaciones y estados) dentro de la clase.</p>
@@ -172,36 +209,65 @@
         </svg>
       </div>
 
-      <h3>Ejemplo en Java (interfaz y uso)</h3>
-      <pre><code class="language-java">public interface Pagable {
+      <h3>Ejemplo compilable (Pagable + Empleado)</h3>
+      <p><strong>Explicación:</strong> Interfaz Pagable define contrato. Empleado implementa la interfaz. Main demuestra polimorfismo: código genérico trabaja con Pagable sin conocer tipos específicos.</p>
+      <pre><code class="language-java">// Interfaz: define contrato puro (solo firma del método)
+interface Pagable {
+    // Método abstracto que toda clase implementadora debe definir
     double calcularPago();
 }
 
-public class Empleado implements Pagable {
+// Clase Empleado: implementa la interfaz Pagable
+class Empleado implements Pagable {
+    // Atributo private: nombre del empleado
     private String nombre;
-    private double salario; // salario bruto
+    // Atributo private: salario bruto mensual
+    private double salario;
 
-    public Empleado(String nombre, double salario) {
-        this.nombre = nombre;
-        this.salario = Math.max(0, salario);
+    // Constructor: inicializa nombre y salario (validando salario no negativo)
+    public Empleado(String n, double s) {
+        // Asigna nombre
+        nombre = n;
+        // Asegura salario no negativo con Math.max
+        salario = Math.max(0, s);
     }
 
+    // Getter: retorna nombre del empleado
     public String getNombre() { return nombre; }
+    // Getter: retorna salario bruto del empleado
     public double getSalario() { return salario; }
-
-    public void setSalario(double salario) {
-        if (salario &gt;= 0) this.salario = salario;
-    }
-
+    
+    // Implementación del método abstracto de Pagable
     @Override
-    public double calcularPago() {
-        // ejemplo simple: retención del 10%
-        return salario * 0.90;
+    // Calcula pago neto: 90% del salario bruto (retención del 10%)
+    public double calcularPago() { return salario * 0.90; }
+}
+
+// Main: demuestra polimorfismo (trabaja con tipo Pagable, no Empleado)
+public class Main {
+    public static void main(String[] args) {
+        // Array de tipo Pagable (interfaz) que almacena objetos Empleado
+        Pagable[] empleados = {
+            // Crea Empleado y lo almacena como referencia Pagable
+            new Empleado("Ana", 1200),
+            new Empleado("Luis", 950),
+            new Empleado("María", 1500)
+        };
+        
+        // Encabezado del reporte
+        System.out.println("=== CÁLCULO DE PAGOS ===");
+        // Itera sobre cada elemento como Pagable (tipo interface)
+        for (Pagable p : empleados) {
+            // Cast necesario: convierte Pagable a Empleado para acceder a getNombre()
+            Empleado e = (Empleado) p;
+            // Imprime nombre (de Empleado) y pago neto (de Pagable calcularPago())
+            System.out.println(e.getNombre() + " -> Pago neto: $" + String.format("%.2f", p.calcularPago()));
+        }
     }
 }
 </code></pre>
 
-      <p>Gracias a la abstracción, cualquier código que dependa de <code>Pagable</code> puede trabajar con empleados, facturas u otros objetos que implementen el contrato sin conocer detalles internos.</p>
+      <p>Gracias a la abstracción, Pagable puede implementarse por múltiples clases diferentes.</p>
 
       <h3>Cards de Refuerzo: Abstracción</h3>
       <div class="cards-grid-teoricos">
@@ -258,24 +324,122 @@ public class Empleado implements Pagable {
         </div>
       </div>
 
+    <section id="aplicacion-practica">
+      <h2>Aplicación Práctica: Encapsulación y Abstracción Combinadas</h2>
+      <p>En la práctica, encapsulación y abstracción funcionan juntas. La <strong>encapsulación</strong> protege los datos internos mediante acceso controlado (private, getters, setters). La <strong>abstracción</strong> simplifica la complejidad exponiendo solo lo necesario mediante interfaces y métodos públicos, ocultando detalles de implementación.</p>
+
+      <h3>Caso Real: Sistema de Notificaciones</h3>
+      <p>Imagina un sistema que envía notificaciones por correo, SMS o push. Cada canal tiene detalles complejos, pero el usuario solo quiere invocar <code>enviar()</code>.</p>
+
+      <pre><code class="language-java">// Interfaz Abstracta: contrato que todo canal debe cumplir
+interface CanalNotificacion {
+    // Método abstracto: todo canal debe saber enviar
+    void enviar(String destinatario, String mensaje);
+}
+
+// Implementación Encapsulada: detalles internos privados
+class EmailNotificacion implements CanalNotificacion {
+    // Datos privados: servidor y puerto ocultos
+    private String servidor = "smtp.example.com";
+    private int puerto = 587;
+    
+    // Método privado: configurar conexión (solo interno)
+    private void conectar() {
+        System.out.println("Conectando a " + servidor + ":" + puerto);
+    }
+    
+    // Implementación del contrato abstracto
+    @Override
+    public void enviar(String destinatario, String mensaje) {
+        // Llama método privado interno
+        conectar();
+        // Valida email antes de enviar
+        if (destinatario.contains("@")) {
+            System.out.println("Email enviado a: " + destinatario);
+        }
+    }
+}
+
+// Otra implementación de la interfaz (polimorfismo)
+class SmsNotificacion implements CanalNotificacion {
+    // Detalles privados diferentes al Email
+    private String apiKey = "clave_privada_sms";
+    
+    @Override
+    public void enviar(String destinatario, String mensaje) {
+        // Implementación diferente usando su propia lógica
+        System.out.println("SMS enviado a: " + destinatario);
+    }
+}
+
+// Cliente: solo conoce la abstracción, no los detalles
+public class SistemaNotificaciones {
+    public static void main(String[] args) {
+        // Polimorfismo: trabajamos con CanalNotificacion (abstracción)
+        // pero creamos implementaciones concretas
+        CanalNotificacion[] canales = {
+            new EmailNotificacion(),
+            new SmsNotificacion()
+        };
+        
+        // Mismo código genérico para cualquier canal
+        for (CanalNotificacion canal : canales) {
+            // Encapsulación: no conocemos detalles internos
+            // Abstracción: solo usamos el contrato público
+            canal.enviar("usuario@example.com", "Hola!");
+        }
+    }
+}
+</code></pre>
+
+      <h4>¿Por qué funciona?</h4>
+      <ul>
+        <li><strong>Encapsulación:</strong> Los detalles (servidor, puerto, apiKey) son <code>private</code>, protegidos.</li>
+        <li><strong>Abstracción:</strong> El cliente solo ve <code>CanalNotificacion.enviar()</code>, ignorando cómo cada canal lo implementa.</li>
+        <li><strong>Flexibilidad:</strong> Agregar un nuevo canal (WhatsApp, Telegram) no requiere cambiar el cliente.</li>
+      </ul>
+
+      <h3>Cards de Teoría: Integración de Encapsulación y Abstracción</h3>
+      <div class="cards-grid-teoricos">
+        <div class="card-teorico">
+          <h4>Encapsulación Establece Límites</h4>
+          <p>Define qué datos son visibles y cuáles ocultos mediante <code>private</code>, <code>protected</code> y <code>public</code>. Esto asegura que solo el código autorizado acceda a datos sensibles. Ejemplo: un campo <code>password</code> nunca debe ser <code>public</code>.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Abstracción Simplifica Interfaces</h4>
+          <p>Define contrato público mediante interfaces y métodos públicos, ocultando complejidad interna. El cliente solo necesita saber <strong>qué</strong> hace un método, no <strong>cómo</strong> lo hace. Permite cambios internos sin afectar al cliente.</p>
+        </div>
+        <div class="card-teorico">
+          <h4>Juntas Crean Robustez</h4>
+          <p>Encapsulación protege datos; abstracción protege lógica de cambios. Combinadas, permiten evolucionar código interno sin romper el contrato público. Ejemplo: cambiar de base de datos sin que el cliente note diferencia.</p>
+        </div>
+      </div>
+
+      <div class="cards-grid-teoricos" style="justify-items: center;">
+        <div class="card-teorico" style="max-width: 280px;">
+          <h4>Validación en Puntos Controlados</h4>
+          <p>La encapsulación concentra validaciones en setters y constructores. La abstracción expone solo métodos públicos confiables. Esto garantiza que datos siempre sean válidos porque pasan por validaciones en puntos únicos y controlados.</p>
+        </div>
+      </div>
+
+    </section>
+
     <section id="ejercicio">
-      <h2>Ejercicio práctico (resuelto)</h2>
-      <p>Enunciado: crear <code>Empleado</code>, <code>Pagable</code> y una clase <code>Test</code> que muestre los pagos por consola. A continuación la solución completa y comentada.</p>
+      <h2>Ejercicio práctico compilable</h2>
+      <p><strong>Enunciado:</strong> Crear Empleado implementando Pagable, luego código que calcule pagos. Una solución compilable completa.</p>
 
       <div class="solution">
-        <h3>Solución: código Java</h3>
-        <pre><code class="language-java">// Pagable.java
-public interface Pagable {
+        <h3>Solución compilable única</h3>
+        <p><strong>Explicación:</strong> Interfaz Pagable + Empleado (encapsulación + abstracción) + Main que demuestra polimorfismo. Todo en un archivo compilable.</p>
+        <pre><code class="language-java">interface Pagable {
     double calcularPago();
 }
 
-// Empleado.java
-public class Empleado implements Pagable {
+class Empleado implements Pagable {
     private String nombre;
-    private double salario; // salario bruto
+    private double salario;
 
     public Empleado(String nombre, double salario) {
-        if (nombre == null || nombre.isBlank()) throw new IllegalArgumentException("Nombre inválido");
         this.nombre = nombre;
         this.salario = Math.max(0, salario);
     }
@@ -283,40 +447,36 @@ public class Empleado implements Pagable {
     public String getNombre() { return nombre; }
     public double getSalario() { return salario; }
 
-    public void setSalario(double salario) {
-        if (salario &lt; 0) throw new IllegalArgumentException("Salario no puede ser negativo");
-        this.salario = salario;
-    }
-
     @Override
-    public double calcularPago() {
-        // ejemplo simple: descuento de 10% por retenciones
-        return salario * 0.90;
-    }
+    public double calcularPago() { return salario * 0.90; }
 }
 
-// Test.java
-public class Test {
+public class Main {
     public static void main(String[] args) {
-        Empleado e1 = new Empleado("Ana", 1200);
-        Empleado e2 = new Empleado("Luis", 950);
-        Empleado e3 = new Empleado("María", 1500);
-
-        Empleado[] empleados = { e1, e2, e3 };
+        Empleado[] empleados = {
+            new Empleado("Ana", 1200),
+            new Empleado("Luis", 950),
+            new Empleado("María", 1500)
+        };
+        
+        System.out.println("=== CÁLCULO DE PAGOS ===");
         for (Empleado e : empleados) {
-            System.out.printf("%s -> Salario bruto: %.2f, Pago neto: %.2f\n", e.getNombre(), e.getSalario(), e.calcularPago());
+            System.out.printf("%s -> Salario: $%.2f | Pago neto: $%.2f\n", 
+                e.getNombre(), e.getSalario(), e.calcularPago());
         }
     }
 }
 </code></pre>
 
-        <h4>Explicación:</h4>
-        <p>La clase valida entrada en el constructor y en <code>setSalario</code>, lo que garantiza el estado válido (encapsulación). La interfaz <code>Pagable</code> abstrae el cálculo del pago; podríamos implementar la interfaz para otros tipos de pagos (por ejemplo, <code>ContratoPorHoras</code>).</p>
+        <h4>Salida esperada:</h4>
+        <pre><code>=== CÁLCULO DE PAGOS ===
+Ana -> Salario: $1200.00 | Pago neto: $1080.00
+Luis -> Salario: $950.00 | Pago neto: $855.00
+María -> Salario: $1500.00 | Pago neto: $1350.00
+</code></pre>
+      </div>
 
-        <h4>Salida esperada (ejemplo):</h4>
-        <pre><code>Ana -> Salario bruto: 1200.00, Pago neto: 1080.00
-Luis -> Salario bruto: 950.00, Pago neto: 855.00
-María -> Salario bruto: 1500.00, Pago neto: 1350.00
+      <p>Este código demuestra <strong>encapsulación</strong> (atributos privados, validaciones) y <strong>abstracción</strong> (interfaz Pagable).</p>
 </code></pre>
       </div>
 

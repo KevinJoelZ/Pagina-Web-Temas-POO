@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Instanciación de Objetos - POO</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -128,37 +130,59 @@ Persona luis = new Persona("Luis", 35, "luis@email.com");
       </div>
 
       <h3>Ejemplo: Clase con Constructores</h3>
-      <pre><code class="language-java">public class Estudiante {
+      <p><strong>Explicación:</strong> Esta clase demuestra diferentes tipos de constructores. El constructor vacío (<code>por defecto</code>) inicializa con valores por defecto. El constructor parametrizado es el más común. El constructor alternativo usa <code>this()</code> para delegar a otro constructor (delegación), evitando código duplicado.</p>
+      <pre><code class="language-java">// Clase que demostra diferentes constructores
+public class Estudiante {
+    // Atributo private: nombre del estudiante
     private String nombre;
+    // Atributo private: edad del estudiante
     private int edad;
+    // Atributo private: promedio académico
     private double promedio;
 
-    // Constructor vacío (por defecto)
+    // Constructor 1: Constructor vacío (sin argumentos)
+    // Se ejecuta cuando se crea: new Estudiante()
     public Estudiante() {
+        // Inicializa nombre con valor por defecto
         this.nombre = "Desconocido";
+        // Inicializa edad en 0
         this.edad = 0;
+        // Inicializa promedio en 0.0
         this.promedio = 0.0;
     }
 
-    // Constructor parametrizado (común)
+    // Constructor 2: Constructor parametrizado (el más común)
+    // Se ejecuta cuando se crea: new Estudiante("Ana", 20, 85.5)
     public Estudiante(String nombre, int edad, double promedio) {
+        // Asigna el nombre
         this.nombre = nombre;
+        // Asigna la edad
         this.edad = edad;
+        // Valida que el promedio esté entre 0 y 100 usando Math.max y Math.min
+        // Math.max(0, valor) asegura que no sea menor a 0
+        // Math.min(100, resultado) asegura que no sea mayor a 100
         this.promedio = Math.max(0, Math.min(100, promedio)); // validación: 0-100
     }
 
-    // Constructor alternativo (más parámetros)
+    // Constructor 3: Constructor alternativo (menos parámetros)
+    // Se ejecuta cuando se crea: new Estudiante("Ana", 20)
     public Estudiante(String nombre, int edad) {
+        // Delega a otro constructor usando this()
+        // this(nombre, edad, 0.0) llama al constructor parametrizado
+        // Evita duplicación de código de validación
         this(nombre, edad, 0.0); // delegar a otro constructor
     }
 
-    // Getters
+    // Getters: métodos públicos para leer atributos privados
     public String getNombre() { return nombre; }
+    // Getter para edad
     public int getEdad() { return edad; }
+    // Getter para promedio
     public double getPromedio() { return promedio; }
 
-    // Setters
+    // Setter: método público para modificar el promedio con validación
     public void setPromedio(double promedio) {
+        // Valida que el promedio esté entre 0 y 100
         this.promedio = Math.max(0, Math.min(100, promedio));
     }
 }
@@ -229,25 +253,41 @@ Estudiante est3 = new Estudiante("Marta", 19);
       </div>
 
       <h3>Ejemplo Visual del Ciclo de Vida</h3>
-      <pre><code class="language-java">public class EjemploCicloVida {
+      <p><strong>Explicación:</strong> Este programa demuestra el ciclo de vida completo de un objeto en Java. La FASE 1 es la creación con <code>new</code>. La FASE 2 es el uso del objeto. La FASE 3 ocurre cuando se pierde la referencia y el objeto se vuelve inaccesible. La FASE 4 y 5 suceden automáticamente cuando el garbage collector libera la memoria.</p>
+      <pre><code class="language-java">// Clase de ejemplo para demostrar ciclo de vida de objetos
+public class EjemploCicloVida {
+    // Método main: punto de entrada del programa
     public static void main(String[] args) {
-        // FASE 1: Creación - new invoca constructor
+        // FASE 1: CREACIÓN - Se ejecuta 'new', se asigna memoria, se invoca constructor
+        // Se crea primer objeto Persona con nombre "Ana" y edad 28
         Persona p1 = new Persona("Ana", 28);
+        // Imprime confirmación de creación
         System.out.println("1. Objeto creado: " + p1.getNombre());
 
-        // FASE 2: Vida útil - usamos el objeto
+        // FASE 2: VIDA ÚTIL - El objeto existe y lo usamos
+        // Modifica la edad del objeto usando el método setEdad()
         p1.setEdad(29);
+        // Imprime la edad modificada
         System.out.println("2. Edad modificada: " + p1.getEdad());
 
-        // FASE 3: Pérdida de referencia - reasignamos la variable
+        // FASE 3: PÉRDIDA DE REFERENCIAS
+        // Crea un segundo objeto Persona con nombre "Luis"
         Persona p2 = new Persona("Luis", 35);
-        p1 = p2;  // p1 ya no apunta al primer objeto, ese objeto es garbage
+        // Reasigna la variable p1 para que apunte al nuevo objeto (p2)
+        p1 = p2;  // Ahora p1 apunta a Luis
+        // El objeto "Ana" que p1 apuntaba está ahora sin referencias
+        // Java marca automáticamente "Ana" como candidata para garbage collection
         // "Ana" ahora es inaccesible y será recolectada
 
+        // Imprime el nuevo nombre al que apunta p1
         System.out.println("3. p1 ahora es: " + p1.getNombre());
         
-        // FASE 4 y 5: Cuando el programa termina, todos los objetos sin referencias
-        // son recolectados por garbage collection automáticamente
+        // FASE 4 y 5: GARBAGE COLLECTION Y DESTRUCCIÓN
+        // Cuando el programa termina o no hay más referencias a los objetos,
+        // el garbage collector (recolector de basura) de Java automáticamente
+        // libera la memoria ocupada por los objetos sin referencias.
+        // El programador NO controla cuándo ocurre exactamente.
+        // p2 (Luis) también será recolectado cuando salga de scope o se pierda la referencia.
     }
 }
 </code></pre>
@@ -282,50 +322,77 @@ Estudiante est3 = new Estudiante("Marta", 19);
       </div>
 
       <h3>Ejemplo: Composición</h3>
-      <pre><code class="language-java">// Clase Dirección
+      <p><strong>Explicación:</strong> Composición es cuando una clase contiene objetos de otra clase. <code>Persona</code> compone una <code>Dirección</code>. Si la Persona se destruye, también su dirección. Es una relación fuerte de "tiene-a".</p>
+      <pre><code class="language-java">// Clase Dirección: representa una ubicación
 public class Dirección {
+    // Atributo private: calle de la dirección
     private String calle;
+    // Atributo private: ciudad de la dirección
     private String ciudad;
+    // Atributo private: código postal de la dirección
     private String codigoPostal;
 
+    // Constructor: inicializa todos los datos de la dirección
     public Dirección(String calle, String ciudad, String codigoPostal) {
+        // Asigna la calle
         this.calle = calle;
+        // Asigna la ciudad
         this.ciudad = ciudad;
+        // Asigna el código postal
         this.codigoPostal = codigoPostal;
     }
 
+    // Sobrescribe toString para representación legible
     @Override
     public String toString() {
+        // Retorna la dirección formateada como string
         return calle + ", " + ciudad + " " + codigoPostal;
     }
 }
 
 // Clase Persona - COMPONE una Dirección
 public class Persona {
+    // Atributo private: nombre de la persona
     private String nombre;
+    // Atributo private: edad de la persona
     private int edad;
-    private Dirección dirección;  // COMPOSICIÓN
+    // Atributo private: objeto Dirección (COMPOSICIÓN)
+    // Persona "tiene-a" una Dirección como parte de sí misma
+    private Dirección dirección;
 
+    // Constructor: recibe parámetros de persona + la dirección como objeto
     public Persona(String nombre, int edad, Dirección dirección) {
+        // Asigna el nombre
         this.nombre = nombre;
+        // Asigna la edad
         this.edad = edad;
+        // Asigna la dirección (objeto compuesto)
         this.dirección = dirección;
     }
 
+    // Método que muestra información de la persona incluyendo su dirección
     public void mostrarInfo() {
+        // Imprime nombre y edad de la persona
         System.out.println(nombre + ", " + edad + " años");
+        // Imprime la dirección (se invoca toString() automáticamente)
         System.out.println("Vive en: " + dirección);
     }
 }
 
-// Uso
+// Clase de uso: demuestra composición en acción
 public class Main {
+    // Método main: punto de entrada
     public static void main(String[] args) {
+        // Crea un objeto Dirección primero
         Dirección dir = new Dirección("Calle Principal 123", "Madrid", "28001");
+        // Crea un objeto Persona que COMPONE la Dirección
+        // Persona necesita una Dirección para estar completa
         Persona p = new Persona("Ana", 28, dir);
+        // Llama al método que muestra información
         p.mostrarInfo();
-        // Salida: Ana, 28 años
-        //         Vive en: Calle Principal 123, Madrid 28001
+        // Salida esperada:
+        // Ana, 28 años
+        // Vive en: Calle Principal 123, Madrid 28001
     }
 }
 </code></pre>
@@ -375,42 +442,61 @@ public class Main {
       </div>
 
       <h3>Ejemplo: Validación en Setters</h3>
-      <pre><code class="language-java">public class CuentaBancaria {
+      <p><strong>Explicación:</strong> Esta clase demuestra cómo usar setters para validar datos. El setter de saldo rechaza valores negativos. Los métodos <code>depositar()</code> y <code>retirar()</code> también incluyen validaciones. Todos modific el estado interno de forma controlada.</p>
+      <pre><code class="language-java">// Clase que representa una cuenta bancaria
+public class CuentaBancaria {
+    // Atributo private: nombre del titular
     private String titular;
+    // Atributo private: saldo actual de la cuenta
     private double saldo;
 
+    // Constructor: inicializa la cuenta con titular y saldo inicial
     public CuentaBancaria(String titular, double saldoInicial) {
+        // Asigna el titular
         this.titular = titular;
+        // Valida que el saldo inicial no sea negativo usando Math.max(0, valor)
         this.saldo = Math.max(0, saldoInicial); // no negativo
     }
 
-    // Getter
+    // Getter: retorna el saldo actual
     public double getSaldo() {
+        // Retorna el saldo sin modificación
         return saldo;
     }
 
-    // Setter con validación
+    // Setter con validación: modifica el saldo de forma segura
     public void setSaldo(double nuevoSaldo) {
+        // Valida que el nuevo saldo sea no-negativo
         if (nuevoSaldo >= 0) {
+            // Si es válido, asigna el nuevo saldo
             this.saldo = nuevoSaldo;
         } else {
+            // Si es inválido, imprime un mensaje de error
             System.out.println("Error: el saldo no puede ser negativo");
         }
     }
 
-    // Método que modifica atributo internamente
+    // Método que realiza un depósito validado
     public void depositar(double cantidad) {
+        // Valida que la cantidad sea positiva
         if (cantidad > 0) {
+            // Si es válida, suma la cantidad al saldo actual
             saldo += cantidad;
+            // Imprime confirmación del depósito
             System.out.println("Depósito de $" + cantidad + " exitoso. Saldo: $" + saldo);
         }
     }
 
+    // Método que realiza un retiro validado
     public void retirar(double cantidad) {
+        // Valida que la cantidad sea positiva Y que haya fondos suficientes
         if (cantidad > 0 && cantidad <= saldo) {
+            // Si es válido, resta la cantidad del saldo
             saldo -= cantidad;
+            // Imprime confirmación del retiro
             System.out.println("Retiro de $" + cantidad + " exitoso. Saldo: $" + saldo);
         } else {
+            // Si no es válido, imprime un mensaje de error
             System.out.println("Operación rechazada: fondos insuficientes o cantidad inválida");
         }
     }
@@ -487,65 +573,101 @@ miCuenta.retirar(2000);   // Error: fondos insuficientes
       </div>
 
       <h3>Ejemplo: Clase Inmutable</h3>
-      <pre><code class="language-java">public final class Fecha {  // final: no puede heredarse
+      <p><strong>Explicación:</strong> Clase <code>Fecha</code> es inmutable: sus atributos son <code>final</code> y no hay setters. Una vez creada, no puede cambiar. Si necesitas "modificar", creas una nueva instancia. Demuestra seguridad y previsibilidad del código.</p>
+      <pre><code class="language-java">// Clase Inmutable: no puede cambiar después de crearse
+public final class Fecha {  // final: no puede heredarse (parte de ser inmutable)
+    // Atributos final: no pueden cambiar después de asignarse
     private final int dia;
+    // Atributo final: no puede cambiar
     private final int mes;
+    // Atributo final: no puede cambiar
     private final int anio;
 
+    // Constructor: único lugar donde se asignan valores a atributos final
     public Fecha(int dia, int mes, int anio) {
+        // Valida que la fecha sea válida antes de asignar
         if (!esValida(dia, mes, anio)) {
+            // Lanza excepción si los datos son inválidos
             throw new IllegalArgumentException("Fecha inválida");
         }
+        // Asigna día (solo se puede hacer en constructor o inicializador)
         this.dia = dia;
+        // Asigna mes
         this.mes = mes;
+        // Asigna año
         this.anio = anio;
     }
 
-    // Getters - sin setters
+    // Getters: retornan los valores, pero no hay setters (inmutabilidad)
     public int getDia() { return dia; }
     public int getMes() { return mes; }
     public int getAnio() { return anio; }
 
-    // Validar fecha
+    // Método privado: valida si una fecha es válida
     private static boolean esValida(int d, int m, int a) {
+        // Verifica mes entre 1 y 12, día entre 1 y 31, año positivo
         return m >= 1 && m <= 12 && d >= 1 && d <= 31 && a > 0;
     }
 
-    // Si necesitas "cambiar" la fecha, creas una nueva instancia
+    // Si necesitas "cambiar" la fecha, creas una NUEVA instancia (no modificas)
     public Fecha agregarDias(int dias) {
-        // cálculo del nuevo día...
+        // Calcula el nuevo día (lógica simplificada)
+        int nuevoDia = dia + dias;
+        int nuevoMes = mes;
+        int nuevoAnio = anio;
+        // ajustar mes y año si es necesario...
+        // Retorna una NUEVA instancia de Fecha con los nuevos valores
         return new Fecha(nuevoDia, nuevoMes, nuevoAnio);
     }
 
+    // Sobrescribe toString para representación legible
     @Override
     public String toString() {
+        // Retorna la fecha formateada
         return dia + "/" + mes + "/" + anio;
     }
 
+    // Sobrescribe equals para comparar fechas lógicamente
     @Override
     public boolean equals(Object obj) {
+        // Si es el mismo objeto en memoria, son iguales
         if (this == obj) return true;
+        // Si el otro objeto no es instancia de Fecha, no son iguales
         if (!(obj instanceof Fecha)) return false;
+        // Castea el objeto a Fecha para acceder a sus atributos
         Fecha otra = (Fecha) obj;
+        // Compara día, mes y año
         return dia == otra.dia && mes == otra.mes && anio == otra.anio;
     }
 
+    // Sobrescribe hashCode: importante cuando usas Fecha en HashSet o HashMap
     @Override
     public int hashCode() {
+        // Calcula hash basado en los atributos
         return java.util.Objects.hash(dia, mes, anio);
     }
 }
 
-// Uso
+// Uso de la clase Inmutable
 public class Main {
+    // Método main: punto de entrada
     public static void main(String[] args) {
+        // Crea una fecha inmutable: 15/6/2024
         Fecha f1 = new Fecha(15, 6, 2024);
-        System.out.println(f1);  // 15/6/2024
+        // Imprime la fecha
+        System.out.println(f1);  // Salida: 15/6/2024
         
-        // No puedo hacer f1.setDia(20) - no existe setter
-        // Si necesito otra fecha, creo una nueva
+        // NO puedo hacer f1.setDia(20) - no existe setter (porque es inmutable)
+        // Si necesito otra fecha, creo una NUEVA instancia llamando agregarDias()
+        // Este método retorna una nueva instancia, NO modifica f1
         Fecha f2 = f1.agregarDias(5);  // retorna nueva instancia
-        System.out.println(f2);  // 20/6/2024 (f1 sigue siendo 15/6/2024)
+        // Imprime la nueva fecha
+        System.out.println(f2);  // Salida: 20/6/2024
+        // Imprime f1 para verificar que no cambió
+        System.out.println(f1);  // Salida: 15/6/2024 (f1 sigue siendo la misma)
+        
+        // Esto es inmutabilidad: el objeto no puede cambiar después de crearse
+        // Es seguro en multi-threading y fácil de predecir
     }
 }
 </code></pre>
@@ -619,46 +741,76 @@ public String obtenerInfo() {
 </code></pre>
 
       <h3>Invocación de Métodos</h3>
-      <pre><code class="language-java">public class Persona {
+      <p><strong>Explicación:</strong> Esta clase demuestra diferentes tipos de métodos: sin parámetros ni retorno (<code>saludar()</code>), con parámetros sin retorno (<code>cumpleanios()</code>), con retorno (<code>esAdulto()</code>), y con parámetros y retorno (<code>presentarse()</code>).</p>
+      <pre><code class="language-java">// Clase que demuestra diferentes tipos de métodos
+public class Persona {
+    // Atributo private: nombre
     private String nombre;
+    // Atributo private: edad
     private int edad;
 
+    // Constructor: inicializa la persona
     public Persona(String nombre, int edad) {
+        // Asigna el nombre
         this.nombre = nombre;
+        // Asigna la edad
         this.edad = edad;
     }
 
-    // Método sin parámetros ni retorno
+    // Método 1: Sin parámetros, sin retorno (void)
+    // Propósito: ejecutar una acción sin datos de entrada ni salida
     public void saludar() {
+        // Imprime un saludo usando el nombre de la persona
         System.out.println("Hola, soy " + nombre);
     }
 
-    // Método con parámetros, sin retorno
+    // Método 2: Sin parámetros, sin retorno (void)
+    // Propósito: modificar el estado interno (incrementar edad)
     public void cumpleanios() {
+        // Incrementa la edad en 1
         edad++;
+        // Imprime el nuevo estado
         System.out.println(nombre + " ahora tiene " + edad + " años");
     }
 
-    // Método con retorno
+    // Método 3: Sin parámetros, con retorno booleano
+    // Propósito: consultar si la persona cumple una condición
     public boolean esAdulto() {
+        // Retorna true si edad es 18 o más, false si no
         return edad >= 18;
     }
 
-    // Método con parámetros y retorno
+    // Método 4: Con parámetros (String) y con retorno (String)
+    // Propósito: usar datos externos y retornar un resultado construido
     public String presentarse(String saludo) {
+        // Retorna un string que combina el saludo con información de la persona
         return saludo + ", me llamo " + nombre + " y tengo " + edad + " años";
     }
 }
 
-// Usar los métodos
+// Clase de uso: demuestra cómo invocar los diferentes métodos
 public class Main {
+    // Método main: punto de entrada
     public static void main(String[] args) {
+        // Crea una instancia de Persona: Ana, 25 años
         Persona p = new Persona("Ana", 25);
 
-        p.saludar();                           // Hola, soy Ana
-        p.cumpleanios();                       // Ana ahora tiene 26 años
-        System.out.println(p.esAdulto());      // true
-        System.out.println(p.presentarse("Buenos días")); // Buenos días, me llamo Ana...
+        // Invoca método 1: sin parámetros, sin retorno
+        // La acción se ejecuta (imprime) pero no retorna nada
+        p.saludar();                           // Salida: Hola, soy Ana
+        
+        // Invoca método 2: sin parámetros, sin retorno
+        // Modifica el estado (incrementa edad) y imprime
+        p.cumpleanios();                       // Salida: Ana ahora tiene 26 años
+        
+        // Invoca método 3: sin parámetros, con retorno booleano
+        // Retorna un valor booleano que imprimimos
+        System.out.println(p.esAdulto());      // Salida: true (26 >= 18)
+        
+        // Invoca método 4: con parámetro String, con retorno String
+        // Pasa "Buenos días" como argumento, retorna un string que imprimimos
+        System.out.println(p.presentarse("Buenos días")); 
+        // Salida: Buenos días, me llamo Ana y tengo 26 años
     }
 }
 </code></pre>
@@ -693,30 +845,41 @@ public class Main {
       </div>
 
       <h3>Ejemplo: Método Bien Diseñado</h3>
+      <p><strong>Explicación:</strong> Este ejemplo muestra cómo diseñar un método de forma profesional: con validaciones claras, documentación Javadoc, responsabilidad única y métodos auxiliares privados que encapsulan complejidad.</p>
       <pre><code class="language-java">/**
+ * Método bien documentado con Javadoc
  * Valida y procesa un depósito en la cuenta.
  * 
- * @param monto el cantidad a depositar, debe ser mayor a 0
+ * @param monto la cantidad a depositar, debe ser mayor a 0
  * @throws IllegalArgumentException si monto es negativo o cero
  * @return true si el depósito fue exitoso, false en caso contrario
  */
 public boolean procesarDeposito(double monto) {
     // Una responsabilidad clara: procesar depósito
+    // Valida que el monto sea positivo
     if (monto <= 0) {
+        // Lanza una excepción con mensaje descriptivo
         throw new IllegalArgumentException("Monto debe ser positivo");
     }
     
+    // Si es válido, suma el monto al saldo actual
     saldo += monto;
+    // Llama a método privado auxiliar para encapsular lógica de registro
     registrarTransacción("Depósito", monto);
+    // Retorna true indicando éxito
     return true;
 }
 
 /**
  * Método privado auxiliar: encapsula la lógica de registrar transacciones.
  * No forma parte de la interfaz pública.
+ * 
+ * @param tipo el tipo de transacción (ej: "Depósito", "Retiro")
+ * @param monto el monto de la transacción
  */
 private void registrarTransacción(String tipo, double monto) {
-    System.out.println("[" + LocalDateTime.now() + "] " + tipo + ": $" + monto);
+    // Imprime información de transacción con timestamp (hora actual)
+    System.out.println("[" + java.time.LocalDateTime.now() + "] " + tipo + ": $" + monto);
 }
 </code></pre>
 
@@ -745,181 +908,66 @@ private void registrarTransacción(String tipo, double monto) {
       </div>
     </section>
 
-    <section id="ejercicios">
-      <h2>Ejercicios Prácticos</h2>
+      <h2>Ejercicio Práctico</h2>
 
-      <h3>Ejercicio 1: Crear una Clase Producto</h3>
-      <p><strong>Enunciado:</strong> Crea una clase <code>Producto</code> con atributos nombre, precio y cantidad. Implementa constructores, getters, setters con validación, y métodos para calcular el valor total del inventario (<code>valorTotalInventario()</code>).</p>
-
-      <div class="solution">
-        <h3>Solución</h3>
-        <pre><code class="language-java">public class Producto {
-    private String nombre;
-    private double precio;
-    private int cantidad;
-
-    // Constructor parametrizado
-    public Producto(String nombre, double precio, int cantidad) {
-        if (nombre == null || nombre.isBlank()) {
-            throw new IllegalArgumentException("El nombre no puede estar vacío");
-        }
-        this.nombre = nombre;
-        setPrecio(precio);
-        setCantidad(cantidad);
-    }
-
-    // Getters
-    public String getNombre() { return nombre; }
-    public double getPrecio() { return precio; }
-    public int getCantidad() { return cantidad; }
-
-    // Setters con validación
-    public void setPrecio(double precio) {
-        if (precio < 0) {
-            throw new IllegalArgumentException("El precio no puede ser negativo");
-        }
-        this.precio = precio;
-    }
-
-    public void setCantidad(int cantidad) {
-        if (cantidad < 0) {
-            throw new IllegalArgumentException("La cantidad no puede ser negativa");
-        }
-        this.cantidad = cantidad;
-    }
-
-    // Método para calcular valor total del inventario
-    public double valorTotalInventario() {
-        return precio * cantidad;
-    }
-
-    // Método para aumentar stock
-    public void agregarStock(int cantidad) {
-        if (cantidad > 0) {
-            this.cantidad += cantidad;
-            System.out.println("Se agregaron " + cantidad + " unidades de " + nombre);
-        }
-    }
-
-    // Método para vender
-    public boolean vender(int cantidad) {
-        if (cantidad > 0 && cantidad <= this.cantidad) {
-            this.cantidad -= cantidad;
-            System.out.println("Se vendieron " + cantidad + " unidades de " + nombre);
-            return true;
-        }
-        System.out.println("No hay suficiente stock disponible");
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "Producto: " + nombre + " | Precio: $" + precio + " | Cantidad: " + cantidad + " | Valor total: $" + valorTotalInventario();
-    }
-}
-
-// Prueba
-public class TestProducto {
-    public static void main(String[] args) {
-        Producto p1 = new Producto("Laptop", 800, 5);
-        System.out.println(p1); // Producto: Laptop | Precio: $800.0 | Cantidad: 5 | Valor total: $4000.0
-
-        p1.agregarStock(3);     // Se agregaron 3 unidades de Laptop
-        p1.vender(2);           // Se vendieron 2 unidades de Laptop
-        System.out.println(p1); // Producto: Laptop | Precio: $800.0 | Cantidad: 6 | Valor total: $4800.0
-    }
-}
-</code></pre>
-      </div>
-
-      <h3>Ejercicio 2: Clase Automóvil con Métodos</h3>
-      <p><strong>Enunciado:</strong> Crea una clase <code>Automovil</code> con marca, modelo, año y velocidad actual. Implementa métodos para acelerar, frenar, obtener velocidad máxima según el modelo. Valida que la velocidad no sea negativa.</p>
+      <h3>Clase Automóvil con Métodos</h3>
+      <p><strong>Enunciado:</strong> Crea una clase <code>Automovil</code> con marca, modelo, año y velocidad actual. Implementa métodos para acelerar, frenar, obtener velocidad máxima según el modelo.</p>
 
       <div class="solution">
-        <h3>Solución</h3>
-        <pre><code class="language-java">public class Automovil {
-    private String marca;
-    private String modelo;
+        <h3>Solución Compilable</h3>
+        <pre><code class="language-java">// Clase Automóvil
+class Automovil {
+    private String marca, modelo;
     private int anio;
-    private double velocidadActual;
-    private static final double VEL_MAX_DEPORTIVO = 280;
-    private static final double VEL_MAX_SEDAN = 200;
-    private static final double VEL_MAX_SUV = 210;
+    private double velocidad;
+    private double velMax;
 
-    public Automovil(String marca, String modelo, int anio) {
-        if (marca == null || modelo == null) {
-            throw new IllegalArgumentException("Marca y modelo no pueden ser nulos");
-        }
+    // Constructor
+    public Automovil(String marca, String modelo, int anio, double velMax) {
         this.marca = marca;
         this.modelo = modelo;
         this.anio = anio;
-        this.velocidadActual = 0;
+        this.velocidad = 0;
+        this.velMax = velMax;
     }
 
-    // Getters
-    public String getMarca() { return marca; }
-    public String getModelo() { return modelo; }
-    public int getAnio() { return anio; }
-    public double getVelocidadActual() { return velocidadActual; }
-
-    // Determinar velocidad máxima según modelo
-    public double getVelocidadMaxima() {
-        if (modelo.toLowerCase().contains("deportivo")) return VEL_MAX_DEPORTIVO;
-        if (modelo.toLowerCase().contains("sedan")) return VEL_MAX_SEDAN;
-        if (modelo.toLowerCase().contains("suv")) return VEL_MAX_SUV;
-        return VEL_MAX_SEDAN; // default
-    }
-
-    // Acelerar
+    // Acelerar - no puede exceder velocidad máxima
     public void acelerar(double incremento) {
-        if (incremento <= 0) {
-            System.out.println("El incremento de velocidad debe ser positivo");
-            return;
-        }
-        double nuevaVelocidad = velocidadActual + incremento;
-        if (nuevaVelocidad > getVelocidadMaxima()) {
-            velocidadActual = getVelocidadMaxima();
-            System.out.println("Velocidad máxima alcanzada: " + velocidadActual + " km/h");
-        } else {
-            velocidadActual = nuevaVelocidad;
-            System.out.println("Acelerando a " + velocidadActual + " km/h");
-        }
+        velocidad = Math.min(velocidad + incremento, velMax);
     }
 
-    // Frenar
+    // Frenar - no puede ser negativa
     public void frenar(double decremento) {
-        if (decremento <= 0) {
-            System.out.println("El decremento debe ser positivo");
-            return;
-        }
-        velocidadActual = Math.max(0, velocidadActual - decremento);
-        System.out.println("Frenando... Velocidad actual: " + velocidadActual + " km/h");
+        velocidad = Math.max(velocidad - decremento, 0);
     }
 
-    // Detener completamente
-    public void detener() {
-        velocidadActual = 0;
-        System.out.println("Vehículo detenido");
-    }
+    public double getVelocidad() { return velocidad; }
 
     @Override
     public String toString() {
-        return marca + " " + modelo + " (" + anio + ") - Velocidad: " + velocidadActual + " km/h";
+        return marca + " " + modelo + " (" + anio + ") - Vel: " + velocidad + " km/h";
     }
 }
 
-// Prueba
-public class TestAutomovil {
+// Programa Principal
+public class Main {
     public static void main(String[] args) {
-        Automovil auto = new Automovil("Toyota", "Sedan", 2023);
-        System.out.println("Velocidad máxima: " + auto.getVelocidadMaxima() + " km/h");
-        
-        auto.acelerar(50);  // Acelerando a 50.0 km/h
-        auto.acelerar(80);  // Acelerando a 130.0 km/h
-        auto.acelerar(100); // Velocidad máxima alcanzada: 200.0 km/h
-        auto.frenar(30);    // Frenando... Velocidad actual: 170.0 km/h
-        auto.detener();     // Vehículo detenido
-        System.out.println(auto); // Toyota Sedan (2023) - Velocidad: 0.0 km/h
+        // Crear automóvil con velocidad máxima de 200 km/h
+        Automovil auto = new Automovil("Toyota", "Sedan", 2023, 200);
+
+        // Acelerar
+        auto.acelerar(50);   // 50 km/h
+        System.out.println(auto);
+
+        auto.acelerar(100);  // 150 km/h
+        System.out.println(auto);
+
+        auto.acelerar(100);  // Intenta 250, pero máximo es 200
+        System.out.println(auto);
+
+        // Frenar
+        auto.frenar(30);     // 170 km/h
+        System.out.println(auto);
     }
 }
 </code></pre>
