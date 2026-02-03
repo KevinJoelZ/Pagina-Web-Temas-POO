@@ -275,3 +275,8 @@ pre.code-inline{display:inline-block;background:#0b1220;color:#e6eef8;padding:6p
     display:none;
   }
 }
+/* Comentarios en amarillo mostaza */
+.hljs-comment{
+  color:#DAA520 !important;
+  font-style:italic;
+}

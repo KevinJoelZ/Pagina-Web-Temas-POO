@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Herencia en POO - POO</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -100,41 +102,60 @@
       <p>La herencia en Java se declara con la palabra clave <code>extends</code>. Una clase que hereda extiende una superclase y obtiene acceso a todos sus miembros públicos y protegidos.</p>
 
       <h3>Estructura Básica</h3>
-      <pre><code class="language-java">// Superclase
+      <p><strong>Explicación:</strong> Esta es la estructura básica de herencia. <code>Persona</code> es la superclase que define atributos y métodos comunes. <code>Empleado</code> extiende <code>Persona</code> usando <code>extends</code>, heredando automáticamente todos sus miembros. El constructor de <code>Empleado</code> debe llamar a <code>super()</code> para inicializar la superclase.</p>
+      <pre><code class="language-java">// Superclase: define los datos y comportamientos comunes
 public class Persona {
+    // Atributo private: no heredable, solo accesible a través de métodos
     private String nombre;
+    // Atributo private: no heredable
     private int edad;
 
+    // Constructor: inicializa los atributos de Persona
     public Persona(String nombre, int edad) {
+        // Asigna el nombre
         this.nombre = nombre;
+        // Asigna la edad
         this.edad = edad;
     }
 
+    // Getter: retorna el nombre (heredable, accesible en subclases)
     public String getNombre() { return nombre; }
+    // Getter: retorna la edad (heredable, accesible en subclases)
     public int getEdad() { return edad; }
 
+    // Método concreto: todas las subclases lo heredan
     public void saludar() {
+        // Imprime un saludo usando el nombre de la persona
         System.out.println("Hola, soy " + nombre);
     }
 }
 
-// Subclase - extiende Persona
+// Subclase: extiende Persona usando la palabra clave extends
 public class Empleado extends Persona {
+    // Atributo private: específico de Empleado
     private double salario;
+    // Atributo private: específico de Empleado
     private String puesto;
 
-    // Constructor de Empleado
+    // Constructor de Empleado: recibe parámetros de Persona + parámetros propios
     public Empleado(String nombre, int edad, double salario, String puesto) {
-        super(nombre, edad); // Llama al constructor de la superclase
+        // Llama OBLIGATORIAMENTE al constructor de la superclase (Persona) como primera línea
+        // super() inicializa los atributos heredados (nombre, edad)
+        super(nombre, edad);
+        // Asigna el salario específico de Empleado
         this.salario = salario;
+        // Asigna el puesto específico de Empleado
         this.puesto = puesto;
     }
 
+    // Getter: retorna el salario
     public double getSalario() { return salario; }
+    // Getter: retorna el puesto
     public String getPuesto() { return puesto; }
 
-    // Método nuevo en Empleado
+    // Método nuevo en Empleado: no existía en Persona
     public double calcularBono() {
+        // Calcula y retorna el 10% del salario como bonus
         return salario * 0.10;
     }
 }
@@ -165,70 +186,104 @@ public class Empleado extends Persona {
       </div>
 
       <h3>Ejemplo Completo: Jerarquía de Vehículos</h3>
-      <pre><code class="language-java">// Superclase
+      <p><strong>Explicación:</strong> Este ejemplo muestra una jerarquía de tres niveles. <code>Vehículo</code> es la superclase base. <code>Auto</code> y <code>Moto</code> son subclases que heredan de <code>Vehículo</code> y agregan atributos/métodos específicos. Demuestra cómo reutilizar código y especializar comportamiento.</p>
+      <pre><code class="language-java">// Superclase: define los datos y comportamientos comunes de todos los vehículos
 public class Vehículo {
+    // Atributo private: marca del vehículo
     private String marca;
+    // Atributo private: modelo del vehículo
     private String modelo;
+    // Atributo private: año de fabricación
     private int año;
 
+    // Constructor: inicializa un vehículo con marca, modelo y año
     public Vehículo(String marca, String modelo, int año) {
+        // Asigna la marca
         this.marca = marca;
+        // Asigna el modelo
         this.modelo = modelo;
+        // Asigna el año
         this.año = año;
     }
 
+    // Método concreto: muestra información del vehículo (heredable)
     public void mostrarInfo() {
+        // Imprime marca, modelo y año formateado
         System.out.println(marca + " " + modelo + " (" + año + ")");
     }
 
+    // Método concreto: acción de arrancar (heredable por todas las subclases)
     public void arrancar() {
+        // Imprime mensaje genérico de arranque
         System.out.println("El vehículo está arrancando...");
     }
 }
 
-// Subclase 1
+// Subclase 1: Auto extiende Vehículo
 public class Auto extends Vehículo {
+    // Atributo private: número de puertas del auto
     private int puertas;
 
+    // Constructor: recibe parámetros de Vehículo + parámetros de Auto
     public Auto(String marca, String modelo, int año, int puertas) {
+        // Llama al constructor de Vehículo (superclase) con sus parámetros
         super(marca, modelo, año);
+        // Asigna el número de puertas específico de Auto
         this.puertas = puertas;
     }
 
+    // Getter: retorna el número de puertas
     public int getPuertas() { return puertas; }
 
+    // Método nuevo específico de Auto: no existe en Vehículo
     public void abrirMaletero() {
+        // Imprime que se abre el maletero
         System.out.println("Maletero del auto abierto");
     }
 }
 
-// Subclase 2
+// Subclase 2: Moto extiende Vehículo
 public class Moto extends Vehículo {
+    // Atributo private: booleano que indica si la moto tiene sidecar
     private boolean tieneSidecar;
 
+    // Constructor: recibe parámetros de Vehículo + parámetros de Moto
     public Moto(String marca, String modelo, int año, boolean tieneSidecar) {
+        // Llama al constructor de Vehículo (superclase) con sus parámetros
         super(marca, modelo, año);
+        // Asigna si tiene sidecar
         this.tieneSidecar = tieneSidecar;
     }
 
+    // Getter: retorna si la moto tiene sidecar
     public boolean tieneSidecar() { return tieneSidecar; }
 
+    // Método nuevo específico de Moto: no existe en Vehículo
     public void hacerCaballito() {
+        // Imprime acción característica de motos
         System.out.println("¡La moto está haciendo caballito!");
     }
 }
 
-// Uso
+// Clase de uso: demuestra la herencia en acción
 public class Main {
+    // Método main: punto de entrada del programa
     public static void main(String[] args) {
+        // Crea una instancia de Auto
         Auto auto = new Auto("Toyota", "Corolla", 2023, 4);
-        auto.mostrarInfo();    // Heredado de Vehículo
-        auto.arrancar();       // Heredado de Vehículo
-        auto.abrirMaletero();  // Método de Auto
+        // Llama método heredado de Vehículo
+        auto.mostrarInfo();    // Heredado de Vehículo - imprime: Toyota Corolla (2023)
+        // Llama otro método heredado de Vehículo
+        auto.arrancar();       // Heredado de Vehículo - imprime: El vehículo está arrancando...
+        // Llama método específico de Auto
+        auto.abrirMaletero();  // Método de Auto - imprime: Maletero del auto abierto
 
+        // Crea una instancia de Moto
         Moto moto = new Moto("Honda", "CB500", 2022, false);
-        moto.mostrarInfo();    // Heredado de Vehículo
-        moto.hacerCaballito(); // Método de Moto
+        // Llama método heredado de Vehículo
+        moto.mostrarInfo();    // Heredado de Vehículo - imprime: Honda CB500 (2022)
+        // Llama método específico de Moto
+        moto.hacerCaballito(); // Método de Moto - imprime: ¡La moto está haciendo caballito!
     }
 }
 </code></pre>
@@ -263,56 +318,80 @@ public class Main {
       </div>
 
       <h3>Ejemplo: Sobrescritura en Acción</h3>
-      <pre><code class="language-java">// Superclase
+      <p><strong>Explicación:</strong> Este ejemplo demuestra polimorfismo mediante sobrescritura. La superclase <code>Animal</code> define un método <code>hacerSonido()</code> genérico. Las subclases <code>Perro</code> y <code>Gato</code> sobrescriben este método con su propio comportamiento. Cuando se invoca <code>hacerSonido()</code> en tiempo de ejecución, se ejecuta la versión específica de cada clase.</p>
+      <pre><code class="language-java">// Superclase: define el comportamiento común
 public class Animal {
+    // Atributo private: nombre del animal
     private String nombre;
 
+    // Constructor: inicializa el animal con un nombre
     public Animal(String nombre) {
+        // Asigna el nombre
         this.nombre = nombre;
     }
 
+    // Getter: retorna el nombre
     public String getNombre() { return nombre; }
 
+    // Método concreto: versión genérica (será sobrescrita en subclases)
     public void hacerSonido() {
+        // Mensaje genérico de sonido
         System.out.println("El animal hace un sonido genérico");
     }
 }
 
-// Subclase 1
+// Subclase 1: Perro extiende Animal
 public class Perro extends Animal {
+    // Constructor: recibe el nombre y lo pasa a la superclase
     public Perro(String nombre) {
+        // Llama al constructor de Animal con el nombre
         super(nombre);
     }
 
-    @Override  // Sobrescribimos hacerSonido()
+    // Sobrescritura: proporciona implementación específica de hacerSonido para Perro
+    // @Override indica que sobrescribimos un método de la superclase
+    @Override
     public void hacerSonido() {
+        // Imprime el sonido específico de un perro usando el nombre heredado
         System.out.println(getNombre() + " ladra: ¡guau guau!");
     }
 }
 
-// Subclase 2
+// Subclase 2: Gato extiende Animal
 public class Gato extends Animal {
+    // Constructor: recibe el nombre y lo pasa a la superclase
     public Gato(String nombre) {
+        // Llama al constructor de Animal con el nombre
         super(nombre);
     }
 
-    @Override  // Sobrescribimos hacerSonido()
+    // Sobrescritura: proporciona implementación específica de hacerSonido para Gato
+    @Override
     public void hacerSonido() {
+        // Imprime el sonido específico de un gato
         System.out.println(getNombre() + " maúlla: ¡miau!");
     }
 }
 
-// Uso - Polimorfismo en acción
+// Clase de uso: demuestra el polimorfismo en acción
 public class Main {
+    // Método main: punto de entrada
     public static void main(String[] args) {
+        // Crea referencia de tipo Animal pero objeto Perro (polimorfismo)
         Animal perro = new Perro("Max");
+        // Crea referencia de tipo Animal pero objeto Gato (polimorfismo)
         Animal gato = new Gato("Misi");
 
-        perro.hacerSonido();  // Max ladra: ¡guau guau!
-        gato.hacerSonido();   // Misi maúlla: ¡miau!
+        // Invoca hacerSonido() en el perro
+        // En tiempo de ejecución, invoca el método sobrescrito de Perro
+        perro.hacerSonido();  // Salida: Max ladra: ¡guau guau!
+        
+        // Invoca hacerSonido() en el gato
+        // En tiempo de ejecución, invoca el método sobrescrito de Gato
+        gato.hacerSonido();   // Salida: Misi maúlla: ¡miau!
         
         // Ambos son Animal, pero cada uno se comporta diferente
-        // El método invocado depende del tipo real en tiempo de ejecución
+        // El método invocado depende del tipo real del objeto en tiempo de ejecución
     }
 }
 </code></pre>
@@ -347,78 +426,120 @@ public class Main {
       </div>
 
       <h3>Ejemplo Completo: Gestión de Empleados</h3>
-      <pre><code class="language-java">// Superclase
+      <p><strong>Explicación:</strong> Este es un ejemplo completo que demuestra polimorfismo en un contexto real. <code>Empleado</code> es una clase abstracta que define el contrato. Las subclases (EmpleadoOficina, Vendedor) implementan <code>calcularBonus()</code> diferente. La clase <code>GestorEmpleados</code> demuestra polimorfismo: trabaja con referencias de <code>Empleado</code> pero ejecuta métodos específicos de cada subclase.</p>
+      <pre><code class="language-java">// Importar ArrayList y List
+import java.util.ArrayList;
+import java.util.List;
+
+// Superclase abstracta: define el contrato que todas las subclases deben cumplir
 public abstract class Empleado {
+    // Atributo protected: heredable por subclases
     protected String nombre;
+    // Atributo protected: heredable por subclases
     protected double salario;
 
+    // Constructor: inicializa nombre y salario
     public Empleado(String nombre, double salario) {
+        // Asigna el nombre
         this.nombre = nombre;
+        // Asigna el salario
         this.salario = salario;
     }
 
-    public abstract double calcularBonus(); // Método abstracto
+    // Método abstracto: cada subclase debe implementarlo
+    public abstract double calcularBonus();
 
+    // Sobrescribe toString para representación legible
     @Override
     public String toString() {
+        // Retorna nombre, salario formateado
         return nombre + " - Salario: $" + salario;
     }
 }
 
-// Subclase 1
+// Subclase 1: EmpleadoOficina
 public class EmpleadoOficina extends Empleado {
+    // Atributo private: horas extra trabajadas
     private int horasExtra;
 
+    // Constructor: recibe parámetros de Empleado + horasExtra
     public EmpleadoOficina(String nombre, double salario, int horasExtra) {
+        // Llama constructor de Empleado
         super(nombre, salario);
+        // Asigna horas extra
         this.horasExtra = horasExtra;
     }
 
+    // Implementación específica de calcularBonus para oficina
     @Override
     public double calcularBonus() {
+        // Retorna 15% del salario + $50 por cada hora extra
         return salario * 0.15 + (horasExtra * 50);
     }
 }
 
-// Subclase 2
+// Subclase 2: Vendedor
 public class Vendedor extends Empleado {
+    // Atributo private: total de ventas realizadas
     private double ventasRealizadas;
 
+    // Constructor: recibe parámetros de Empleado + ventasRealizadas
     public Vendedor(String nombre, double salario, double ventasRealizadas) {
+        // Llama constructor de Empleado
         super(nombre, salario);
+        // Asigna ventas realizadas
         this.ventasRealizadas = ventasRealizadas;
     }
 
+    // Implementación específica de calcularBonus para vendedores
     @Override
     public double calcularBonus() {
+        // Retorna 5% de comisión sobre las ventas realizadas
         return ventasRealizadas * 0.05; // 5% de comisión
     }
 }
 
-// Sistema de gestión
+// Clase que gestiona empleados de forma polimórfica
 public class GestorEmpleados {
+    // Lista que almacena referencias de tipo Empleado (puede contener cualquier subclase)
     private List&lt;Empleado&gt; empleados = new ArrayList&lt;&gt;();
 
+    // Método para agregar un empleado (de cualquier tipo) a la lista
     public void agregarEmpleado(Empleado e) {
+        // Agrega el empleado a la lista (puede ser EmpleadoOficina, Vendedor, etc)
         empleados.add(e);
     }
 
+    // Método que muestra bonus de todos los empleados (polimórfico)
     public void mostrarBonus() {
+        // Itera sobre cada empleado en la lista
         for (Empleado e : empleados) {
+            // Imprime empleado y su bonus
+            // calcularBonus() se invoca polimórficamente: cada tipo ejecuta su versión
             System.out.println(e + " - Bonus: $" + e.calcularBonus());
         }
     }
 }
 
-// Uso
+// Clase de uso: demuestra el sistema en acción
 public class Main {
+    // Método main: punto de entrada
     public static void main(String[] args) {
+        // Crea instancia del gestor
         GestorEmpleados gestor = new GestorEmpleados();
 
+        // Crea y agrega un EmpleadoOficina
+        // Agrupa nombre, salario, horasExtra
         gestor.agregarEmpleado(new EmpleadoOficina("Ana", 2000, 10));
+        
+        // Crea y agrega un Vendedor
+        // Agrupa nombre, salario, ventasRealizadas
         gestor.agregarEmpleado(new Vendedor("Carlos", 1500, 5000));
 
+        // Muestra bonus de todos los empleados
+        // El gestor no conoce tipos específicos, pero cada uno calcula bonus correcto
         gestor.mostrarBonus();
+        // Salida esperada:
         // Ana - Salario: $2000.0 - Bonus: $500.0
         // Carlos - Salario: $1500.0 - Bonus: $250.0
     }
@@ -455,28 +576,52 @@ public class Main {
       </div>
 
       <h3>Ejemplo: Modificadores en Jerarquía</h3>
-      <pre><code class="language-java">public class Persona {
-    private String numeroDocumento;    // NO heredable
-    protected String nombre;            // Heredable
-    public int edad;                    // Heredable
-    int id;                            // Heredable (default, si mismo paquete)
+      <p><strong>Explicación:</strong> Este ejemplo muestra cómo funcionan los diferentes modificadores de acceso en una jerarquía de herencia. <code>private</code> NO es heredable, <code>protected</code> es heredable, <code>public</code> es heredable. La clase <code>Empleado</code> intenta acceder a diferentes miembros de <code>Persona</code>.</p>
+      <pre><code class="language-java">// Superclase con diferentes modificadores de acceso
+public class Persona {
+    // Atributo private: NO heredable, solo accesible dentro de Persona
+    private String numeroDocumento;
+    
+    // Atributo protected: heredable, accesible en subclases
+    protected String nombre;
+    
+    // Atributo public: heredable, accesible desde cualquier lugar
+    public int edad;
+    
+    // Atributo default (sin modificador): heredable solo en mismo paquete
+    int id;
 
+    // Método protected: heredable, implementación puede ser de subclases
     protected void saludar() {
+        // Imprime saludo
         System.out.println("Hola");
     }
 
+    // Método private: NO heredable, solo accesible dentro de Persona
     private void detallePersonal() {
+        // Imprime detalles personales
         System.out.println("Este es privado");
     }
 }
 
+// Subclase que intenta acceder a miembros de Persona
 public class Empleado extends Persona {
+    // Método que intenta acceder a miembros heredados
     public void mostrarDatos() {
-        System.out.println(nombre);              // ✅ OK - protected heredado
-        System.out.println(edad);                // ✅ OK - public
-        // System.out.println(numeroDocumento);  // ❌ ERROR - private NO heredable
-        saludar();                               // ✅ OK - protected heredado
-        // detallePersonal();                    // ❌ ERROR - private NO heredable
+        // ✅ OK - protected: heredable y accesible en subclases
+        System.out.println(nombre);              // Acceso permitido
+        
+        // ✅ OK - public: heredable y accesible desde cualquier lugar
+        System.out.println(edad);                // Acceso permitido
+        
+        // ❌ ERROR - private: NO heredable, no accesible en subclases
+        // System.out.println(numeroDocumento);  // COMPILARÍA ERROR
+        
+        // ✅ OK - protected: heredable, puede llamarse método heredado
+        saludar();                               // Acceso permitido
+        
+        // ❌ ERROR - private: NO heredable, no accesible en subclases
+        // detallePersonal();                    // COMPILARÍA ERROR
     }
 }
 </code></pre>
@@ -486,76 +631,66 @@ public class Empleado extends Persona {
       <h2>Ejercicios Prácticos</h2>
 
       <h3>Ejercicio 1: Jerarquía de Figuras Geométricas</h3>
-      <p><strong>Enunciado:</strong> Crea una superclase <code>Figura</code> con método abstracto <code>calcularArea()</code> y <code>calcularPerimetro()</code>. Implementa subclases <code>Rectángulo</code> y <code>Círculo</code>. Crea un programa que calcule área y perímetro de diferentes figuras.</p>
+      <p><strong>Enunciado:</strong> Crea una superclase abstracta <code>Figura</code> con métodos abstractos <code>calcularArea()</code> y <code>calcularPerimetro()</code>. Implementa <code>Rectángulo</code> y <code>Círculo</code>.</p>
 
       <div class="solution">
-        <h3>Solución</h3>
-        <pre><code class="language-java">public abstract class Figura {
+        <pre><code class="language-java">// Superclase abstracta
+abstract class Figura {
     protected String nombre;
-
-    public Figura(String nombre) {
-        this.nombre = nombre;
-    }
-
+    public Figura(String nombre) { this.nombre = nombre; }
+    
+    // Métodos abstractos - cada subclase implementa
     public abstract double calcularArea();
     public abstract double calcularPerimetro();
-
+    
     @Override
-    public String toString() {
-        return nombre;
-    }
+    public String toString() { return nombre; }
 }
 
-public class Rectángulo extends Figura {
-    private double ancho;
-    private double alto;
-
-    public Rectángulo(double ancho, double alto) {
+// Subclase 1: Rectángulo
+class Rectangulo extends Figura {
+    private double ancho, alto;
+    public Rectangulo(double ancho, double alto) {
         super("Rectángulo");
         this.ancho = ancho;
         this.alto = alto;
     }
-
+    
     @Override
-    public double calcularArea() {
-        return ancho * alto;
-    }
-
+    public double calcularArea() { return ancho * alto; }
+    
     @Override
-    public double calcularPerimetro() {
-        return 2 * (ancho + alto);
-    }
+    public double calcularPerimetro() { return 2 * (ancho + alto); }
 }
 
-public class Círculo extends Figura {
+// Subclase 2: Círculo
+class Circulo extends Figura {
     private double radio;
-
-    public Círculo(double radio) {
+    public Circulo(double radio) {
         super("Círculo");
         this.radio = radio;
     }
-
+    
     @Override
-    public double calcularArea() {
-        return Math.PI * radio * radio;
-    }
-
+    public double calcularArea() { return Math.PI * radio * radio; }
+    
     @Override
-    public double calcularPerimetro() {
-        return 2 * Math.PI * radio;
-    }
+    public double calcularPerimetro() { return 2 * Math.PI * radio; }
 }
 
+// Programa principal
 public class Main {
     public static void main(String[] args) {
-        List&lt;Figura&gt; figuras = new ArrayList&lt;&gt;();
-        figuras.add(new Rectángulo(5, 3));
-        figuras.add(new Círculo(4));
-
+        // Polimorfismo: lista de Figuras puede contener cualquier subclase
+        Figura[] figuras = {
+            new Rectangulo(5, 3),
+            new Circulo(4)
+        };
+        
+        // Iterar sobre figuras - cada una responde apropiadamente
         for (Figura f : figuras) {
-            System.out.println(f + " - Área: " + String.format("%.2f", f.calcularArea()));
-            System.out.println(f + " - Perímetro: " + String.format("%.2f", f.calcularPerimetro()));
-            System.out.println();
+            System.out.println(f + " - Área: " + String.format("%.2f", f.calcularArea()) + 
+                             " - Perímetro: " + String.format("%.2f", f.calcularPerimetro()));
         }
     }
 }
@@ -563,99 +698,92 @@ public class Main {
       </div>
 
       <h3>Ejercicio 2: Sistema Bancario con Herencia</h3>
-      <p><strong>Enunciado:</strong> Crea clase <code>CuentaBancaria</code> como superclase con <code>depositar()</code>, <code>retirar()</code> y <code>calcularInteres()</code>. Crea subclases <code>CuentaAhorro</code> (interés bajo) y <code>CuentaCorriente</code> (sin interés, permite descubierto). Implementa polimorfismo.</p>
+      <p><strong>Enunciado:</strong> Superclase abstracta <code>CuentaBancaria</code> con <code>depositar()</code>, <code>retirar()</code> y <code>calcularInteres()</code>. Subclases: <code>CuentaAhorro</code> (5% interés) y <code>CuentaCorriente</code> (sin interés, permite descubierto).</p>
 
       <div class="solution">
-        <h3>Solución</h3>
-        <pre><code class="language-java">public abstract class CuentaBancaria {
-    protected String numero;
-    protected String titular;
+        <pre><code class="language-java">// Superclase abstracta
+abstract class CuentaBancaria {
+    protected String numero, titular;
     protected double saldo;
-
-    public CuentaBancaria(String numero, String titular, double saldoInicial) {
+    
+    public CuentaBancaria(String numero, String titular, double saldo) {
         this.numero = numero;
         this.titular = titular;
-        this.saldo = saldoInicial;
+        this.saldo = saldo;
     }
-
+    
+    // Método concreto: todas las cuentas lo heredan
     public void depositar(double monto) {
-        if (monto > 0) {
-            saldo += monto;
-            System.out.println("Depósito de $" + monto + " realizado. Saldo: $" + saldo);
-        }
+        if (monto > 0) saldo += monto;
     }
-
+    
+    // Métodos abstractos: cada subclase implementa diferente
     public abstract boolean retirar(double monto);
     public abstract double calcularInteres();
-
+    
     public double getSaldo() { return saldo; }
-
+    
     @Override
-    public String toString() {
-        return "Cuenta " + numero + " (" + titular + ") - Saldo: $" + saldo;
-    }
+    public String toString() { return titular + " - Saldo: $" + saldo; }
 }
 
-public class CuentaAhorro extends CuentaBancaria {
-    private static final double TASA_INTERES = 0.05; // 5% anual
-
-    public CuentaAhorro(String numero, String titular, double saldoInicial) {
-        super(numero, titular, saldoInicial);
+// Subclase 1: Cuenta de Ahorro - 5% interés, no permite descubierto
+class CuentaAhorro extends CuentaBancaria {
+    public CuentaAhorro(String numero, String titular, double saldo) {
+        super(numero, titular, saldo);
     }
-
+    
     @Override
     public boolean retirar(double monto) {
         if (monto > 0 && monto <= saldo) {
             saldo -= monto;
-            System.out.println("Retiro de $" + monto + " realizado. Saldo: $" + saldo);
             return true;
         }
-        System.out.println("Retiro rechazado: fondos insuficientes");
         return false;
     }
-
+    
     @Override
-    public double calcularInteres() {
-        return saldo * TASA_INTERES;
-    }
+    public double calcularInteres() { return saldo * 0.05; } // 5% anual
 }
 
-public class CuentaCorriente extends CuentaBancaria {
-    private double limiteDescubierto;
-
-    public CuentaCorriente(String numero, String titular, double saldoInicial, double limiteDescubierto) {
-        super(numero, titular, saldoInicial);
-        this.limiteDescubierto = limiteDescubierto;
+// Subclase 2: Cuenta Corriente - sin interés, permite descubierto
+class CuentaCorriente extends CuentaBancaria {
+    private double limite = 500; // Permite hasta $500 de descubierto
+    
+    public CuentaCorriente(String numero, String titular, double saldo) {
+        super(numero, titular, saldo);
     }
-
+    
     @Override
     public boolean retirar(double monto) {
-        if (monto > 0 && monto <= (saldo + limiteDescubierto)) {
+        if (monto > 0 && monto <= (saldo + limite)) {
             saldo -= monto;
-            System.out.println("Retiro de $" + monto + " realizado. Saldo: $" + saldo);
             return true;
         }
-        System.out.println("Retiro rechazado: límite de descubierto excedido");
         return false;
     }
-
+    
     @Override
-    public double calcularInteres() {
-        return 0; // Cuenta corriente no genera interés
-    }
+    public double calcularInteres() { return 0; } // Sin interés
 }
 
+// Programa principal
 public class Main {
     public static void main(String[] args) {
-        List&lt;CuentaBancaria&gt; cuentas = new ArrayList&lt;&gt;();
-        cuentas.add(new CuentaAhorro("001", "Ana", 1000));
-        cuentas.add(new CuentaCorriente("002", "Carlos", 500, 300));
-
-        for (CuentaBancaria c : cuentas) {
-            System.out.println(c);
-            System.out.println("Interés: $" + c.calcularInteres());
-            System.out.println();
-        }
+        CuentaBancaria c1 = new CuentaAhorro("001", "Ana", 1000);
+        CuentaBancaria c2 = new CuentaCorriente("002", "Carlos", 500);
+        
+        // Depósitos
+        c1.depositar(200);
+        c2.depositar(300);
+        
+        // Retiros
+        c1.retirar(100);
+        c2.retirar(100);
+        
+        // Mostrar información con polimorfismo
+        System.out.println(c1 + " - Interés: $" + String.format("%.2f", c1.calcularInteres()));
+        System.out.println(c2 + " - Interés: $" + String.format("%.2f", c2.calcularInteres()));
     }
 }
 </code></pre>

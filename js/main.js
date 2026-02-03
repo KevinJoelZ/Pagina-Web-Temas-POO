@@ -1,3 +1,10 @@
+// Inicializar highlight.js para resaltar sintaxis y comentarios en amarillo mostaza
+if(typeof hljs !== 'undefined'){
+  document.addEventListener('DOMContentLoaded', function(){
+    hljs.highlightAll();
+  });
+}
+
 // Tarjetas generadas dinámicamente
 const pages = [
   {

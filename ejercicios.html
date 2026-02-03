@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ejercicios Prácticos - POO</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -94,128 +96,126 @@
         </div>
       </div>
 
-      <h3>Solución Completa</h3>
+      <h3>Solución Compilable</h3>
       <div class="solution">
-        <h4>1. Clase Persona (Superclase Base)</h4>
-        <pre><code class="language-java">public class Persona {
-    protected String nombre;
-    protected String apellido;
-    protected int edad;
-
-    public Persona(String nombre, String apellido, int edad) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.edad = edad;
-    }
-
-    public String getNombre() { return nombre; }
-    public String getApellido() { return apellido; }
-    public int getEdad() { return edad; }
-
-    public String obtenerNombreCompleto() {
-        return nombre + " " + apellido;
-    }
-
-    @Override
-    public String toString() {
-        return obtenerNombreCompleto() + " (" + edad + " años)";
-    }
-}
-</code></pre>
-
-        <h4>2. Clase Empleado (Abstracta)</h4>
-        <pre><code class="language-java">public abstract class Empleado extends Persona {
-    protected String id;
-    protected double salario;
-    protected String departamento;
-
-    public Empleado(String nombre, String apellido, int edad, String id, double salario, String departamento) {
-        super(nombre, apellido, edad);
-        this.id = id;
-        this.salario = Math.max(0, salario);
-        this.departamento = departamento;
-    }
-
-    public String getId() { return id; }
-    public double getSalario() { return salario; }
-    public String getDepartamento() { return departamento; }
-
-    public abstract double calcularBonus();
-
-    public double obtenerCostoTotal() {
-        return salario + calcularBonus();
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + " - ID: " + id + " - Salario: $" + salario;
-    }
-}
-</code></pre>
-
-        <h4>3. Subclases Específicas</h4>
-        <pre><code class="language-java">public class Administrativo extends Empleado {
-    private int horasExtra;
-
-    public Administrativo(String nombre, String apellido, int edad, String id, double salario, String departamento, int horasExtra) {
-        super(nombre, apellido, edad, id, salario, departamento);
-        this.horasExtra = horasExtra;
-    }
-
-    @Override
-    public double calcularBonus() {
-        return salario * 0.10 + (horasExtra * 25);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + " (Administrativo) - Horas Extra: " + horasExtra;
-    }
-}
-
-public class Vendedor extends Empleado {
-    private double ventasRealizadas;
-
-    public Vendedor(String nombre, String apellido, int edad, String id, double salario, String departamento, double ventasRealizadas) {
-        super(nombre, apellido, edad, id, salario, departamento);
-        this.ventasRealizadas = Math.max(0, ventasRealizadas);
-    }
-
-    @Override
-    public double calcularBonus() {
-        return ventasRealizadas * 0.08; // 8% de comisión
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + " (Vendedor) - Ventas: $" + ventasRealizadas;
-    }
-}
-
-public class Ingeniero extends Empleado {
-    private int proyectosCompletos;
-    private String lenguajePrincipal;
-
-    public Ingeniero(String nombre, String apellido, int edad, String id, double salario, String departamento, int proyectosCompletos, String lenguajePrincipal) {
-        super(nombre, apellido, edad, id, salario, departamento);
-        this.proyectosCompletos = proyectosCompletos;
-        this.lenguajePrincipal = lenguajePrincipal;
-    }
-
-    @Override
-    public double calcularBonus() {
-        return salario * 0.20 + (proyectosCompletos * 500);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + " (Ingeniero) - Proyectos: " + proyectosCompletos + " - Lenguaje: " + lenguajePrincipal;
-    }
-}
-</code></pre>
-
-        <h4>4. Clase Empresa (Gestor Polimórfico)</h4>
+        <p><strong>Explicación:</strong> Sistema compilable de empresa. Persona → Empleado (abstracta con método calcularBonus()) → Administrativo/Vendedor/Ingeniero. Cada subclase calcula bonus diferente. Empresa gestiona empleados polimórficamente usando una lista de tipo Empleado.</p>
         <pre><code class="language-java">import java.util.ArrayList;
+import java.util.List;
+
+// Base: Persona con nombre, apellido, edad
+class Persona {
+    protected String nombre, apellido;
+    protected int edad;
+    public Persona(String n, String a, int e) { nombre = n; apellido = a; edad = e; }
+    public String getNombre() { return nombre + " " + apellido; }
+}
+
+// Abstracta: Empleado extiende Persona con id, salario y calcularBonus() abstracto
+abstract class Empleado extends Persona {
+    protected String id; protected double salario;
+    public Empleado(String n, String a, int e, String id, double s) {
+        super(n, a, e); this.id = id; this.salario = Math.max(0, s);
+    }
+    public abstract double calcularBonus(); // Polimorfismo: cada subclase implementa
+    public double getCostoTotal() { return salario + calcularBonus(); }
+    public double getSalario() { return salario; }
+}
+
+// Administrativo: bonus = 10% salario + $25 por hora extra
+class Administrativo extends Empleado {
+    private int horasExtra;
+    public Administrativo(String n, String a, int e, String id, double s, int h) {
+        super(n, a, e, id, s); horasExtra = h;
+    }
+    public double calcularBonus() { return salario * 0.10 + (horasExtra * 25); }
+}
+
+// Vendedor: bonus = 8% de ventas realizadas (comisión)
+class Vendedor extends Empleado {
+    private double ventas;
+    public Vendedor(String n, String a, int e, String id, double s, double v) {
+        super(n, a, e, id, s); ventas = Math.max(0, v);
+    }
+    public double calcularBonus() { return ventas * 0.08; }
+}
+
+// Ingeniero: bonus = 15% salario + $200 por proyecto completado
+class Ingeniero extends Empleado {
+    private int proyectos;
+    public Ingeniero(String n, String a, int e, String id, double s, int p) {
+        super(n, a, e, id, s); proyectos = p;
+    }
+    public double calcularBonus() { return salario * 0.15 + (proyectos * 200); }
+}
+
+// Empresa: gestor que maneja empleados polimórficamente sin conocer sus tipos
+class Empresa {
+    private List&lt;Empleado&gt; empleados = new ArrayList&lt;&gt;();
+    public void agregarEmpleado(Empleado e) { empleados.add(e); }
+    public double getCostoMensual() {
+        double total = 0;
+        for (Empleado e : empleados) total += e.getCostoTotal();
+        return total;
+    }
+    public void reporte() {
+        System.out.println("=== REPORTE EMPRESA ===");
+        double sumaSalarios = 0, sumaBonus = 0;
+        for (Empleado e : empleados) {
+            double bonus = e.calcularBonus();
+            System.out.println(e.getNombre() + " - Salario: $" + String.format("%.2f", e.getSalario()) + " Bonus: $" + String.format("%.2f", bonus));
+            sumaSalarios += e.getSalario();
+            sumaBonus += bonus;
+        }
+        System.out.println("\n--- RESUMEN ---");
+        System.out.println("Costo Total: $" + String.format("%.2f", getCostoMensual()));
+    }
+}
+
+// Main: demuestra polimorfismo - cada empleado calcula su bonus diferente
+public class Main {
+    public static void main(String[] args) {
+        Empresa emp = new Empresa();
+        emp.agregarEmpleado(new Administrativo("Ana", "García", 35, "A001", 1500, 8));
+        emp.agregarEmpleado(new Vendedor("Carlos", "López", 40, "V001", 1200, 50000));
+        emp.agregarEmpleado(new Ingeniero("María", "Martínez", 28, "I001", 2500, 5));
+        emp.reporte();
+    }
+}
+</code></pre>
+      </div>
+        // Crea e inmediatamente agrega un Vendedor
+        // Parámetros: nombre, apellido, edad, id, salario, departamento, ventasRealizadas
+        empresa.agregarEmpleado(new Vendedor("Carlos", "López", 40, "VEN001", 1200, "Ventas", 50000));
+        
+        // Crea e inmediatamente agrega un Ingeniero
+        // Parámetros: nombre, apellido, edad, id, salario, departamento, proyectosCompletos, lenguajePrincipal
+        empresa.agregarEmpleado(new Ingeniero("María", "Martínez", 28, "ING001", 2500, "Desarrollo", 5, "Java"));
+        
+        // Crea e inmediatamente agrega otro Administrativo con diferente ID
+        empresa.agregarEmpleado(new Administrativo("Juan", "Pérez", 32, "ADM002", 1400, "Administración", 5));
+        
+        // Crea e inmediatamente agrega otro Vendedor con diferente ID
+        empresa.agregarEmpleado(new Vendedor("Rosa", "Díaz", 38, "VEN002", 1300, "Ventas", 75000));
+
+        // Llama al método generarReporte() de la empresa
+        // Este método itera sobre todos los empleados e imprime información
+        // Demuestra polimorfismo: cada empleado calcula su bonus diferente            // Suma el bonus de este empleado al total
+            totalBonus += e.calcularBonus();
+        }
+
+        // Imprime separador para la sección de resumen
+        System.out.println("--- RESUMEN ---");
+        // Imprime total de todos los salarios (formateado a 2 decimales)
+        System.out.println("Salarios Totales: $" + String.format("%.2f", totalSalarios));
+        // Imprime total de todos los bonus
+        System.out.println("Bonus Total: $" + String.format("%.2f", totalBonus));
+        // Imprime costo mensual total (usando el método obtenerCostoMensual)
+        System.out.println("Costo Mensual Total: $" + String.format("%.2f", obtenerCostoMensual()));
+    }
+
+    // Getter: retorna una copia de la lista de empleados
+    public List&lt;Empleado&gt; obtenerEmpleados() {
+        // Retorna una nueva ArrayList con los empleados (copia para evitar modificaciones externas).util.ArrayList;
 import java.util.List;
 
 public class Empresa {
@@ -335,141 +335,156 @@ public class Empresa {
         </div>
       </div>
 
-      <h3>Implementación</h3>
-      <pre><code class="language-java">// Superclase abstracta
-public abstract class VehículoTransporte {
-    protected String id;
-    protected String ruta;
-    protected int capacidadMaxima;
-    protected int ocupacionActual;
+      <h3>Implementación Compilable</h3>
+      <div class="solution">
+        <p><strong>Explicación:</strong> VehículoTransporte es la superclase abstracta. Subclases: Autobús (tarifa fija), Metro (tarifa por zona), Taxi (tarifa por km). SistemaTransportes gestiona vehículos polimórficamente. Método calcularTarifa() es abstracto: cada vehículo implementa diferente.</p>
+        <pre><code class="language-java">import java.util.ArrayList;
+import java.util.List;
+
+// Superclase abstracta: VehículoTransporte define comportamiento común
+abstract class VehiculoTransporte {
+    protected String id, ruta;
+    protected int capacidadMax, ocupacion;
     protected double tarifaBase;
-
-    public VehículoTransporte(String id, String ruta, int capacidad, double tarifa) {
-        this.id = id;
-        this.ruta = ruta;
-        this.capacidadMaxima = capacidad;
-        this.ocupacionActual = 0;
-        this.tarifaBase = tarifa;
+    
+    public VehiculoTransporte(String id, String ruta, int cap, double tarifa) {
+        this.id = id; this.ruta = ruta; this.capacidadMax = cap; 
+        this.ocupacion = 0; this.tarifaBase = tarifa;
     }
-
     public abstract double calcularTarifa();
-    public abstract String obtenerTipo();
-
-    public boolean embarcar() {
-        if (ocupacionActual < capacidadMaxima) {
-            ocupacionActual++;
-            return true;
-        }
-        return false;
+    public boolean embarcar() { 
+        if (ocupacion < capacidadMax) { ocupacion++; return true; } 
+        return false; 
     }
-
-    public boolean desembarcar() {
-        if (ocupacionActual > 0) {
-            ocupacionActual--;
-            return true;
-        }
-        return false;
+    public boolean desembarcar() { 
+        if (ocupacion > 0) { ocupacion--; return true; } 
+        return false; 
     }
-
-    public int getOcupacionActual() { return ocupacionActual; }
-    public double getPorcentajeOcupación() {
-        return (ocupacionActual * 100.0) / capacidadMaxima;
-    }
-
-    public String getEstado() {
-        String estado = "Disponible";
-        if (getPorcentajeOcupación() >= 100) estado = "Lleno";
-        else if (getPorcentajeOcupación() >= 75) estado = "Casi lleno";
-        else if (getPorcentajeOcupación() >= 50) estado = "Medio lleno";
-        return estado;
-    }
-
-    @Override
-    public String toString() {
-        return obtenerTipo() + " [" + id + "] Ruta: " + ruta + " - Ocupación: " + ocupacionActual + "/" + capacidadMaxima + " (" + String.format("%.1f", getPorcentajeOcupación()) + "%) - " + getEstado();
-    }
+    public double getPorcentajeOcupacion() { return (ocupacion * 100.0) / capacidadMax; }
 }
 
-// Subclases
-public class Autobús extends VehículoTransporte {
-    public Autobús(String id, String ruta, int capacidad) {
-        super(id, ruta, capacidad, 1.50);
-    }
-
-    @Override
-    public double calcularTarifa() {
-        return tarifaBase; // Tarifa fija
-    }
-
-    @Override
-    public String obtenerTipo() { return "Autobús"; }
+// Subclase 1: Autobús - tarifa fija de $1.50
+class Autobus extends VehiculoTransporte {
+    public Autobus(String id, String ruta, int cap) { super(id, ruta, cap, 1.50); }
+    public double calcularTarifa() { return tarifaBase; }
 }
 
-public class Metro extends VehículoTransporte {
+// Subclase 2: Metro - tarifa basada en zona ($0.50 * zona)
+class Metro extends VehiculoTransporte {
     private int zona;
-
-    public Metro(String id, String ruta, int capacidad, int zona) {
-        super(id, ruta, capacidad, 0.50);
-        this.zona = zona;
+    public Metro(String id, String ruta, int cap, int zona) { 
+        super(id, ruta, cap, 0.50); this.zona = zona;
     }
-
-    @Override
-    public double calcularTarifa() {
-        return tarifaBase * zona; // Tarifa por zona
-    }
-
-    @Override
-    public String obtenerTipo() { return "Metro"; }
+    public double calcularTarifa() { return tarifaBase * zona; }
 }
 
-public class Taxi extends VehículoTransporte {
-    private double distancia;
-
-    public Taxi(String id, String ruta, double distancia) {
-        super(id, ruta, 4, 2.00);
-        this.distancia = distancia;
+// Subclase 3: Taxi - tarifa base + $0.50 por km
+class Taxi extends VehiculoTransporte {
+    private double km;
+    public Taxi(String id, String ruta, double km) { 
+        super(id, ruta, 4, 2.00); this.km = km;
     }
+    public void setKm(double k) { km = k; }
+    public double calcularTarifa() { return tarifaBase + (km * 0.50); }
+}
 
-    public void setDistancia(double dist) { this.distancia = dist; }
-
-    @Override
-    public double calcularTarifa() {
-        return tarifaBase + (distancia * 0.50); // Base + por km
+// Gestor del sistema de transportes con polimorfismo
+class SistemaTransportes {
+    private List&lt;VehiculoTransporte&gt; vehiculos = new ArrayList&lt;&gt;();
+    public void agregarVehiculo(VehiculoTransporte v) { vehiculos.add(v); }
+    public double obtenerIngresosTotales() {
+        double total = 0;
+        for (VehiculoTransporte v : vehiculos) 
+            total += v.calcularTarifa() * v.ocupacion;
+        return total;
     }
+    public void reporte() {
+        System.out.println("=== REPORTE TRANSPORTES ===");
+        for (VehiculoTransporte v : vehiculos) {
+            System.out.println(v.id + " - Ocupación: " + v.ocupacion + "/" + v.capacidadMax + 
+                " - Tarifa: $" + String.format("%.2f", v.calcularTarifa()) + 
+                " - Ingresos: $" + String.format("%.2f", v.calcularTarifa() * v.ocupacion));
+        }
+        System.out.println("Ingresos Totales: $" + String.format("%.2f", obtenerIngresosTotales()));
+    }
+}
 
-    @Override
-    public String obtenerTipo() { return "Taxi"; }
+// Main: demuestra polimorfismo de tarifa
+public class Main {
+    public static void main(String[] args) {
+        SistemaTransportes st = new SistemaTransportes();
+        
+        // Crear vehículos: cada uno calcula tarifa diferente
+        Autobus bus1 = new Autobus("BUS-001", "Ruta 1", 40);
+        Metro metro1 = new Metro("MTR-001", "Línea A", 100, 2);
+        Taxi taxi1 = new Taxi("TAX-001", "Sector Centro", 5.5);
+        
+        // Simular embarques
+        for (int i = 0; i < 30; i++) bus1.embarcar();
+        for (int i = 0; i < 80; i++) metro1.embarcar();
+        for (int i = 0; i < 3; i++) taxi1.embarcar();
+        
+        // Agregar y generar reporte
+        st.agregarVehiculo(bus1);
+        st.agregarVehiculo(metro1);
+        st.agregarVehiculo(taxi1);
+        st.reporte();
+    }
 }
 </code></pre>
+      </div>
 
       <h3>Gestor del Sistema</h3>
-      <pre><code class="language-java">public class SistemaTransportes {
+      <p><strong>Explicación:</strong> Esta clase gestiona todos los vehículos del sistema. Demuestra polimorfismo: almacena vehículos de diferentes tipos (Autobús, Metro, Taxi) en una sola colección. Métodos como <code>obtenerIngresosTotales()</code> e <code>generarReporte()</code> funcionan con cualquier tipo de vehículo sin conocer cuál es.</p>
+      <pre><code class="language-java">// Importar ArrayList y List
+import java.util.ArrayList;
+import java.util.List;
+
+// Clase Gestor del Sistema de Transportes
+public class SistemaTransportes {
+    // Atributo private: lista que almacena vehículos de cualquier tipo
     private List&lt;VehículoTransporte&gt; vehículos;
 
+    // Constructor: inicializa el sistema con una lista vacía de vehículos
     public SistemaTransportes() {
+        // Crea una nueva ArrayList para almacenar vehículos
         this.vehículos = new ArrayList&lt;&gt;();
     }
 
+    // Método para agregar un vehículo al sistema
     public void agregarVehículo(VehículoTransporte v) {
+        // Agrega el vehículo a la lista (puede ser Autobús, Metro o Taxi)
         vehículos.add(v);
     }
 
+    // Método que calcula los ingresos totales de todos los vehículos
     public double obtenerIngresosTotales() {
+        // Inicializa acumulador en 0
         double total = 0;
+        // Itera sobre cada vehículo en el sistema
         for (VehículoTransporte v : vehículos) {
+            // Suma el ingreso de este vehículo (tarifa × ocupación actual)
             total += v.calcularTarifa() * v.getOcupacionActual();
         }
+        // Retorna el total acumulado
         return total;
     }
 
+    // Método que genera un reporte completo del sistema
     public void generarReporte() {
+        // Imprime encabezado
         System.out.println("=== REPORTE DEL SISTEMA DE TRANSPORTES ===");
+        // Itera sobre cada vehículo del sistema
         for (VehículoTransporte v : vehículos) {
+            // Imprime la representación completa del vehículo
             System.out.println(v);
+            // Imprime la tarifa calculada (polimórfica: cada tipo calcula diferente)
             System.out.println("  Tarifa: $" + String.format("%.2f", v.calcularTarifa()));
+            // Imprime los ingresos de este vehículo (tarifa × pasajeros)
             System.out.println("  Ingresos: $" + String.format("%.2f", v.calcularTarifa() * v.getOcupacionActual()));
             System.out.println();
         }
+        // Imprime los ingresos totales del sistema
         System.out.println("INGRESOS TOTALES: $" + String.format("%.2f", obtenerIngresosTotales()));
     }
 }
@@ -480,101 +495,81 @@ public class Taxi extends VehículoTransporte {
       <h2>Ejercicio 3: Zoo - Gestión de Animales</h2>
       <p><strong>Enunciado:</strong> Implementa un sistema para un zoo que gestiona diferentes animales (carnívoros, herbívoros, omnívoros). Cada animal tiene nombre, edad, dieta, y comportamientos específicos (comer, dormir, hacer sonido). El sistema debe calcular cantidad de alimento diario y generar reporte de cuidado.</p>
 
-      <h3>Solución Clave</h3>
-      <pre><code class="language-java">public abstract class Animal {
+      <h3>Solución Compilable</h3>
+      <div class="solution">
+        <p><strong>Explicación:</strong> Animal es la superclase abstracta. Carnívoro y Herbívoro implementan calcularAlimentoDiario() diferente (5% vs 8% del peso). Zoo gestiona animales polimórficamente. El polimorfismo permite iterar sin conocer tipos específicos.</p>
+        <pre><code class="language-java">import java.util.ArrayList;
+import java.util.List;
+
+// Superclase abstracta: define comportamiento común
+abstract class Animal {
     protected String nombre;
     protected int edad;
     protected double peso;
-
-    public Animal(String nombre, int edad, double peso) {
-        this.nombre = nombre;
-        this.edad = edad;
-        this.peso = peso;
+    
+    public Animal(String n, int e, double p) { 
+        nombre = n; edad = e; peso = p;
     }
-
-    public abstract String getTipo(); // Ej: Carnívoro, Herbívoro
-    public abstract double calcularAlimentoDiario(); // kg necesarios
+    public abstract String getTipo();
+    public abstract double calcularAlimentoDiario();
     public abstract void hacerSonido();
-
-    public void dormir() {
-        System.out.println(nombre + " está durmiendo...");
-    }
-
-    public void comer(double cantidad) {
-        System.out.println(nombre + " está comiendo " + cantidad + " kg");
-    }
-
-    public void hacerActividad(String actividad) {
-        System.out.println(nombre + " está " + actividad);
-    }
+    
+    public void dormir() { System.out.println(nombre + " duerme..."); }
+    public void comer(double cant) { System.out.println(nombre + " come " + cant + " kg"); }
 }
 
-public class Carnívoro extends Animal {
-    public Carnívoro(String nombre, int edad, double peso) {
-        super(nombre, edad, peso);
-    }
-
-    @Override
+// Subclase 1: Carnívoro - come 5% de su peso
+class Carnivoro extends Animal {
+    public Carnivoro(String n, int e, double p) { super(n, e, p); }
     public String getTipo() { return "Carnívoro"; }
-
-    @Override
-    public double calcularAlimentoDiario() {
-        return peso * 0.05; // 5% del peso
-    }
-
-    @Override
-    public void hacerSonido() {
-        System.out.println(nombre + " ruge: ¡ROOOAAARRR!");
-    }
+    public double calcularAlimentoDiario() { return peso * 0.05; } // 5% del peso
+    public void hacerSonido() { System.out.println(nombre + " ruge: ¡ROAAARRR!"); }
 }
 
-public class Herbívoro extends Animal {
-    public Herbívoro(String nombre, int edad, double peso) {
-        super(nombre, edad, peso);
-    }
-
-    @Override
+// Subclase 2: Herbívoro - come 8% de su peso
+class Herbivoro extends Animal {
+    public Herbivoro(String n, int e, double p) { super(n, e, p); }
     public String getTipo() { return "Herbívoro"; }
-
-    @Override
-    public double calcularAlimentoDiario() {
-        return peso * 0.08; // 8% del peso (comen más)
-    }
-
-    @Override
-    public void hacerSonido() {
-        System.out.println(nombre + " emite un sonido suave");
-    }
+    public double calcularAlimentoDiario() { return peso * 0.08; } // 8% del peso
+    public void hacerSonido() { System.out.println(nombre + " emite sonido suave"); }
 }
 
-public class Zoo {
+// Gestor: Zoo maneja animales polimórficamente
+class Zoo {
     private String nombre;
-    private List&lt;Animal&gt; animales;
-
-    public Zoo(String nombre) {
-        this.nombre = nombre;
-        this.animales = new ArrayList&lt;&gt;();
-    }
-
-    public void agregarAnimal(Animal a) {
-        animales.add(a);
-    }
-
-    public double obtenerAlimentoTotalDiario() {
+    private List&lt;Animal&gt; animales = new ArrayList&lt;&gt;();
+    
+    public Zoo(String n) { nombre = n; }
+    public void agregarAnimal(Animal a) { animales.add(a); }
+    public double getAlimentoTotalDiario() {
         double total = 0;
-        for (Animal a : animales) {
-            total += a.calcularAlimentoDiario();
-        }
+        for (Animal a : animales) total += a.calcularAlimentoDiario();
         return total;
     }
-
-    public void generarReporteCuidado() {
-        System.out.println("=== REPORTE DE CUIDADO DEL ZOO: " + nombre + " ===");
+    public void reporte() {
+        System.out.println("=== ZOO: " + nombre + " ===");
+        double totalAlimento = 0;
         for (Animal a : animales) {
-            System.out.println(a.nombre + " (" + a.getTipo() + ") - Alimento diario: " + String.format("%.2f", a.calcularAlimentoDiario()) + " kg");
+            double alim = a.calcularAlimentoDiario();
+            System.out.println(a.nombre + " (" + a.getTipo() + ") - Peso: " + a.peso + " kg - Alimento: " + String.format("%.2f", alim) + " kg");
             a.hacerSonido();
+            totalAlimento += alim;
         }
-        System.out.println("\nAlimento total diario requerido: " + String.format("%.2f", obtenerAlimentoTotalDiario()) + " kg");
+        System.out.println("\nAlimento Total Diario: " + String.format("%.2f", totalAlimento) + " kg");
+    }
+}
+
+// Main: demuestra polimorfismo - cada animal come diferente según su tipo
+public class Main {
+    public static void main(String[] args) {
+        Zoo zoo = new Zoo("Zoológico Central");
+        
+        zoo.agregarAnimal(new Carnivoro("León", 8, 180));
+        zoo.agregarAnimal(new Carnivoro("Tigre", 6, 160));
+        zoo.agregarAnimal(new Herbivoro("Elefante", 20, 5000));
+        zoo.agregarAnimal(new Herbivoro("Jirafa", 15, 800));
+        
+        zoo.reporte();
     }
 }
 </code></pre>
