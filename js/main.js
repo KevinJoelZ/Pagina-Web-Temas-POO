@@ -29,6 +29,13 @@ const pages = [
   }
 ];
 
+// Añadimos tarjeta para la nueva página "Ejercicios en Clase"
+pages.push({
+  title: 'Ejercicios en Clase - Código visto en sesiones',
+  href: 'ejercicios-en-clase.html',
+  description: 'Ejercicios trabajados en clase con ejemplos de código y salidas de ejemplo.'
+});
+
 const container = document.getElementById('cards');
 if(container){
   pages.forEach(p => {
