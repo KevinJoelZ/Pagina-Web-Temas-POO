@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicios en Clase - POO</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <style>
+    .content-container {
+      max-width: 1100px;
+      margin: 28px auto;
+      padding: 12px;
+    }
+
+    .page-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #0f1724;
+      margin-bottom: 28px;
+      letter-spacing: -0.8px;
+    }
+
+    .exercise-block {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 6px 18px rgba(11,15,30,0.06);
+      border: 1px solid rgba(11,15,30,0.03);
+    }
+
+    .exercise-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    .exercise-date {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+      font-style: italic;
+    }
+
+    .code-section, .output-section {
+      margin-bottom: 24px;
+    }
+
+    .section-label {
+      font-weight: 600;
+      color: #0f1724;
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+    }
+
+    .code-container {
+      background: #282c34;
+      border-radius: 8px;
+      overflow: auto;
+      border: 1px solid #3d4250;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .code-container pre {
+      margin: 0;
+      padding: 0;
+    }
+
+    .code-container code {
+      padding: 16px !important;
+      display: block !important;
+      font-family: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace !important;
+      font-size: 0.9rem !important;
+      line-height: 1.5 !important;
+      letter-spacing: 0.3px;
+      color: #abb2bf !important;
+    }
+
+    .output-container {
+      background: #1e1e1e;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      overflow-x: auto;
+      border: 1px solid #444;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .output-line {
+      margin: 2px 0;
+    }
+
+    .output-input {
+      color: #87ceeb;
+      font-weight: 500;
+    }
+
+    .output-value {
+      color: #ffeb3b;
+      font-weight: 600;
+    }
+
+    .output-section-header {
+      color: #4fc3f7;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .output-text {
+      color: #e8f5e9;
+    }
+
+    .hljs {
+      background: transparent !important;
+      padding: 0 !important;
+      color: #abb2bf;
+    }
+
+    .hljs-string {
+      color: #98c379;
+    }
+
+    .hljs-number {
+      color: #d19a66;
+    }
+
+    .hljs-literal {
+      color: #56b6c2;
+    }
+
+    .hljs-attr {
+      color: #e06c75;
+    }
+
+    .hljs-keyword {
+      color: #c678dd;
+    }
+
+    .hljs-class {
+      color: #e5c07b;
+    }
+
+    .hljs-title {
+      color: #61afef;
+      font-weight: 600;
+    }
+
+    .hljs-function {
+      color: #61afef;
+    }
+
+    .hljs-type {
+      color: #e5c07b;
+    }
+
+    .hljs-params {
+      color: #abb2bf;
+    }
+
+    .hljs-comment {
+      color: #5c6370;
+      font-style: italic;
+    }
+
+    .run-button {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 20px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .run-button:hover {
+      background: #1e5a96;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(43,108,176,0.3);
+    }
+
+    .run-button:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .exercise-block {
+        padding: 16px;
+      }
+
+      .page-title {
+        font-size: 1.8rem;
+      }
+
+      .exercise-title {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="brand"><a href="index.html">POO</a></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="fundamentos.html">Fundamentos</a></li>
+        <li><a href="instanciacion.html">Instanciación</a></li>
+        <li><a href="herencia.html">Herencia</a></li>
+        <li><a href="ejercicios.html">Ejercicios</a></li>
+        <li><a href="ejercicios-en-clase.html">Ejercicios en Clase</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="content-container">
+      <h1 class="page-title">Ejercicios hechos en clase</h1>
+
+      <!-- Ejercicio 1 -->
+      <div class="exercise-block">
+        <h2 class="exercise-title">Ejercicio 1: Personajes (Héroe vs Villano)</h2>
+        <p class="exercise-date">Primer día de clase</p>
+
+        <div class="code-section">
+          <div class="section-label">📝 Código Java:</div>
+          <div class="code-container">
+            <pre><code class="language-java">import java.util.Scanner;
+
+public class Principal {
+
+    static class Personaje {
+
+        String nombre;
+        String tipo;
+        int nivelDeVida;
+
+        public void saludar() {
+            System.out.println("Soy " + nombre + " el " + tipo);
+        }
+
+        public void mostrarVida() {
+            System.out.println("Nivel de vida: " + nivelDeVida + " puntos");
+        }
+
+        public void recibirDanio(int danio) {
+            nivelDeVida -= danio;
+
+            if (nivelDeVida &lt; 0) {
+                nivelDeVida = 0;
+            }
+
+            System.out.println("Ataque recibido: -" + danio + " puntos");
+            System.out.println("Nivel de vida: " + nivelDeVida + " puntos");
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // HEROE
+        Personaje heroe = new Personaje();
+        System.out.print("Ingrese nombre del héroe: ");
+        heroe.nombre = sc.nextLine();
+
+        System.out.print("Ingrese tipo del héroe: ");
+        heroe.tipo = sc.nextLine();
+
+        System.out.print("Ingrese nivel de vida del héroe: ");
+        heroe.nivelDeVida = sc.nextInt();
+        sc.nextLine(); // limpiar buffer
+
+        System.out.println();
+
+        // VILLANO
+        Personaje villano = new Personaje();
+        System.out.print("Ingrese nombre del villano: ");
+        villano.nombre = sc.nextLine();
+
+        System.out.print("Ingrese tipo del villano: ");
+        villano.tipo = sc.nextLine();
+
+        System.out.print("Ingrese nivel de vida del villano: ");
+        villano.nivelDeVida = sc.nextInt();
+
+        System.out.println("\n--- ESTADO INICIAL ---");
+        heroe.saludar();
+        heroe.mostrarVida();
+
+        System.out.println();
+
+        villano.saludar();
+        villano.mostrarVida();
+
+        System.out.println("\n--- ATAQUE (-30 puntos) ---");
+        heroe.recibirDanio(30);
+        System.out.println();
+        villano.recibirDanio(30);
+
+        sc.close();
+    }
+}</code></pre>
+          </div>
+          <a href="https://www.onlinejavacompiler.com/" target="_blank" class="run-button">▶ Ejecutar en OnlineJavaCompiler</a>
+        </div>
+
+        <div class="output-section">
+          <div class="section-label">💻 Salida del programa:</div>
+          <div class="output-container">
+            <div class="output-line"><span class="output-input">Ingrese nombre del héroe:</span> <span class="output-value">Aragorn</span></div>
+            <div class="output-line"><span class="output-input">Ingrese tipo del héroe:</span> <span class="output-value">Guerrero</span></div>
+            <div class="output-line"><span class="output-input">Ingrese nivel de vida del héroe:</span> <span class="output-value">100</span></div>
+            <div class="output-line"></div>
+            <div class="output-line"><span class="output-input">Ingrese nombre del villano:</span> <span class="output-value">Sauron</span></div>
+            <div class="output-line"><span class="output-input">Ingrese tipo del villano:</span> <span class="output-value">Hechicero</span></div>
+            <div class="output-line"><span class="output-input">Ingrese nivel de vida del villano:</span> <span class="output-value">80</span></div>
+            <div class="output-line"></div>
+            <div class="output-line output-section-header">--- ESTADO INICIAL ---</div>
+            <div class="output-line output-text">Soy <span class="output-value">Aragorn</span> el <span class="output-value">Guerrero</span></div>
+            <div class="output-line output-text">Nivel de vida: <span class="output-value">100</span> puntos</div>
+            <div class="output-line"></div>
+            <div class="output-line output-text">Soy <span class="output-value">Sauron</span> el <span class="output-value">Hechicero</span></div>
+            <div class="output-line output-text">Nivel de vida: <span class="output-value">80</span> puntos</div>
+            <div class="output-line"></div>
+            <div class="output-line output-section-header">--- ATAQUE (-30 puntos) ---</div>
+            <div class="output-line output-text">Ataque recibido: -<span class="output-value">30</span> puntos</div>
+            <div class="output-line output-text">Nivel de vida: <span class="output-value">70</span> puntos</div>
+            <div class="output-line"></div>
+            <div class="output-line output-text">Ataque recibido: -<span class="output-value">30</span> puntos</div>
+            <div class="output-line output-text">Nivel de vida: <span class="output-value">50</span> puntos</div>
+          </div>
+          <a href="https://www.onlinejavacompiler.com/" target="_blank" class="run-button">▶ Ejecutar en OnlineJavaCompiler</a>
+        </div>
+
+        <div style="margin-top: 16px; padding: 12px; background: rgba(43,108,176,0.08); border-left: 4px solid var(--accent); border-radius: 4px;">
+          <p style="margin: 0; color: #0f1724;"><strong>Conceptos cubiertos:</strong></p>
+          <ul style="margin: 8px 0 0 0; padding-left: 20px; color: var(--muted);">
+            <li>Clases anidadas (inner classes)</li>
+            <li>Atributos de clase</li>
+            <li>Métodos de instancia</li>
+            <li>Entrada de datos con Scanner</li>
+            <li>Control de lógica condicional</li>
+            <li>Encapsulación básica</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ejercicio 2 -->
+      <div class="exercise-block">
+        <h2 class="exercise-title">Ejercicio 2: Clase Persona con Métodos</h2>
+        <p class="exercise-date">Segundo día de clase</p>
+
+        <div class="code-section">
+          <div class="section-label">📝 Código Java:</div>
+          <div class="code-container">
+            <pre><code class="language-java">class Persona {
+
+    String nombre;
+    int edad;
+    double nota;
+
+    public String saludar() {
+        return "Hola " + nombre + ", mi edad es " + edad;
+    }
+
+    public int contarCaracteresNombre() {
+        return nombre.length();
+    }
+
+    public boolean validarEdad() {
+        return edad >= 18;
+    }
+
+    // Valida si aprueba el semestre
+    public boolean aprobarSemestre() {
+        return nota >= 7;
+    }
+
+    // Devuelve mensaje de aprobación o reprobación
+    public String estadoSemestre() {
+        if (aprobarSemestre()) {
+            return nombre + " ha APROBADO el semestre con " + nota;
+        } else {
+            return nombre + " ha REPROBADO el semestre con " + nota;
+        }
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        persona1();
+        persona2();
+        persona3();
+    }
+
+    public static void persona1() {
+        Persona p = new Persona();
+        p.nombre = "Oscar";
+        p.edad = 28;
+        p.nota = 8;
+
+        mostrarDatos(p);
+    }
+
+    public static void persona2() {
+        Persona p = new Persona();
+        p.nombre = "Jorge";
+        p.edad = 15;
+        p.nota = 6;
+
+        mostrarDatos(p);
+    }
+
+    public static void persona3() {
+        Persona p = new Persona();
+        p.nombre = "Maria";
+        p.edad = 28;
+        p.nota = 9;
+
+        mostrarDatos(p);
+    }
+
+    // Método reutilizable
+    public static void mostrarDatos(Persona p) {
+
+        System.out.println(p.saludar());
+        System.out.println("Caracteres del nombre: " + p.contarCaracteresNombre());
+
+        if (p.validarEdad()) {
+            System.out.println(p.nombre + " es MAYOR de edad");
+        } else {
+            System.out.println(p.nombre + " es MENOR de edad");
+        }
+
+        System.out.println(p.estadoSemestre());
+        System.out.println();
+    }
+}</code></pre>
+          </div>
+          <a href="https://www.onlinejavacompiler.com/" target="_blank" class="run-button">▶ Ejecutar en OnlineJavaCompiler</a>
+        </div>
+
+        <div class="output-section">
+          <div class="section-label">💻 Salida del programa:</div>
+          <div class="output-container">
+            <div class="output-line output-text">Hola <span class="output-value">Oscar</span>, mi edad es <span class="output-value">28</span></div>
+            <div class="output-line output-text">Caracteres del nombre: <span class="output-value">5</span></div>
+            <div class="output-line output-text"><span class="output-value">Oscar</span> es <span style="color: #4fc3f7; font-weight: 600;">MAYOR de edad</span></div>
+            <div class="output-line output-text"><span class="output-value">Oscar</span> ha <span style="color: #90ee90; font-weight: 600;">APROBADO</span> el semestre con <span class="output-value">8.0</span></div>
+            <div class="output-line"></div>
+            <div class="output-line output-text">Hola <span class="output-value">Jorge</span>, mi edad es <span class="output-value">15</span></div>
+            <div class="output-line output-text">Caracteres del nombre: <span class="output-value">5</span></div>
+            <div class="output-line output-text"><span class="output-value">Jorge</span> es <span style="color: #ff6b6b; font-weight: 600;">MENOR de edad</span></div>
+            <div class="output-line output-text"><span class="output-value">Jorge</span> ha <span style="color: #ff6b6b; font-weight: 600;">REPROBADO</span> el semestre con <span class="output-value">6.0</span></div>
+            <div class="output-line"></div>
+            <div class="output-line output-text">Hola <span class="output-value">Maria</span>, mi edad es <span class="output-value">28</span></div>
+            <div class="output-line output-text">Caracteres del nombre: <span class="output-value">5</span></div>
+            <div class="output-line output-text"><span class="output-value">Maria</span> es <span style="color: #4fc3f7; font-weight: 600;">MAYOR de edad</span></div>
+            <div class="output-line output-text"><span class="output-value">Maria</span> ha <span style="color: #90ee90; font-weight: 600;">APROBADO</span> el semestre con <span class="output-value">9.0</span></div>
+            <div class="output-line"></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px; padding: 12px; background: rgba(43,108,176,0.08); border-left: 4px solid var(--accent); border-radius: 4px;">
+          <p style="margin: 0; color: #0f1724;"><strong>Conceptos cubiertos:</strong></p>
+          <ul style="margin: 8px 0 0 0; padding-left: 20px; color: var(--muted);">
+            <li>Definición de clases</li>
+            <li>Atributos privados y métodos públicos</li>
+            <li>Métodos con valor de retorno</li>
+            <li>Métodos booleanos</li>
+            <li>Métodos estáticos</li>
+            <li>Instanciación de objetos</li>
+            <li>Control de lógica condicional (if-else)</li>
+            <li>Reutilización de código mediante métodos</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ejercicio 3 -->
+      <div class="exercise-block">
+        <h2 class="exercise-title">Ejercicio 3: Comparación de edades y nombres</h2>
+        <p class="exercise-date">Tercer día de clase</p>
+
+        <div class="code-section">
+          <div class="section-label">📝 Código Java:</div>
+          <div class="code-container">
+            <pre><code class="language-java">import java.util.Scanner;
+
+class Persona {
+
+    String nombre;
+    int edad;
+
+    // Constructor
+    public Persona(int edad) {
+        if (edad &lt; 0) {
+            this.edad = 0; //edad inválida
+        } else {
+            this.edad = edad;
+        }
+    }
+
+    public String mostrarMensaje() {
+        return "Hola " + nombre + ", mi edad es " + edad;
+    }
+}
+
+public class Main {
+
+    static Scanner sc;
+
+    public static void main(String[] args) {
+
+        sc = new Scanner(System.in);
+
+        //Persona 1
+        Persona p1 = new Persona(ingresaredad());
+        p1.nombre = "Javier";
+
+        //Persona 2
+        Persona p2 = new Persona(ingresaredad());
+        p2.nombre = "Sarah";
+
+        //Comparación de edades
+        if (p1.edad &lt; p2.edad) {
+            System.out.println(p1.nombre + " es menor que " + p2.nombre);
+        } else if (p1.edad &gt; p2.edad) {
+            System.out.println(p1.nombre + " es mayor que " + p2.nombre);
+        } else {
+            System.out.println(p1.nombre + " y " + p2.nombre + " tienen la misma edad");
+        }
+
+        //Comparación de cantidad de caracteres en los nombres
+        if (p1.nombre.length() &gt; p2.nombre.length()) {
+            System.out.println("El nombre con más caracteres es: " + p1.nombre);
+        } else if (p1.nombre.length() &lt; p2.nombre.length()) {
+            System.out.println("El nombre con más caracteres es: " + p2.nombre);
+        } else {
+            System.out.println("Ambos nombres tienen la misma cantidad de caracteres");
+        }
+
+        sc.close();
+    }
+
+    public static int ingresaredad() {
+        System.out.println("Ingrese la edad: ");
+        return sc.nextInt();
+    }
+}</code></pre>
+          </div>
+          <a href="https://www.onlinejavacompiler.com/" target="_blank" class="run-button">▶ Ejecutar en OnlineJavaCompiler</a>
+        </div>
+
+        <div class="output-section">
+          <div class="section-label">💻 Salida del programa (ejemplo):</div>
+          <div class="output-container">
+            <div class="output-line output-text"><span class="output-input">Ingrese la edad:</span> <span class="output-value">22</span></div>
+            <div class="output-line output-text"><span class="output-input">Ingrese la edad:</span> <span class="output-value">25</span></div>
+            <div class="output-line"></div>
+            <div class="output-line output-text"><span class="output-value">Javier</span> es <span style="color: #ff6b6b; font-weight: 600;">menor</span> que <span class="output-value">Sarah</span></div>
+            <div class="output-line output-text">El nombre con más caracteres es: <span class="output-value">Javier</span></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px; padding: 12px; background: rgba(43,108,176,0.08); border-left: 4px solid var(--accent); border-radius: 4px;">
+          <p style="margin: 0; color: #0f1724;"><strong>Conceptos cubiertos:</strong></p>
+          <ul style="margin: 8px 0 0 0; padding-left: 20px; color: var(--muted);">
+            <li>Constructores con validación</li>
+            <li>Uso de `Scanner` estático</li>
+            <li>Comparación de atributos primitivos</li>
+            <li>Operaciones con cadenas (`length`, comparación)</li>
+            <li>Cierre de recursos (`sc.close()`)</li>
+            <li>Salida formateada</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; Página web POO 2026 - Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      hljs.highlightAll();
+    });
+  </script>
+</body>
+</html>
