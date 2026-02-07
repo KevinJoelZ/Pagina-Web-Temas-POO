@@ -65,20 +65,8 @@
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
     }
 
-    .code-container pre {
-      margin: 0;
-      padding: 0;
-    }
-
-    .code-container code {
-      padding: 16px !important;
-      display: block !important;
-      font-family: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace !important;
-      font-size: 0.9rem !important;
-      line-height: 1.5 !important;
-      letter-spacing: 0.3px;
-      color: #abb2bf !important;
-    }
+    .code-container pre { margin: 0; padding: 0; }
+    .code-container code { padding: 16px !important; display: block !important; font-family: 'Fira Code', 'JetBrains Mono', monospace !important; font-size: 0.9rem !important; line-height: 1.5 !important; color: #abb2bf !important; }
 
     .output-container {
       background: #1e1e1e;
@@ -92,120 +80,15 @@
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
     }
 
-    .output-line {
-      margin: 2px 0;
-    }
+    .output-line { margin: 2px 0; }
+    .output-input { color: #87ceeb; font-weight: 500; }
+    .output-value { color: #ffeb3b; font-weight: 600; }
+    .output-section-header { color: #4fc3f7; font-weight: 600; margin-top: 8px; }
+    .output-text { color: #e8f5e9; }
 
-    .output-input {
-      color: #87ceeb;
-      font-weight: 500;
-    }
+    .run-button { display: inline-block; margin-top: 12px; padding: 10px 20px; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; font-size: 0.95rem; }
 
-    .output-value {
-      color: #ffeb3b;
-      font-weight: 600;
-    }
-
-    .output-section-header {
-      color: #4fc3f7;
-      font-weight: 600;
-      margin-top: 8px;
-    }
-
-    .output-text {
-      color: #e8f5e9;
-    }
-
-    .hljs {
-      background: transparent !important;
-      padding: 0 !important;
-      color: #abb2bf;
-    }
-
-    .hljs-string {
-      color: #98c379;
-    }
-
-    .hljs-number {
-      color: #d19a66;
-    }
-
-    .hljs-literal {
-      color: #56b6c2;
-    }
-
-    .hljs-attr {
-      color: #e06c75;
-    }
-
-    .hljs-keyword {
-      color: #c678dd;
-    }
-
-    .hljs-class {
-      color: #e5c07b;
-    }
-
-    .hljs-title {
-      color: #61afef;
-      font-weight: 600;
-    }
-
-    .hljs-function {
-      color: #61afef;
-    }
-
-    .hljs-type {
-      color: #e5c07b;
-    }
-
-    .hljs-params {
-      color: #abb2bf;
-    }
-
-    .hljs-comment {
-      color: #5c6370;
-      font-style: italic;
-    }
-
-    .run-button {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 10px 20px;
-      background: var(--accent);
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: 600;
-      transition: all 0.2s ease;
-      border: none;
-      cursor: pointer;
-      font-size: 0.95rem;
-    }
-
-    .run-button:hover {
-      background: #1e5a96;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(43,108,176,0.3);
-    }
-
-    .run-button:active {
-      transform: translateY(0);
-    }
-
-    @media (max-width: 768px) {
-      .exercise-block {
-        padding: 16px;
-      }
-
-      .page-title {
-        font-size: 1.8rem;
-      }
-
-      .exercise-title {
-        font-size: 1.2rem;
-      }
-    }
+    @media (max-width: 768px) { .exercise-block { padding: 16px; } .page-title { font-size: 1.8rem; } .exercise-title { font-size: 1.2rem; } }
   </style>
 </head>
 <body>
@@ -235,80 +118,73 @@
         <div class="code-section">
           <div class="section-label">📝 Código Java:</div>
           <div class="code-container">
-            <pre><code class="language-java">import java.util.Scanner;
+            <pre><code class="language-java">// Ejercicio 1: Personajes (Héroe vs Villano)
+// Importa Scanner para leer entrada desde teclado
+import java.util.Scanner; // lee datos por teclado
 
-public class Principal {
+// Clase principal
+public class Principal { // inicio de la clase Principal
 
-    static class Personaje {
+    // Clase interna que modela un personaje simple
+    static class Personaje { // inicio de Personaje
+        String nombre; // atributo: nombre del personaje
+        String tipo; // atributo: tipo o rol del personaje
+        int nivelDeVida; // atributo: puntos de vida
 
-        String nombre;
-        String tipo;
-        int nivelDeVida;
-
-        public void saludar() {
-            System.out.println("Soy " + nombre + " el " + tipo);
+        public void saludar() { // método: presenta al personaje
+            System.out.println("Soy " + nombre + " el " + tipo); // imprime saludo
         }
 
-        public void mostrarVida() {
-            System.out.println("Nivel de vida: " + nivelDeVida + " puntos");
+        public void mostrarVida() { // método: muestra nivel de vida
+            System.out.println("Nivel de vida: " + nivelDeVida + " puntos"); // imprime vida
         }
 
-        public void recibirDanio(int danio) {
-            nivelDeVida -= danio;
-
-            if (nivelDeVida &lt; 0) {
-                nivelDeVida = 0;
+        public void recibirDanio(int danio) { // método: aplica daño
+            nivelDeVida -= danio; // resta el daño
+            if (nivelDeVida < 0) { // evita negativo
+                nivelDeVida = 0; // pone a cero si es negativo
             }
-
-            System.out.println("Ataque recibido: -" + danio + " puntos");
-            System.out.println("Nivel de vida: " + nivelDeVida + " puntos");
+            System.out.println("Ataque recibido: -" + danio + " puntos"); // informa daño
+            System.out.println("Nivel de vida: " + nivelDeVida + " puntos"); // muestra vida
         }
-    }
+    } // fin de Personaje
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { // entrada del programa
+        Scanner sc = new Scanner(System.in); // crea Scanner
 
-        Scanner sc = new Scanner(System.in);
+        // Héroe: lectura de datos
+        Personaje heroe = new Personaje(); // crea héroe
+        System.out.print("Ingrese nombre del héroe: "); // pide nombre
+        heroe.nombre = sc.nextLine(); // lee nombre
+        System.out.print("Ingrese tipo del héroe: "); // pide tipo
+        heroe.tipo = sc.nextLine(); // lee tipo
+        System.out.print("Ingrese nivel de vida del héroe: "); // pide vida
+        heroe.nivelDeVida = sc.nextInt(); // lee entero
+        sc.nextLine(); // limpia buffer
 
-        // HEROE
-        Personaje heroe = new Personaje();
-        System.out.print("Ingrese nombre del héroe: ");
-        heroe.nombre = sc.nextLine();
+        // Villano: lectura de datos
+        Personaje villano = new Personaje(); // crea villano
+        System.out.print("\nIngrese nombre del villano: "); // pide nombre
+        villano.nombre = sc.nextLine(); // lee nombre
+        System.out.print("Ingrese tipo del villano: "); // pide tipo
+        villano.tipo = sc.nextLine(); // lee tipo
+        System.out.print("Ingrese nivel de vida del villano: "); // pide vida
+        villano.nivelDeVida = sc.nextInt(); // lee entero
 
-        System.out.print("Ingrese tipo del héroe: ");
-        heroe.tipo = sc.nextLine();
+        // Mostrar estados y simular ataque
+        System.out.println("\n--- ESTADO INICIAL ---"); // encabezado
+        heroe.saludar(); // muestra héroe
+        heroe.mostrarVida(); // muestra vida héroe
+        System.out.println(); // separación
+        villano.saludar(); // muestra villano
+        villano.mostrarVida(); // muestra vida villano
 
-        System.out.print("Ingrese nivel de vida del héroe: ");
-        heroe.nivelDeVida = sc.nextInt();
-        sc.nextLine(); // limpiar buffer
+        System.out.println("\n--- ATAQUE (-30 puntos) ---"); // encabezado ataque
+        heroe.recibirDanio(30); // aplica daño héroe
+        System.out.println(); // separación
+        villano.recibirDanio(30); // aplica daño villano
 
-        System.out.println();
-
-        // VILLANO
-        Personaje villano = new Personaje();
-        System.out.print("Ingrese nombre del villano: ");
-        villano.nombre = sc.nextLine();
-
-        System.out.print("Ingrese tipo del villano: ");
-        villano.tipo = sc.nextLine();
-
-        System.out.print("Ingrese nivel de vida del villano: ");
-        villano.nivelDeVida = sc.nextInt();
-
-        System.out.println("\n--- ESTADO INICIAL ---");
-        heroe.saludar();
-        heroe.mostrarVida();
-
-        System.out.println();
-
-        villano.saludar();
-        villano.mostrarVida();
-
-        System.out.println("\n--- ATAQUE (-30 puntos) ---");
-        heroe.recibirDanio(30);
-        System.out.println();
-        villano.recibirDanio(30);
-
-        sc.close();
+        sc.close(); // cierra Scanner
     }
 }</code></pre>
           </div>
@@ -340,18 +216,15 @@ public class Principal {
             <div class="output-line output-text">Ataque recibido: -<span class="output-value">30</span> puntos</div>
             <div class="output-line output-text">Nivel de vida: <span class="output-value">50</span> puntos</div>
           </div>
-          <a href="https://www.onlinejavacompiler.com/" target="_blank" class="run-button">▶ Ejecutar en OnlineJavaCompiler</a>
         </div>
 
         <div style="margin-top: 16px; padding: 12px; background: rgba(43,108,176,0.08); border-left: 4px solid var(--accent); border-radius: 4px;">
           <p style="margin: 0; color: #0f1724;"><strong>Conceptos cubiertos:</strong></p>
           <ul style="margin: 8px 0 0 0; padding-left: 20px; color: var(--muted);">
             <li>Clases anidadas (inner classes)</li>
-            <li>Atributos de clase</li>
-            <li>Métodos de instancia</li>
-            <li>Entrada de datos con Scanner</li>
-            <li>Control de lógica condicional</li>
-            <li>Encapsulación básica</li>
+            <li>Atributos de clase y métodos de instancia</li>
+            <li>Entrada de datos con `Scanner`</li>
+            <li>Control condicional y buenas prácticas</li>
           </ul>
         </div>
       </div>
@@ -364,89 +237,80 @@ public class Principal {
         <div class="code-section">
           <div class="section-label">📝 Código Java:</div>
           <div class="code-container">
-            <pre><code class="language-java">class Persona {
+            <pre><code class="language-java">// Ejercicio 2: Clase Persona con Métodos
+// Definición de la clase Persona
+class Persona { // inicio clase Persona
+    String nombre; // atributo: nombre
+    int edad; // atributo: edad
+    double nota; // atributo: nota del semestre
 
-    String nombre;
-    int edad;
-    double nota;
-
-    public String saludar() {
-        return "Hola " + nombre + ", mi edad es " + edad;
+    public String saludar() { // método: saludar
+        return "Hola " + nombre + ", mi edad es " + edad; // retorna saludo
     }
 
-    public int contarCaracteresNombre() {
-        return nombre.length();
+    public int contarCaracteresNombre() { // método: contar caracteres
+        return nombre.length(); // retorna longitud del nombre
     }
 
-    public boolean validarEdad() {
-        return edad >= 18;
+    public boolean validarEdad() { // método: validar mayoría de edad
+        return edad >= 18; // true si >= 18
     }
 
-    // Valida si aprueba el semestre
-    public boolean aprobarSemestre() {
-        return nota >= 7;
+    public boolean aprobarSemestre() { // método: validar aprobación
+        return nota >= 7; // true si nota >= 7
     }
 
-    // Devuelve mensaje de aprobación o reprobación
-    public String estadoSemestre() {
-        if (aprobarSemestre()) {
-            return nombre + " ha APROBADO el semestre con " + nota;
+    public String estadoSemestre() { // método: mensaje según nota
+        if (aprobarSemestre()) { // usa aprobarSemestre()
+            return nombre + " ha APROBADO el semestre con " + nota; // aprobado
         } else {
-            return nombre + " ha REPROBADO el semestre con " + nota;
+            return nombre + " ha REPROBADO el semestre con " + nota; // reprobado
         }
     }
-}
+} // fin clase Persona
 
-public class Main {
-
-    public static void main(String[] args) {
-
-        persona1();
-        persona2();
-        persona3();
+// Clase principal para ejemplificar uso
+public class Main { // inicio Main
+    public static void main(String[] args) { // entrada
+        persona1(); // ejemplo 1
+        persona2(); // ejemplo 2
+        persona3(); // ejemplo 3
     }
 
-    public static void persona1() {
+    public static void persona1() { // crea y muestra persona 1
+        Persona p = new Persona(); // instancia
+        p.nombre = "Oscar"; // asigna nombre
+        p.edad = 28; // asigna edad
+        p.nota = 8; // asigna nota
+        mostrarDatos(p); // muestra datos
+    }
+
+    public static void persona2() { // crea y muestra persona 2
         Persona p = new Persona();
-        p.nombre = "Oscar";
-        p.edad = 28;
-        p.nota = 8;
-
-        mostrarDatos(p);
+        p.nombre = "Jorge"; // asigna nombre
+        p.edad = 15; // menor de edad
+        p.nota = 6; // reprobado
+        mostrarDatos(p); // muestra datos
     }
 
-    public static void persona2() {
+    public static void persona3() { // crea y muestra persona 3
         Persona p = new Persona();
-        p.nombre = "Jorge";
-        p.edad = 15;
-        p.nota = 6;
-
-        mostrarDatos(p);
+        p.nombre = "Maria"; // asigna nombre
+        p.edad = 28; // mayor de edad
+        p.nota = 9; // aprobado
+        mostrarDatos(p); // muestra datos
     }
 
-    public static void persona3() {
-        Persona p = new Persona();
-        p.nombre = "Maria";
-        p.edad = 28;
-        p.nota = 9;
-
-        mostrarDatos(p);
-    }
-
-    // Método reutilizable
-    public static void mostrarDatos(Persona p) {
-
-        System.out.println(p.saludar());
-        System.out.println("Caracteres del nombre: " + p.contarCaracteresNombre());
-
-        if (p.validarEdad()) {
+    public static void mostrarDatos(Persona p) { // imprime información
+        System.out.println(p.saludar()); // saludo
+        System.out.println("Caracteres del nombre: " + p.contarCaracteresNombre()); // longitud nombre
+        if (p.validarEdad()) { // muestra si es mayor
             System.out.println(p.nombre + " es MAYOR de edad");
         } else {
             System.out.println(p.nombre + " es MENOR de edad");
         }
-
-        System.out.println(p.estadoSemestre());
-        System.out.println();
+        System.out.println(p.estadoSemestre()); // estado del semestre
+        System.out.println(); // línea en blanco
     }
 }</code></pre>
           </div>
@@ -470,7 +334,6 @@ public class Main {
             <div class="output-line output-text">Caracteres del nombre: <span class="output-value">5</span></div>
             <div class="output-line output-text"><span class="output-value">Maria</span> es <span style="color: #4fc3f7; font-weight: 600;">MAYOR de edad</span></div>
             <div class="output-line output-text"><span class="output-value">Maria</span> ha <span style="color: #90ee90; font-weight: 600;">APROBADO</span> el semestre con <span class="output-value">9.0</span></div>
-            <div class="output-line"></div>
           </div>
         </div>
 
@@ -478,12 +341,9 @@ public class Main {
           <p style="margin: 0; color: #0f1724;"><strong>Conceptos cubiertos:</strong></p>
           <ul style="margin: 8px 0 0 0; padding-left: 20px; color: var(--muted);">
             <li>Definición de clases</li>
-            <li>Atributos privados y métodos públicos</li>
+            <li>Atributos y métodos</li>
             <li>Métodos con valor de retorno</li>
             <li>Métodos booleanos</li>
-            <li>Métodos estáticos</li>
-            <li>Instanciación de objetos</li>
-            <li>Control de lógica condicional (if-else)</li>
             <li>Reutilización de código mediante métodos</li>
           </ul>
         </div>
@@ -497,67 +357,62 @@ public class Main {
         <div class="code-section">
           <div class="section-label">📝 Código Java:</div>
           <div class="code-container">
-            <pre><code class="language-java">import java.util.Scanner;
+            <pre><code class="language-java">// Ejercicio 3: Comparación de edades y nombres
+// Importa Scanner para entrada
+import java.util.Scanner;
 
+// Clase Persona con validación en el constructor
 class Persona {
+    String nombre; // atributo: nombre
+    int edad; // atributo: edad
 
-    String nombre;
-    int edad;
-
-    // Constructor
-    public Persona(int edad) {
-        if (edad &lt; 0) {
-            this.edad = 0; //edad inválida
+    public Persona(int edad) { // constructor con validación
+        if (edad < 0) { // si edad negativa
+            this.edad = 0; // corrige a 0
         } else {
-            this.edad = edad;
+            this.edad = edad; // asigna valor
         }
     }
 
-    public String mostrarMensaje() {
-        return "Hola " + nombre + ", mi edad es " + edad;
+    public String mostrarMensaje() { // método auxiliar
+        return "Hola " + nombre + ", mi edad es " + edad; // devuelve texto
     }
 }
 
-public class Main {
+public class Main { // clase principal
+    static Scanner sc; // Scanner compartido
 
-    static Scanner sc;
+    public static void main(String[] args) { // entrada
+        sc = new Scanner(System.in); // inicializa Scanner
+        Persona p1 = new Persona(ingresaredad()); // crea persona 1
+        p1.nombre = "Javier"; // asigna nombre
+        Persona p2 = new Persona(ingresaredad()); // crea persona 2
+        p2.nombre = "Sarah"; // asigna nombre
 
-    public static void main(String[] args) {
-
-        sc = new Scanner(System.in);
-
-        //Persona 1
-        Persona p1 = new Persona(ingresaredad());
-        p1.nombre = "Javier";
-
-        //Persona 2
-        Persona p2 = new Persona(ingresaredad());
-        p2.nombre = "Sarah";
-
-        //Comparación de edades
-        if (p1.edad &lt; p2.edad) {
+        // Comparación de edades
+        if (p1.edad < p2.edad) {
             System.out.println(p1.nombre + " es menor que " + p2.nombre);
-        } else if (p1.edad &gt; p2.edad) {
+        } else if (p1.edad > p2.edad) {
             System.out.println(p1.nombre + " es mayor que " + p2.nombre);
         } else {
             System.out.println(p1.nombre + " y " + p2.nombre + " tienen la misma edad");
         }
 
-        //Comparación de cantidad de caracteres en los nombres
-        if (p1.nombre.length() &gt; p2.nombre.length()) {
+        // Comparación de longitud de nombres
+        if (p1.nombre.length() > p2.nombre.length()) {
             System.out.println("El nombre con más caracteres es: " + p1.nombre);
-        } else if (p1.nombre.length() &lt; p2.nombre.length()) {
+        } else if (p1.nombre.length() < p2.nombre.length()) {
             System.out.println("El nombre con más caracteres es: " + p2.nombre);
         } else {
             System.out.println("Ambos nombres tienen la misma cantidad de caracteres");
         }
 
-        sc.close();
+        sc.close(); // cierra Scanner
     }
 
-    public static int ingresaredad() {
-        System.out.println("Ingrese la edad: ");
-        return sc.nextInt();
+    public static int ingresaredad() { // pide edad y la retorna
+        System.out.println("Ingrese la edad: "); // prompt
+        return sc.nextInt(); // lee entero
     }
 }</code></pre>
           </div>
@@ -567,8 +422,8 @@ public class Main {
         <div class="output-section">
           <div class="section-label">💻 Salida del programa (ejemplo):</div>
           <div class="output-container">
-            <div class="output-line output-text"><span class="output-input">Ingrese la edad:</span> <span class="output-value">22</span></div>
-            <div class="output-line output-text"><span class="output-input">Ingrese la edad:</span> <span class="output-value">25</span></div>
+            <div class="output-line"><span class="output-input">Ingrese la edad:</span> <span class="output-value">22</span></div>
+            <div class="output-line"><span class="output-input">Ingrese la edad:</span> <span class="output-value">25</span></div>
             <div class="output-line"></div>
             <div class="output-line output-text"><span class="output-value">Javier</span> es <span style="color: #ff6b6b; font-weight: 600;">menor</span> que <span class="output-value">Sarah</span></div>
             <div class="output-line output-text">El nombre con más caracteres es: <span class="output-value">Javier</span></div>
@@ -579,11 +434,298 @@ public class Main {
           <p style="margin: 0; color: #0f1724;"><strong>Conceptos cubiertos:</strong></p>
           <ul style="margin: 8px 0 0 0; padding-left: 20px; color: var(--muted);">
             <li>Constructores con validación</li>
-            <li>Uso de `Scanner` estático</li>
-            <li>Comparación de atributos primitivos</li>
-            <li>Operaciones con cadenas (`length`, comparación)</li>
-            <li>Cierre de recursos (`sc.close()`)</li>
-            <li>Salida formateada</li>
+            <li>Entrada de datos con `Scanner`</li>
+            <li>Comparación de atributos y cadenas</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ejercicio 4 -->
+      <div class="exercise-block">
+        <h2 class="exercise-title">Ejercicio 4: Clase Libro</h2>
+        <p class="exercise-date">Clase práctica adicional</p>
+
+        <div class="code-section">
+          <div class="section-label">📝 Código Java (comentado línea por línea):</div>
+          <div class="code-container">
+            <pre><code class="language-java">// Importa Scanner para lectura por teclado
+import java.util.Scanner; // permite leer datos desde la entrada estándar
+
+// Clase que modela un libro
+class Libro { // inicio clase Libro
+    String nombre_libro; // atributo: título del libro
+    String autor; // atributo: autor del libro
+    int npag; // atributo: número de páginas
+
+    public Libro(String nombre_libro, String autor, int npag) { // constructor
+        this.nombre_libro = nombre_libro; // asigna título
+        this.autor = autor; // asigna autor
+        this.npag = npag; // asigna páginas
+    }
+
+    public String obtenerautorylibro() { // retorna título y autor
+        return "Libro: " + nombre_libro + " Autor: " + autor; // cadena breve
+    }
+
+    public int obtenernumerodepags() { // retorna número de páginas
+        return npag; // devuelve npag
+    }
+
+    public String devolvertodocadena() { // retorna todos los datos
+        return "Nombre del libro: " + nombre_libro + ", Autor: " + autor + ", Numero de paginas: " + npag; // cadena completa
+    }
+
+    public static Libro libroconmaspaginas(Libro libro1, Libro libro2) { // compara dos libros
+        if (libro1.npag > libro2.npag) { // si libro1 tiene más páginas
+            return libro1; // retorna libro1
+        } else {
+            return libro2; // retorna libro2 (más o igual páginas)
+        }
+    }
+} // fin clase Libro
+
+public class Main { // clase principal para ejecutar ejemplo
+    public static void main(String[] args) { // método main
+        Scanner sc = new Scanner(System.in); // crea Scanner
+
+        System.out.println("Ingrese el nombre del primer libro: "); // solicita título 1
+        String nombre1 = sc.nextLine(); // lee título 1
+
+        System.out.println("Ingrese el autor del primer libro: "); // solicita autor 1
+        String autor1 = sc.nextLine(); // lee autor 1
+
+        System.out.println("Ingrese el numero de paginas: "); // solicita páginas 1
+        int paginas1 = sc.nextInt(); // lee entero
+        sc.nextLine(); // limpia buffer
+
+        Libro l1 = new Libro(nombre1, autor1, paginas1); // crea objeto libro 1
+
+        System.out.println("\nIngrese el nombre del segundo libro: "); // solicita título 2
+        String nombre2 = sc.nextLine(); // lee título 2
+
+        System.out.println("Ingrese el autor del segundo libro: "); // solicita autor 2
+        String autor2 = sc.nextLine(); // lee autor 2
+
+        System.out.println("Ingrese el numero de paginas: "); // solicita páginas 2
+        int paginas2 = sc.nextInt(); // lee entero
+
+        Libro l2 = new Libro(nombre2, autor2, paginas2); // crea libro 2
+
+        System.out.println("\n--- Informacion de los libros ---"); // encabezado
+        System.out.println(l1.obtenerautorylibro()); // imprime breve 1
+        System.out.println("Paginas: " + l1.obtenernumerodepags()); // imprime páginas 1
+        System.out.println(); // separación
+        System.out.println(l2.obtenerautorylibro()); // imprime breve 2
+        System.out.println("Paginas: " + l2.obtenernumerodepags()); // imprime páginas 2
+
+        System.out.println("\n--- Informacion como cadena de texto ---"); // encabezado
+        System.out.println(l1.devolvertodocadena()); // imprime cadena completa 1
+        System.out.println(l2.devolvertodocadena()); // imprime cadena completa 2
+
+        Libro mayor = Libro.libroconmaspaginas(l1, l2); // obtiene libro con más páginas
+
+        System.out.println("\n--- Libro con mas paginas ---"); // encabezado
+        System.out.println("El libro con mas paginas es: " + mayor.nombre_libro + " con " + mayor.npag + " paginas "); // muestra resultado
+
+        sc.close(); // cierra Scanner
+    }
+}</code></pre>
+          </div>
+          <a href="https://www.onlinejavacompiler.com/" target="_blank" class="run-button">▶ Ejecutar en OnlineJavaCompiler</a>
+        </div>
+
+        <div class="output-section">
+          <div class="section-label">💻 Salida del programa (ejemplo):</div>
+          <div class="output-container">
+            <div class="output-line"><span class="output-input">Ingrese el nombre del primer libro:</span> <span class="output-value">El Quijote</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el autor del primer libro:</span> <span class="output-value">Miguel de Cervantes</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el numero de paginas:</span> <span class="output-value">863</span></div>
+            <div class="output-line"></div>
+            <div class="output-line"><span class="output-input">Ingrese el nombre del segundo libro:</span> <span class="output-value">La Odisea</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el autor del segundo libro:</span> <span class="output-value">Homero</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el numero de paginas:</span> <span class="output-value">300</span></div>
+            <div class="output-line"></div>
+            <div class="output-line output-section-header">--- Libro con mas paginas ---</div>
+            <div class="output-line output-text">El libro con mas paginas es: <span class="output-value">El Quijote</span> con <span class="output-value">863</span> paginas</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px; padding: 12px; background: rgba(43,108,176,0.08); border-left: 4px solid var(--accent); border-radius: 4px;">
+          <p style="margin: 0; color: #0f1724;"><strong>Conceptos cubiertos:</strong></p>
+          <ul style="margin: 8px 0 0 0; padding-left: 20px; color: var(--muted);">
+            <li>Definición de clases y constructores</li>
+            <li>Métodos de instancia y métodos estáticos</li>
+            <li>Uso de `Scanner` para entrada de datos</li>
+            <li>Comparación de objetos mediante atributos</li>
+            <li>Buenas prácticas: cerrar recursos (`sc.close()`)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ejercicio 5 -->
+      <div class="exercise-block">
+        <h2 class="exercise-title">Ejercicio 5: Bankaccount (Cuenta Bancaria)</h2>
+        <p class="exercise-date">Ejercicio adicional</p>
+
+        <div class="code-section">
+          <div class="section-label">📝 Código Java:</div>
+          <div class="code-container">
+            <pre><code class="language-java">// Importa Scanner para leer entradas por teclado
+import java.util.Scanner;
+
+// Clase que representa una cuenta bancaria simple
+class Bankaccount {
+
+    // Atributo privado: propietario de la cuenta
+    private String owner;
+    // Atributo privado: saldo en la cuenta
+    private double balance;
+    // Atributo privado: número de cuenta
+    private String accountnumber;
+
+    // Constructor: inicializa owner, balance y accountnumber
+    public Bankaccount(String owner, double balance, String accountnumber) {
+        this.owner = owner; // asigna propietario
+        this.balance = balance; // asigna saldo inicial
+        this.accountnumber = accountnumber; // asigna número de cuenta
+    }
+
+    // Getter para owner
+    public String getOwner() {
+        return owner; // devuelve propietario
+    }
+
+    // Setter para owner
+    public void setOwner(String owner) {
+        this.owner = owner; // actualiza propietario
+    }
+
+    // Getter para balance
+    public double getBalance() {
+        return balance; // devuelve saldo
+    }
+
+    // Setter para balance
+    public void setBalance(double balance) {
+        this.balance = balance; // actualiza saldo
+    }
+
+    // Getter para accountnumber
+    public String getAccountnumber() {
+        return accountnumber; // devuelve número de cuenta
+    }
+
+    // Setter para accountnumber
+    public void setAccountnumber(String accountnumber) {
+        this.accountnumber = accountnumber; // actualiza número
+    }
+}
+
+// Clase principal que contiene el método main
+public class Main {
+    public static void main(String[] args) {
+
+        // Crea un Scanner para leer entradas del usuario
+        Scanner scanner = new Scanner(System.in);
+
+        // Pide y lee el nombre del propietario de la primera cuenta
+        System.out.println("Ingrese el nombre del propietario de la primera cuenta:");
+        String owner1 = scanner.nextLine(); // lee línea completa
+
+        // Pide y lee el saldo inicial de la primera cuenta (double)
+        System.out.println("Ingrese el saldo inicial de la primera cuenta:");
+        double balance1 = scanner.nextDouble(); // lee número decimal
+        scanner.nextLine(); // limpia buffer después de nextDouble()
+
+        // Pide y lee el número de la primera cuenta
+        System.out.println("Ingrese el número de la primera cuenta:");
+        String accountnumber1 = scanner.nextLine(); // lee línea completa
+
+        // Crea la primera cuenta usando el constructor
+        Bankaccount account1 = new Bankaccount(owner1, balance1, accountnumber1);
+
+        // Crea una segunda cuenta vacía y luego asigna sus valores mediante setters
+        Bankaccount account2 = new Bankaccount("", 0.0, ""); // instancia con valores por defecto
+
+        // Pide y asigna propietario de la segunda cuenta
+        System.out.println("Ingrese el nombre del propietario de la segunda cuenta:");
+        String owner2 = scanner.nextLine();
+        account2.setOwner(owner2); // usa setter
+
+        // Pide y asigna saldo inicial de la segunda cuenta
+        System.out.println("Ingrese el saldo inicial de la segunda cuenta:");
+        double balance2 = scanner.nextDouble();
+        scanner.nextLine(); // limpia buffer
+        account2.setBalance(balance2); // usa setter
+
+        // Pide y asigna número de la segunda cuenta
+        System.out.println("Ingrese el número de la segunda cuenta:");
+        String accountnumber2 = scanner.nextLine();
+        account2.setAccountnumber(accountnumber2); // usa setter
+
+        // Muestra detalles de la primera cuenta
+        System.out.println("\nDetalles de la primera cuenta:");
+        System.out.println("Propietario: " + account1.getOwner()); // muestra propietario
+        System.out.println("Número de cuenta: " + account1.getAccountnumber()); // muestra número
+        System.out.println("Saldo: " + account1.getBalance()); // muestra saldo
+
+        // Muestra detalles de la segunda cuenta
+        System.out.println("\nDetalles de la segunda cuenta:");
+        System.out.println("Propietario: " + account2.getOwner());
+        System.out.println("Número de cuenta: " + account2.getAccountnumber());
+        System.out.println("Saldo: " + account2.getBalance());
+
+        // Compara saldos y muestra quién tiene más dinero o si son iguales
+        if (account1.getBalance() > account2.getBalance()) {
+            System.out.println(
+                account1.getOwner() + " tiene más dinero que " +
+                account2.getOwner() + ". El saldo es: " +
+                account1.getBalance()
+            );
+        } else if (account2.getBalance() > account1.getBalance()) {
+            System.out.println(
+                account2.getOwner() + " tiene más dinero que " +
+                account1.getOwner() + ". El saldo es: " +
+                account2.getBalance()
+            );
+        } else {
+            System.out.println(
+                account1.getOwner() + " y " +
+                account2.getOwner() + " tienen el mismo saldo."
+            );
+        }
+
+        // Cierra el Scanner para liberar recursos
+        scanner.close();
+    }
+}</code></pre>
+          </div>
+          <a href="https://www.onlinejavacompiler.com/" target="_blank" class="run-button">▶ Ejecutar en OnlineJavaCompiler</a>
+        </div>
+
+        <div class="output-section">
+          <div class="section-label">💻 Salida del programa (ejemplo):</div>
+          <div class="output-container">
+            <div class="output-line"><span class="output-input">Ingrese el nombre del propietario de la primera cuenta:</span> <span class="output-value">Luis</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el saldo inicial de la primera cuenta:</span> <span class="output-value">1200.5</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el número de la primera cuenta:</span> <span class="output-value">ES001</span></div>
+            <div class="output-line"></div>
+            <div class="output-line"><span class="output-input">Ingrese el nombre del propietario de la segunda cuenta:</span> <span class="output-value">Ana</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el saldo inicial de la segunda cuenta:</span> <span class="output-value">950.0</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el número de la segunda cuenta:</span> <span class="output-value">ES002</span></div>
+            <div class="output-line"></div>
+            <div class="output-line output-section-header">--- Resultado de la comparación ---</div>
+            <div class="output-line output-text">Luis tiene más dinero que Ana. El saldo es: <span class="output-value">1200.5</span></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px; padding: 12px; background: rgba(43,108,176,0.08); border-left: 4px solid var(--accent); border-radius: 4px;">
+          <p style="margin: 0; color: #0f1724;"><strong>Conceptos cubiertos:</strong></p>
+          <ul style="margin: 8px 0 0 0; padding-left: 20px; color: var(--muted);">
+            <li>Encapsulación: atributos privados y getters/setters</li>
+            <li>Constructores y creación de objetos</li>
+            <li>Entrada de datos con `Scanner`</li>
+            <li>Comparación de valores y salida formateada</li>
           </ul>
         </div>
       </div>
@@ -594,12 +736,36 @@ public class Main {
   <footer class="site-footer">
     <p>&copy; Página web POO 2026 - Todos los derechos reservados.</p>
   </footer>
-
+  
+  <!-- Botones de navegación profesional -->
+  <div class="nav-buttons-container">
+    <button class="nav-button top" data-tooltip="Ir al principio" onclick="scrollToTop()">↑</button>
+    <button class="nav-button" data-tooltip="Subir página" onclick="scrollUp()">↑</button>
+    <button class="nav-button" data-tooltip="Bajar página" onclick="scrollDown()">↓</button>
+    <button class="nav-button bottom" data-tooltip="Ir al final" onclick="scrollToBottom()">↓</button>
+  </div>
+  
   <script src="js/main.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       hljs.highlightAll();
     });
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function scrollToBottom() {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    
+    function scrollUp() {
+      window.scrollBy({ top: -window.innerHeight * 0.8, behavior: 'smooth' });
+    }
+    
+    function scrollDown() {
+      window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' });
+    }
   </script>
 </body>
 </html>
