@@ -568,137 +568,141 @@ public class Main { // clase principal para ejecutar ejemplo
         <p class="exercise-date">Ejercicio adicional</p>
 
         <div class="code-section">
-          <div class="section-label">📝 Código Java:</div>
+          <div class="section-label">📝 Código Java (comentado línea por línea):</div>
           <div class="code-container">
             <pre><code class="language-java">// Importa Scanner para leer entradas por teclado
 import java.util.Scanner;
 
 // Clase que representa una cuenta bancaria simple
-class Bankaccount {
+class Bankaccount { // inicio clase Bankaccount
 
     // Atributo privado: propietario de la cuenta
-    private String owner;
+    private String owner; // nombre del titular
     // Atributo privado: saldo en la cuenta
-    private double balance;
+    private double balance; // monto disponible
     // Atributo privado: número de cuenta
-    private String accountnumber;
+    private String accountnumber; // identificador único
 
     // Constructor: inicializa owner, balance y accountnumber
-    public Bankaccount(String owner, double balance, String accountnumber) {
+    public Bankaccount(String owner, double balance, String accountnumber) { // constructor
         this.owner = owner; // asigna propietario
         this.balance = balance; // asigna saldo inicial
         this.accountnumber = accountnumber; // asigna número de cuenta
-    }
+    } // fin constructor
 
-    // Getter para owner
-    public String getOwner() {
+    // Getter para owner: retorna el propietario
+    public String getOwner() { // acceso a propietario
         return owner; // devuelve propietario
-    }
+    } // fin getter owner
 
-    // Setter para owner
-    public void setOwner(String owner) {
+    // Setter para owner: modifica el propietario
+    public void setOwner(String owner) { // modificar propietario
         this.owner = owner; // actualiza propietario
-    }
+    } // fin setter owner
 
-    // Getter para balance
-    public double getBalance() {
+    // Getter para balance: retorna el saldo actual
+    public double getBalance() { // acceso a saldo
         return balance; // devuelve saldo
-    }
+    } // fin getter balance
 
-    // Setter para balance
-    public void setBalance(double balance) {
+    // Setter para balance: modifica el saldo
+    public void setBalance(double balance) { // modificar saldo
         this.balance = balance; // actualiza saldo
-    }
+    } // fin setter balance
 
-    // Getter para accountnumber
-    public String getAccountnumber() {
+    // Getter para accountnumber: retorna el número de cuenta
+    public String getAccountnumber() { // acceso a número
         return accountnumber; // devuelve número de cuenta
-    }
+    } // fin getter accountnumber
 
-    // Setter para accountnumber
-    public void setAccountnumber(String accountnumber) {
+    // Setter para accountnumber: modifica el número de cuenta
+    public void setAccountnumber(String accountnumber) { // modificar número
         this.accountnumber = accountnumber; // actualiza número
-    }
-}
+    } // fin setter accountnumber
+} // fin clase Bankaccount
 
 // Clase principal que contiene el método main
-public class Main {
-    public static void main(String[] args) {
+public class Main { // clase principal
+    public static void main(String[] args) { // entrada del programa
 
         // Crea un Scanner para leer entradas del usuario
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in); // inicializa Scanner
 
-        // Pide y lee el nombre del propietario de la primera cuenta
-        System.out.println("Ingrese el nombre del propietario de la primera cuenta:");
-        String owner1 = scanner.nextLine(); // lee línea completa
+        // ===== PRIMERA CUENTA =====
+        // Pide el nombre del propietario de la primera cuenta
+        System.out.println("Ingrese el nombre del propietario de la primera cuenta:"); // prompt
+        String owner1 = scanner.nextLine(); // lee línea completa (incluyendo espacios)
 
-        // Pide y lee el saldo inicial de la primera cuenta (double)
-        System.out.println("Ingrese el saldo inicial de la primera cuenta:");
+        // Pide el saldo inicial de la primera cuenta
+        System.out.println("Ingrese el saldo inicial de la primera cuenta:"); // prompt
         double balance1 = scanner.nextDouble(); // lee número decimal
-        scanner.nextLine(); // limpia buffer después de nextDouble()
+        scanner.nextLine(); // limpia buffer (nextDouble no consume el salto de línea)
 
-        // Pide y lee el número de la primera cuenta
-        System.out.println("Ingrese el número de la primera cuenta:");
+        // Pide el número de la primera cuenta
+        System.out.println("Ingrese el número de la primera cuenta:"); // prompt
         String accountnumber1 = scanner.nextLine(); // lee línea completa
 
-        // Crea la primera cuenta usando el constructor
-        Bankaccount account1 = new Bankaccount(owner1, balance1, accountnumber1);
+        // Crea la primera cuenta usando el constructor parametrizado
+        Bankaccount account1 = new Bankaccount(owner1, balance1, accountnumber1); // instancia account1
 
+        // ===== SEGUNDA CUENTA =====
         // Crea una segunda cuenta vacía y luego asigna sus valores mediante setters
         Bankaccount account2 = new Bankaccount("", 0.0, ""); // instancia con valores por defecto
 
-        // Pide y asigna propietario de la segunda cuenta
-        System.out.println("Ingrese el nombre del propietario de la segunda cuenta:");
-        String owner2 = scanner.nextLine();
-        account2.setOwner(owner2); // usa setter
+        // Pide y asigna el nombre del propietario de la segunda cuenta
+        System.out.println("Ingrese el nombre del propietario de la segunda cuenta:"); // prompt
+        String owner2 = scanner.nextLine(); // lee línea completa
+        account2.setOwner(owner2); // usa setter para asignar propietario
 
-        // Pide y asigna saldo inicial de la segunda cuenta
-        System.out.println("Ingrese el saldo inicial de la segunda cuenta:");
-        double balance2 = scanner.nextDouble();
+        // Pide y asigna el saldo inicial de la segunda cuenta
+        System.out.println("Ingrese el saldo inicial de la segunda cuenta:"); // prompt
+        double balance2 = scanner.nextDouble(); // lee número decimal
         scanner.nextLine(); // limpia buffer
-        account2.setBalance(balance2); // usa setter
+        account2.setBalance(balance2); // usa setter para asignar saldo
 
-        // Pide y asigna número de la segunda cuenta
-        System.out.println("Ingrese el número de la segunda cuenta:");
-        String accountnumber2 = scanner.nextLine();
-        account2.setAccountnumber(accountnumber2); // usa setter
+        // Pide y asigna el número de la segunda cuenta
+        System.out.println("Ingrese el número de la segunda cuenta:"); // prompt
+        String accountnumber2 = scanner.nextLine(); // lee línea completa
+        account2.setAccountnumber(accountnumber2); // usa setter para asignar número
 
+        // ===== MOSTRAR DETALLES =====
         // Muestra detalles de la primera cuenta
-        System.out.println("\nDetalles de la primera cuenta:");
-        System.out.println("Propietario: " + account1.getOwner()); // muestra propietario
-        System.out.println("Número de cuenta: " + account1.getAccountnumber()); // muestra número
-        System.out.println("Saldo: " + account1.getBalance()); // muestra saldo
+        System.out.println("\nDetalles de la primera cuenta:"); // encabezado
+        System.out.println("Propietario: " + account1.getOwner()); // usa getter para propietario
+        System.out.println("Número de cuenta: " + account1.getAccountnumber()); // usa getter para número
+        System.out.println("Saldo: " + account1.getBalance()); // usa getter para saldo
 
         // Muestra detalles de la segunda cuenta
-        System.out.println("\nDetalles de la segunda cuenta:");
-        System.out.println("Propietario: " + account2.getOwner());
-        System.out.println("Número de cuenta: " + account2.getAccountnumber());
-        System.out.println("Saldo: " + account2.getBalance());
+        System.out.println("\nDetalles de la segunda cuenta:"); // encabezado
+        System.out.println("Propietario: " + account2.getOwner()); // usa getter para propietario
+        System.out.println("Número de cuenta: " + account2.getAccountnumber()); // usa getter para número
+        System.out.println("Saldo: " + account2.getBalance()); // usa getter para saldo
 
-        // Compara saldos y muestra quién tiene más dinero o si son iguales
-        if (account1.getBalance() > account2.getBalance()) {
-            System.out.println(
-                account1.getOwner() + " tiene más dinero que " +
-                account2.getOwner() + ". El saldo es: " +
-                account1.getBalance()
-            );
-        } else if (account2.getBalance() > account1.getBalance()) {
-            System.out.println(
-                account2.getOwner() + " tiene más dinero que " +
-                account1.getOwner() + ". El saldo es: " +
-                account2.getBalance()
-            );
-        } else {
-            System.out.println(
-                account1.getOwner() + " y " +
-                account2.getOwner() + " tienen el mismo saldo."
-            );
-        }
+        // ===== COMPARACIÓN DE SALDOS =====
+        // Compara saldos y muestra quién tiene más dinero
+        if (account1.getBalance() > account2.getBalance()) { // si saldo1 > saldo2
+            System.out.println( // imprime mensaje
+                account1.getOwner() + " tiene más dinero que " + // propietario 1
+                account2.getOwner() + ". El saldo es: " + // propietario 2
+                account1.getBalance() // saldo de account1
+            ); // fin impresión
+        } else if (account2.getBalance() > account1.getBalance()) { // si saldo2 > saldo1
+            System.out.println( // imprime mensaje
+                account2.getOwner() + " tiene más dinero que " + // propietario 2
+                account1.getOwner() + ". El saldo es: " + // propietario 1
+                account2.getBalance() // saldo de account2
+            ); // fin impresión
+        } else { // si saldos son iguales
+            System.out.println( // imprime mensaje
+                account1.getOwner() + " y " + // propietario 1
+                account2.getOwner() + " tienen el mismo saldo." // propietario 2
+            ); // fin impresión
+        } // fin else
 
         // Cierra el Scanner para liberar recursos
-        scanner.close();
-    }
-}</code></pre>
+        scanner.close(); // cierra Scanner
+    } // fin main
+} // fin clase Main</code></pre>
           </div>
           <a href="https://www.onlinejavacompiler.com/" target="_blank" class="run-button">▶ Ejecutar en OnlineJavaCompiler</a>
         </div>
@@ -706,26 +710,45 @@ public class Main {
         <div class="output-section">
           <div class="section-label">💻 Salida del programa (ejemplo):</div>
           <div class="output-container">
-            <div class="output-line"><span class="output-input">Ingrese el nombre del propietario de la primera cuenta:</span> <span class="output-value">Luis</span></div>
-            <div class="output-line"><span class="output-input">Ingrese el saldo inicial de la primera cuenta:</span> <span class="output-value">1200.5</span></div>
-            <div class="output-line"><span class="output-input">Ingrese el número de la primera cuenta:</span> <span class="output-value">ES001</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el nombre del propietario de la primera cuenta:</span></div>
+            <div class="output-line"><span class="output-value">Luis</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el saldo inicial de la primera cuenta:</span></div>
+            <div class="output-line"><span class="output-value">1200.5</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el número de la primera cuenta:</span></div>
+            <div class="output-line"><span class="output-value">ES001</span></div>
             <div class="output-line"></div>
-            <div class="output-line"><span class="output-input">Ingrese el nombre del propietario de la segunda cuenta:</span> <span class="output-value">Ana</span></div>
-            <div class="output-line"><span class="output-input">Ingrese el saldo inicial de la segunda cuenta:</span> <span class="output-value">950.0</span></div>
-            <div class="output-line"><span class="output-input">Ingrese el número de la segunda cuenta:</span> <span class="output-value">ES002</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el nombre del propietario de la segunda cuenta:</span></div>
+            <div class="output-line"><span class="output-value">Ana</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el saldo inicial de la segunda cuenta:</span></div>
+            <div class="output-line"><span class="output-value">950.0</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el número de la segunda cuenta:</span></div>
+            <div class="output-line"><span class="output-value">ES002</span></div>
             <div class="output-line"></div>
-            <div class="output-line output-section-header">--- Resultado de la comparación ---</div>
-            <div class="output-line output-text">Luis tiene más dinero que Ana. El saldo es: <span class="output-value">1200.5</span></div>
+            <div class="output-line output-section-header">Detalles de la primera cuenta:</div>
+            <div class="output-line output-text">Propietario: <span class="output-value">Luis</span></div>
+            <div class="output-line output-text">Número de cuenta: <span class="output-value">ES001</span></div>
+            <div class="output-line output-text">Saldo: <span class="output-value">1200.5</span></div>
+            <div class="output-line"></div>
+            <div class="output-line output-section-header">Detalles de la segunda cuenta:</div>
+            <div class="output-line output-text">Propietario: <span class="output-value">Ana</span></div>
+            <div class="output-line output-text">Número de cuenta: <span class="output-value">ES002</span></div>
+            <div class="output-line output-text">Saldo: <span class="output-value">950.0</span></div>
+            <div class="output-line"></div>
+            <div class="output-line output-text"><span class="output-value">Luis</span> tiene más dinero que <span class="output-value">Ana</span>. El saldo es: <span class="output-value">1200.5</span></div>
           </div>
         </div>
 
         <div style="margin-top: 16px; padding: 12px; background: rgba(43,108,176,0.08); border-left: 4px solid var(--accent); border-radius: 4px;">
           <p style="margin: 0; color: #0f1724;"><strong>Conceptos cubiertos:</strong></p>
           <ul style="margin: 8px 0 0 0; padding-left: 20px; color: var(--muted);">
-            <li>Encapsulación: atributos privados y getters/setters</li>
-            <li>Constructores y creación de objetos</li>
-            <li>Entrada de datos con `Scanner`</li>
-            <li>Comparación de valores y salida formateada</li>
+            <li>Encapsulación: atributos privados (`private`)</li>
+            <li>Getters y Setters: acceso y modificación controlada de datos</li>
+            <li>Constructores parametrizados: inicialización de objetos</li>
+            <li>Uso de `Scanner` para entrada de datos múltiples</li>
+            <li>Limpieza de buffer (`nextLine()` después de `nextDouble()`)</li>
+            <li>Condicionales múltiples (`if-else if-else`)</li>
+            <li>Comparación de valores numéricos</li>
+            <li>Buenas prácticas: cerrar recursos (`scanner.close()`)</li>
           </ul>
         </div>
       </div>
