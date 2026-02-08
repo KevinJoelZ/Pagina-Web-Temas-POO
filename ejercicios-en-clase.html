@@ -753,6 +753,211 @@ public class Main { // clase principal
         </div>
       </div>
 
+      <!-- Ejercicio 6 -->
+      <div class="exercise-block">
+        <h2 class="exercise-title">Ejercicio 6: Clases Abstractas - BankAccount</h2>
+        <p class="exercise-date">Ejercicio avanzado - Herencia y Polimorfismo</p>
+
+        <div class="code-section">
+          <div class="section-label">📝 Código Java (comentado línea por línea):</div>
+          <div class="code-container">
+            <pre><code class="language-java">// Importa Scanner para leer datos desde la consola
+import java.util.Scanner; // permite entrada del usuario
+
+/*
+ * CLASE ABSTRACTA
+ * No se pueden crear objetos directamente de esta clase
+ * Sirve como plantilla para otras clases
+ */
+// Define una clase abstracta que actúa como plantilla
+abstract class BankAccount { // clase abstracta - base para cuentas bancarias
+
+    // Atributos encapsulados (protected: accesibles en subclases)
+    protected String owner; // atributo: nombre del propietario
+    protected double balance; // atributo: saldo en la cuenta
+    protected String accountNumber; // atributo: número de cuenta único
+
+    // Constructor de la clase abstracta
+    public BankAccount(String owner, double balance, String accountNumber) { // constructor
+        this.owner = owner; // inicializa propietario
+        this.balance = balance; // inicializa saldo
+        this.accountNumber = accountNumber; // inicializa número de cuenta
+    } // fin constructor
+
+    // Getter para owner: retorna el propietario
+    public String getOwner() { // accede al propietario
+        return owner; // devuelve nombre del propietario
+    } // fin getter getOwner
+
+    // Setter para owner: modifica el propietario
+    public void setOwner(String owner) { // modifica propietario
+        this.owner = owner; // asigna nuevo propietario
+    } // fin setter setOwner
+
+    // Getter para balance: retorna el saldo actual
+    public double getBalance() { // accede al saldo
+        return balance; // devuelve saldo de la cuenta
+    } // fin getter getBalance
+
+    // Setter para balance: modifica el saldo
+    public void setBalance(double balance) { // modifica saldo
+        this.balance = balance; // asigna nuevo saldo
+    } // fin setter setBalance
+
+    // Getter para accountNumber: retorna el número de cuenta
+    public String getAccountNumber() { // accede al número
+        return accountNumber; // devuelve número de cuenta
+    } // fin getter getAccountNumber
+
+    // Setter para accountNumber: modifica el número de cuenta
+    public void setAccountNumber(String accountNumber) { // modifica número
+        this.accountNumber = accountNumber; // asigna nuevo número de cuenta
+    } // fin setter setAccountNumber
+
+    // Método abstracto (obligatorio de implementar en subclases)
+    public abstract void mostrarDetalles(); // firma del método - sin implementación
+} // fin clase abstracta BankAccount
+
+/*
+ * CLASE CONCRETA
+ * Hereda de la clase abstracta BankAccount
+ */
+// Clase que implementa la clase abstracta BankAccount
+class CuentaBancaria extends BankAccount { // hereda de BankAccount
+
+    // Constructor que llama al constructor de la clase abstracta
+    public CuentaBancaria(String owner, double balance, String accountNumber) { // constructor
+        super(owner, balance, accountNumber); // llamada al constructor padre
+    } // fin constructor
+
+    // Implementación obligatoria del método abstracto mostrarDetalles
+    @Override // anotación: indica que sobreescribimos un método de la clase padre
+    public void mostrarDetalles() { // implementación del método abstracto
+        System.out.println("Propietario: " + owner); // imprime propietario
+        System.out.println("Número de cuenta: " + accountNumber); // imprime número de cuenta
+        System.out.println("Saldo: " + balance); // imprime saldo
+    } // fin método mostrarDetalles
+} // fin clase CuentaBancaria
+
+/*
+ * CLASE PRINCIPAL
+ */
+// Clase que contiene el método main
+public class Main { // clase principal
+    public static void main(String[] args) { // método principal
+
+        // Crea un Scanner para leer inputs del usuario
+        Scanner scanner = new Scanner(System.in); // inicializa Scanner
+
+        // ===== PRIMERA CUENTA =====
+        // Pide el nombre del propietario de la primera cuenta
+        System.out.println("Ingrese el nombre del propietario de la primera cuenta:"); // solicita propietario 1
+        String owner1 = scanner.nextLine(); // lee línea completa
+
+        // Pide el saldo inicial de la primera cuenta
+        System.out.println("Ingrese el saldo inicial de la primera cuenta:"); // solicita saldo 1
+        double balance1 = scanner.nextDouble(); // lee número decimal
+        scanner.nextLine(); // limpia buffer (nextDouble no consume salto de línea)
+
+        // Pide el número de la primera cuenta
+        System.out.println("Ingrese el número de la primera cuenta:"); // solicita número 1
+        String accountNumber1 = scanner.nextLine(); // lee línea completa
+
+        // Crea la primera cuenta usando polimorfismo
+        BankAccount account1 = new CuentaBancaria(owner1, balance1, accountNumber1); // instancia con referencia abstracta
+
+        // ===== SEGUNDA CUENTA =====
+        // Pide el nombre del propietario de la segunda cuenta
+        System.out.println("Ingrese el nombre del propietario de la segunda cuenta:"); // solicita propietario 2
+        String owner2 = scanner.nextLine(); // lee línea completa
+
+        // Pide el saldo inicial de la segunda cuenta
+        System.out.println("Ingrese el saldo inicial de la segunda cuenta:"); // solicita saldo 2
+        double balance2 = scanner.nextDouble(); // lee número decimal
+        scanner.nextLine(); // limpia buffer
+
+        // Pide el número de la segunda cuenta
+        System.out.println("Ingrese el número de la segunda cuenta:"); // solicita número 2
+        String accountNumber2 = scanner.nextLine(); // lee línea completa
+
+        // Crea la segunda cuenta usando polimorfismo
+        BankAccount account2 = new CuentaBancaria(owner2, balance2, accountNumber2); // instancia con referencia abstracta
+
+        // ===== MOSTRAR DETALLES =====
+        // Imprime separador para claridad
+        System.out.println("\nDetalles de la primera cuenta:"); // encabezado
+        account1.mostrarDetalles(); // llama método sobrescrito (polimorfismo)
+
+        // Imprime separador para claridad
+        System.out.println("\nDetalles de la segunda cuenta:"); // encabezado
+        account2.mostrarDetalles(); // llama método sobrescrito (polimorfismo)
+
+        // ===== COMPARACIÓN DE SALDOS =====
+        // Compara saldos para determinar quién tiene más dinero
+        if (account1.getBalance() > account2.getBalance()) { // si saldo1 > saldo2
+            System.out.println(account1.getOwner() + " tiene más dinero."); // imprime resultado
+        } else if (account2.getBalance() > account1.getBalance()) { // si saldo2 > saldo1
+            System.out.println(account2.getOwner() + " tiene más dinero."); // imprime resultado
+        } else { // si saldos son iguales
+            System.out.println("Ambas cuentas tienen el mismo saldo."); // imprime resultado
+        } // fin else
+
+        // Cierra el Scanner para liberar recursos
+        scanner.close(); // cierra Scanner
+    } // fin main
+} // fin clase Main</code></pre>
+          </div>
+          <a href="https://www.onlinejavacompiler.com/" target="_blank" class="run-button">▶ Ejecutar en OnlineJavaCompiler</a>
+        </div>
+
+        <div class="output-section">
+          <div class="section-label">💻 Salida del programa (ejemplo):</div>
+          <div class="output-container">
+            <div class="output-line"><span class="output-input">Ingrese el nombre del propietario de la primera cuenta:</span></div>
+            <div class="output-line"><span class="output-value">Carlos</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el saldo inicial de la primera cuenta:</span></div>
+            <div class="output-line"><span class="output-value">5000.75</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el número de la primera cuenta:</span></div>
+            <div class="output-line"><span class="output-value">ACC-001</span></div>
+            <div class="output-line"></div>
+            <div class="output-line"><span class="output-input">Ingrese el nombre del propietario de la segunda cuenta:</span></div>
+            <div class="output-line"><span class="output-value">María</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el saldo inicial de la segunda cuenta:</span></div>
+            <div class="output-line"><span class="output-value">3500.50</span></div>
+            <div class="output-line"><span class="output-input">Ingrese el número de la segunda cuenta:</span></div>
+            <div class="output-line"><span class="output-value">ACC-002</span></div>
+            <div class="output-line"></div>
+            <div class="output-line output-section-header">Detalles de la primera cuenta:</div>
+            <div class="output-line output-text">Propietario: <span class="output-value">Carlos</span></div>
+            <div class="output-line output-text">Número de cuenta: <span class="output-value">ACC-001</span></div>
+            <div class="output-line output-text">Saldo: <span class="output-value">5000.75</span></div>
+            <div class="output-line"></div>
+            <div class="output-line output-section-header">Detalles de la segunda cuenta:</div>
+            <div class="output-line output-text">Propietario: <span class="output-value">María</span></div>
+            <div class="output-line output-text">Número de cuenta: <span class="output-value">ACC-002</span></div>
+            <div class="output-line output-text">Saldo: <span class="output-value">3500.50</span></div>
+            <div class="output-line"></div>
+            <div class="output-line output-text"><span class="output-value">Carlos</span> tiene más dinero.</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px; padding: 12px; background: rgba(43,108,176,0.08); border-left: 4px solid var(--accent); border-radius: 4px;">
+          <p style="margin: 0; color: #0f1724;"><strong>Conceptos cubiertos:</strong></p>
+          <ul style="margin: 8px 0 0 0; padding-left: 20px; color: var(--muted);">
+            <li>Clases abstractas: plantillas que no se instancian directamente</li>
+            <li>Métodos abstractos: obligatorios de implementar en subclases</li>
+            <li>Herencia: `extends` para heredar de clases abstractas</li>
+            <li>Polimorfismo: usar referencias abstractas con objetos concretos</li>
+            <li>Encapsulación: atributos `protected` accesibles en subclases</li>
+            <li>Anotación `@Override`: indicar métodos sobrescritos</li>
+            <li>Constructores con `super()`: llamada a constructor de clase padre</li>
+            <li>Comparación de atributos mediante getters</li>
+            <li>Condicionales múltiples (`if-else if-else`)</li>
+            <li>Buenas prácticas: cerrar recursos (`scanner.close()`)</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </main>
 
