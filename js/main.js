@@ -36,6 +36,27 @@ pages.push({
   description: 'Ejercicios trabajados en clase con ejemplos de código y salidas de ejemplo.'
 });
 
+// Añadimos tarjeta para la nueva página "Trabajos Autónomos"
+pages.push({
+  title: 'Trabajos Autónomos - Investigación y Análisis',
+  href: 'trabajos-autonomos.html',
+  description: 'Actividades de investigación técnica y ensayos sobre Java y programación orientada a objetos.'
+});
+
+// Añadimos tarjeta para "Ejercicios Temas POO"
+pages.push({
+  title: 'Ejercicios Temas POO - Práctica de Conceptos',
+  href: 'ejercicios-temas-poo.html',
+  description: 'Ejercicios prácticos sobre los temas fundamentales de POO: clases, objetos, herencia y polimorfismo.'
+});
+
+// Añadimos tarjeta para "Clase Práctica"
+pages.push({
+  title: 'Clase Práctica - Desarrollo en Vivo',
+  href: 'clase-practica.html',
+  description: 'Ejemplos de código desarrollados durante las sesiones prácticas de laboratorio y talleres en clase.'
+});
+
 const container = document.getElementById('cards');
 if(container){
   pages.forEach(p => {
