@@ -573,6 +573,388 @@ public class Main {
       </div>
     </section>
 
+      <!-- TRABAJO AUTÓNOMO NO. 03 -->
+    <section id="trabajo-autonomo-03" style="margin-top: 80px;">
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+        <div class="concept-badge" style="font-size: 1rem; padding: 8px 18px; background: linear-gradient(135deg, #0891b2, #22d3ee);">Trabajo Autónomo No. 03</div>
+        <div style="height: 3px; flex: 1; background: linear-gradient(90deg, #0891b2, transparent); border-radius: 2px;"></div>
+      </div>
+
+      <h2 style="margin-top: 0; color: #0891b2;">Herencia en Sistemas de Software Reales</h2>
+
+      <!-- Indicaciones del trabajo -->
+      <div class="info-box" style="margin: 28px 0; background: linear-gradient(135deg,#f0fdfa 0%,#ccfbf1 100%); border-left-color: #0891b2;">
+        <h3 style="margin-top: 0; color: #0891b2; font-size: 1.3rem;">📋 Indicaciones del Trabajo</h3>
+        <p style="margin-bottom: 16px; line-height: 1.8;">
+          Los estudiantes investigarán un <strong>caso real</strong> donde se haya utilizado herencia en el desarrollo de un sistema de software complejo. A partir de esta investigación, diseñarán un pequeño proyecto que incluya al menos una <strong>superclase</strong> y <strong>dos subclases</strong>, documentando cómo cada clase contribuye al sistema general.
+        </p>
+        <p style="margin-bottom: 16px; line-height: 1.8;">
+          También se les pedirá que redacten un <strong>informe de 190-200 palabras</strong> describiendo cómo la herencia facilita la extensión y el mantenimiento del código en aplicaciones grandes.
+        </p>
+        <p style="margin: 0; line-height: 1.8;">
+          Esta actividad busca fortalecer la comprensión de la <strong>herencia</strong> como pilar de la POO y su aplicación en el diseño de sistemas escalables y mantenibles.
+        </p>
+      </div>
+
+      <!-- Divisor visual -->
+      <div style="height: 2px; background: linear-gradient(90deg, transparent, #99f6e4, transparent); margin: 48px 0;"></div>
+
+      <!-- Código del Programa -->
+      <div style="background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%); border: 2px solid #99f6e4; border-left: 6px solid #0891b2; border-radius: 12px; padding: 36px; box-shadow: 0 10px 30px rgba(8, 145, 178, 0.08); margin: 32px 0;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 2px solid #99f6e4;">
+          <div style="width: 6px; height: 48px; background: linear-gradient(180deg, #0891b2, #22d3ee); border-radius: 3px;"></div>
+          <h3 style="margin: 0; color: #0f1724; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.4px;">💻 Programa: Sistema de Gestión de Animales</h3>
+        </div>
+
+        <!-- Código Unificado -->
+        <h4 style="color: #0891b2; margin: 24px 0 16px; font-size: 1.2rem;">📄 Archivo: Main.java</h4>
+        <div style="margin-bottom: 16px; padding: 12px; background: rgba(8, 145, 178, 0.08); border-left: 4px solid #0891b2; border-radius: 4px;">
+          <p style="margin: 0; color: #164e63; font-size: 0.95rem; line-height: 1.6;">
+            💡 <strong>Nota:</strong> Este código está diseñado para ser ejecutado en compiladores online como 
+            <a href="https://www.onlinegdb.com/online_java_compiler" target="_blank" style="color: #0891b2; font-weight: 600;">OnlineGDB</a> o 
+            <a href="https://www.programiz.com/java-programming/online-compiler/" target="_blank" style="color: #0891b2; font-weight: 600;">Programiz</a>.
+            Todas las clases están en un solo archivo con una única clase pública (<code style="background: #f3f4f6; padding: 2px 6px; border-radius: 3px; color: #0891b2;">Main</code>).
+          </p>
+        </div>
+        <pre style="margin: 0;"><code class="language-java">// ==========================
+// SUPERCLASE: Animal
+// Clase base que define características comunes de todos los animales
+// ==========================
+class Animal {
+    // Atributos protegidos (accesibles por subclases)
+    protected String nombre;      // Nombre del animal
+    protected int edad;           // Edad del animal en años
+    protected String color;       // Color del animal
+    
+    // Constructor: Inicializa un animal con sus datos básicos
+    // @param nombre - Nombre del animal
+    // @param edad - Edad en años
+    // @param color - Color del animal
+    public Animal(String nombre, int edad, String color) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.color = color;
+    }
+    
+    // Getters: Métodos para obtener los valores de los atributos
+    public String getNombre() {
+        return nombre;
+    }
+    
+    public int getEdad() {
+        return edad;
+    }
+    
+    public String getColor() {
+        return color;
+    }
+    
+    // Métodos comunes a todos los animales
+    // Comportamiento genérico que será heredado
+    public void dormir() {
+        System.out.println(nombre + " está durmiendo... ZZZZ");
+    }
+    
+    public void comer() {
+        System.out.println(nombre + " está comiendo.");
+    }
+    
+    // Método que será sobrescrito por las subclases
+    // Demonstración de polimorfismo
+    public void hacerSonido() {
+        System.out.println(nombre + " hace un sonido.");
+    }
+    
+    // Método para mostrar información general del animal
+    public void mostrarInformacion() {
+        System.out.println("=== Información de " + nombre + " ===");
+        System.out.println("Edad: " + edad + " años");
+        System.out.println("Color: " + color);
+    }
+}
+
+// ==========================
+// SUBCLASE: Perro
+// Hereda de Animal y añade características específicas de perros
+// ==========================
+class Perro extends Animal {
+    // Atributos específicos de Perro
+    private String raza;           // Raza del perro
+    private boolean entrenado;     // Si ha recibido entrenamiento
+    
+    // Constructor: Llama al constructor de la superclase con super()
+    public Perro(String nombre, int edad, String color, String raza, boolean entrenado) {
+        super(nombre, edad, color); // Llama al constructor de Animal
+        this.raza = raza;
+        this.entrenado = entrenado;
+    }
+    
+    // Getter específico de Perro
+    public String getRaza() {
+        return raza;
+    }
+    
+    public boolean isEntrenado() {
+        return entrenado;
+    }
+    
+    // Método específico de Perro: Ladrar
+    // Este método no existe en la superclase
+    public void ladrar() {
+        System.out.println(nombre + " dice: ¡Guau! ¡Guau!");
+    }
+    
+    // Método específico de Perro: Jugar
+    public void jugar() {
+        System.out.println(nombre + " está jugando con su pelota.");
+    }
+    
+    // Sobrescritura del método hacerSonido()
+    // Demonstración de polimorfismo
+    @Override
+    public void hacerSonido() {
+        System.out.println(nombre + " ladra fuerte: ¡GUAU GUAU!");
+    }
+    
+    // Método específico para mostrar información de Perro
+    public void mostrarInformacionPerro() {
+        mostrarInformacion(); // Llama al método de la superclase
+        System.out.println("Raza: " + raza);
+        System.out.println("Entrenado: " + (entrenado ? "Sí" : "No"));
+    }
+}
+
+// ==========================
+// SUBCLASE: Gato
+// Hereda de Animal y añade características específicas de gatos
+// ==========================
+class Gato extends Animal {
+    // Atributos específicos de Gato
+    private boolean domestico;      // Si es doméstico o salvaje
+    private String personalidad;   // Personalidad del gato
+    
+    // Constructor: Llama al constructor de la superclase con super()
+    public Gato(String nombre, int edad, String color, boolean domestico, String personalidad) {
+        super(nombre, edad, color); // Llama al constructor de Animal
+        this.domestico = domestico;
+        this.personalidad = personalidad;
+    }
+    
+    // Getters específicos de Gato
+    public boolean isDomestico() {
+        return domestico;
+    }
+    
+    public String getPersonalidad() {
+        return personalidad;
+    }
+    
+    // Método específico de Gato: Maullar
+    public void maullar() {
+        System.out.println(nombre + " dice: ¡Miau! ¡Miau!");
+    }
+    
+    // Método específico de Gato: Arañar
+    public void aranar() {
+        System.out.println(nombre + " está arañando el mueble.");
+    }
+    
+    // Método específico de Gato: Ronronear
+    public void ronronear() {
+        System.out.println(nombre + " está ronroneando feliz.");
+    }
+    
+    // Sobrescritura del método hacerSonido()
+    // Demonstración de polimorfismo
+    @Override
+    public void hacerSonido() {
+        System.out.println(nombre + " maúlla: ¡MIAU MIAU!");
+    }
+    
+    // Método específico para mostrar información de Gato
+    public void mostrarInformacionGato() {
+        mostrarInformacion(); // Llama al método de la superclase
+        System.out.println("Tipo: " + (domestico ? "Doméstico" : "Salvaje"));
+        System.out.println("Personalidad: " + personalidad);
+    }
+}
+
+// ==========================
+// CLASE PRINCIPAL (ÚNICA CLASE PUBLIC)
+// Contiene el método main para ejecutar el programa
+// ==========================
+public class Main {
+    public static void main(String[] args) {
+        // Crear un objeto de la superclase Animal
+        System.out.println("=== CREANDO UN ANIMAL GENÉRICO ===");
+        Animal animal1 = new Animal("Bobby", 3, "Marrón");
+        animal1.mostrarInformacion();
+        animal1.hacerSonido();
+        
+        System.out.println("\n");
+        
+        // Crear un objeto de la subclase Perro
+        System.out.println("=== CREANDO UN PERRO (HEREDA DE ANIMAL) ===");
+        Perro miPerro = new Perro("Max", 5, "Dorado", "Golden Retriever", true);
+        miPerro.mostrarInformacionPerro();
+        miPerro.ladrar();       // Método propio de Perro
+        miPerro.jugar();         // Método propio de Perro
+        miPerro.comer();         // Heredado de Animal
+        miPerro.dormir();        // Heredado de Animal
+        miPerro.hacerSonido();   // Sobrescrito en Perro (polimorfismo)
+        
+        System.out.println("\n");
+        
+        // Crear un objeto de la subclase Gato
+        System.out.println("=== CREANDO UN GATO (HEREDA DE ANIMAL) ===");
+        Gato miGato = new Gato("Luna", 2, "Negro", true, "Juguetona");
+        miGato.mostrarInformacionGato();
+        miGato.maullar();        // Método propio de Gato
+        miGato.ronronear();      // Método propio de Gato
+        miGato.comer();          // Heredado de Animal
+        miGato.dormir();         // Heredado de Animal
+        miGato.hacerSonido();    // Sobrescrito en Gato (polimorfismo)
+        
+        System.out.println("\n");
+        
+        // Demonstración de polimorfismo con arreglo de tipo Animal
+        System.out.println("=== DEMOSTRACIÓN DE POLIMORFISMO ===");
+        Animal[] animales = {miPerro, miGato, animal1};
+        
+        for (Animal a : animales) {
+            System.out.print(a.getNombre() + ": ");
+            a.hacerSonido();  // Cada objeto ejecuta su propia versión del método
+        }
+    }
+}</code></pre>
+
+        <!-- Salida del Programa -->
+        <h4 style="color: #0891b2; margin: 32px 0 16px; font-size: 1.2rem;">📟 Salida del Programa</h4>
+        <div style="background: #1e1e1e; border-radius: 8px; padding: 20px; font-family: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace; font-size: 0.9rem; line-height: 1.6; overflow-x: auto; border: 2px solid #0891b2; box-shadow: 0 4px 12px rgba(8, 145, 178, 0.2);">
+          <div style="color: #4fc3f7; font-weight: 600; margin-bottom: 12px;">═══ CREANDO UN ANIMAL GENÉRICO ═══</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">=== Información de Bobby ===</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">Edad: 3 años</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">Color: Marrón</div>
+          <div style="color: #a78bfa; margin: 4px 0;">Bobby hace un sonido.</div>
+          
+          <div style="color: #4fc3f7; font-weight: 600; margin: 16px 0 8px;">═══ CREANDO UN PERRO (HEREDA DE ANIMAL) ═══</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">=== Información de Max ===</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">Edad: 5 años</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">Color: Dorado</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">Raza: Golden Retriever</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">Entrenado: Sí</div>
+          <div style="color: #fbbf24; margin: 4px 0;">Max dice: ¡Guau! ¡Guau!</div>
+          <div style="color: #fbbf24; margin: 4px 0;">Max está jugando con su pelota.</div>
+          <div style="color: #fbbf24; margin: 4px 0;">Max está comiendo.</div>
+          <div style="color: #fbbf24; margin: 4px 0;">Max está durmiendo... ZZZZ</div>
+          <div style="color: #fbbf24; margin: 4px 0;">Max ladra fuerte: ¡GUAU GUAU!</div>
+          
+          <div style="color: #4fc3f7; font-weight: 600; margin: 16px 0 8px;">═══ CREANDO UN GATO (HEREDA DE ANIMAL) ═══</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">=== Información de Luna ===</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">Edad: 2 años</div>
+          <div name="e8f5e9" style="margin: 4px 0;">Color: Negro</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">Tipo: Doméstico</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">Personalidad: Juguetona</div>
+          <div style="color: #f472b6; margin: 4px 0;">Luna dice: ¡Miau! ¡Miau!</div>
+          <div style="color: #f472b6; margin: 4px 0;">Luna está ronroneando feliz.</div>
+          <div style="color: #f472b6; margin: 4px 0;">Luna está comiendo.</div>
+          <div style="color: #f472b6; margin: 4px 0;">Luna está durmiendo... ZZZZ</div>
+          <div style="color: #f472b6; margin: 4px 0;">Luna maúlla: ¡MIAU MIAU!</div>
+          
+          <div style="color: #4fc3f7; font-weight: 600; margin: 16px 0 8px;">═══ DEMOSTRACIÓN DE POLIMORFISMO ═══</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">Max ladra fuerte: ¡GUAU GUAU!</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">Luna maúlla: ¡MIAU MIAU!</div>
+          <div style="color: #e8f5e9; margin: 4px 0;">Bobby hace un sonido.</div>
+        </div>
+
+        <div style="margin-top: 24px; padding: 16px; background: rgba(8, 145, 178, 0.08); border-left: 4px solid #0891b2; border-radius: 4px;">
+          <p style="margin: 0; color: #0f1724; font-weight: 600; margin-bottom: 8px;">🔍 Análisis de Herencia:</p>
+          <ul style="margin: 8px 0 0 0; padding-left: 20px; color: #164e63;">
+            <li style="margin-bottom: 8px;"><strong>Superclase Animal:</strong> Define atributos y métodos comunes (nombre, edad, color, dormir, comer). código reutilizable.</li>
+            <li style="margin-bottom: 8px;"><strong>Subclase Perro:</strong> hereda de Animal, añade atributos propios (raza, entrenado) y métodos específicos (ladrar, jugar). Sobrescribe hacerSonido().</li>
+            <li style="margin-bottom: 8px;"><strong>Subclase Gato:</strong> hereda de Animal, añade atributos propios (domestico, personalidad) y métodos específicos (maullar, ronronear). Sobrescribe hacerSonido().</li>
+            <li style="margin-bottom: 0;"><strong>Polimorfismo:</strong> El mismo método hacerSonido() se comporta diferente según el tipo de objeto.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Divisor visual -->
+      <div style="height: 2px; background: linear-gradient(90deg, transparent, #99f6e4, transparent); margin: 48px 0;"></div>
+
+      <!-- Ensayo -->
+      <div style="background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%); border: 2px solid #99f6e4; border-left: 6px solid #0891b2; border-radius: 12px; padding: 36px; box-shadow: 0 10px 30px rgba(8, 145, 178, 0.08); margin: 32px 0;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 2px solid #99f6e4;">
+          <div style="width: 6px; height: 48px; background: linear-gradient(180deg, #0891b2, #22d3ee); border-radius: 3px;"></div>
+          <h3 style="margin: 0; color: #0f1724; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.4px;">Informe: Herencia en el Desarrollo de Software</h3>
+        </div>
+
+        <div style="max-width: 800px; line-height: 1.9; color: #1f2937; font-size: 1.02rem;">
+          <p style="margin-bottom: 24px; text-align: justify; text-indent: 2em;">
+            La herencia es uno de los pilares fundamentales de la programación orientada a objetos que facilita enormemente la <strong>extensión</strong> y el <strong>mantenimiento</strong> del código en aplicaciones grandes. Esta técnica permite crear nuevas clases basadas en clases existentes, aprovechando el código ya implementado y evitando la duplicación. En sistemas complejos como los utilizados en la industria bancaria o en aplicaciones empresariales, la herencia permite estructurar jerarquías de clases que reflejan relaciones del mundo real de manera clara y organizada.
+          </p>
+
+          <p style="margin-bottom: 24px; text-align: justify; text-indent: 2em;">
+            La extensión del código se vuelve más sencilla porque las subclases heredan automáticamente todos los métodos y atributos de la superclase, pudiendo añadir nuevas funcionalidades sin modificar el código existente. Esto cumple con el principio <strong>Open/Closed</strong> (Abierto/Cerrado), que establece que las clases deben estar abiertas para extensión pero cerradas para modificación. Además, el mantenimiento se simplifica porque los cambios en la lógica común se realizan una sola vez en la superclase, beneficiando automáticamente a todas las subclases.
+          </p>
+
+          <p style="margin: 0; text-align: justify; text-indent: 2em;">
+            En conclusión, la herencia promotes la reutilización de código, reduce la redundancia, facilita la escalabilidad y permite un mantenimiento más eficiente. Sin embargo, debe utilizarse con moderación para evitar jerarquías demasiado profundas que dificulten la comprensión del sistema. Un diseño adecuado de herencia, combinado con otras técnicas como el polimorfismo, resulta en aplicaciones más robustas, flexibles y fáciles de evolucionar con el tiempo.
+          </p>
+        </div>
+
+        <!-- Pie del ensayo -->
+        <div style="margin-top: 32px; padding-top: 24px; border-top: 2px dashed #99f6e4; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div style="color: var(--muted); font-size: 0.9rem; font-weight: 500;">
+            <span style="display: inline-block; margin-right: 20px;">📊 Palabras: ~200</span>
+            <span style="display: inline-block;">📅 Fecha de entrega: Febrero 2026</span>
+          </div>
+          <div class="concept-badge" style="background: linear-gradient(135deg, #059669, #047857); font-size: 0.85rem;">
+            ✓ Completado
+          </div>
+        </div>
+      </div>
+
+      <!-- Bibliografía Trabajo 03 -->
+      <div style="background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 8px; padding: 24px; margin: 24px 0;">
+        <h4 style="margin: 0 0 16px; color: #0f1724; font-size: 1.1rem; font-weight: 600;">📖 Bibliografía</h4>
+        <ol style="margin: 0; padding-left: 24px; color: #374151; line-height: 1.8;">
+          <li style="margin-bottom: 12px;">
+            Sierra, K., & Bates, B. (2022). <em>Head First Java: A Brain-Friendly Guide</em> (3ra ed.). O'Reilly Media.
+          </li>
+          <li style="margin-bottom: 12px;">
+            Deitel, P., & Deitel, H. (2017). <em>Java: How to Program</em> (11va ed.). Pearson Education.
+          </li>
+          <li style="margin-bottom: 12px;">
+            Bloch, J. (2018). <em>Effective Java</em> (3ra ed.). Addison-Wesley Professional.
+          </li>
+          <li style="margin-bottom: 12px;">
+            Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994). <em>Design Patterns: Elements of Reusable Object-Oriented Software</em>. Addison-Wesley Professional.
+          </li>
+          <li style="margin-bottom: 0;">
+            Martin, R. C. (2017). <em>Clean Code: A Handbook of Agile Software Craftsmanship</em>. Prentice Hall.
+          </li>
+        </ol>
+      </div>
+
+      <!-- Recursos adicionales -->
+      <div class="cards-grid-profesional" style="margin-top: 40px;">
+        <div class="card-profesional-blue">
+          <h4>🎯 Objetivos Cumplidos</h4>
+          <p>Comprensión práctica de herencia, diseño de jerarquías de clases, aplicación de polimorfismo, y documentación de contribuciones de cada clase al sistema.</p>
+        </div>
+        
+        <div class="card-profesional-green">
+          <h4>🔍 Lecciones Clave</h4>
+          <p><strong>Reutilización:</strong> Las subclases heredan código de la superclase. <strong>Extensibilidad:</strong> Fácil añadir nuevas funcionalidades. <strong>Mantenimiento:</strong> Cambios centralizados en superclase. <strong>Polimorfismo:</strong> Comportamiento variable según tipo.</p>
+        </div>
+        
+        <div class="card-profesional-purple">
+          <h4>💡 Aplicaciones Futuras</h4>
+          <p>Este diseño puede extenderse con más subclases (Gato, Pajaro, Pez), interfaces, clases abstractas, y aplicarse en sistemas reales como gestión de empleados, productos, o vehículos.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Espacio para futuros trabajos -->
     <div style="margin-top: 80px; padding: 32px; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 2px dashed #0369a1; border-radius: 12px; text-align: center;">
       <h3 style="margin: 0 0 12px; color: var(--accent); font-size: 1.3rem;">📌 Próximos Trabajos Autónomos</h3>
