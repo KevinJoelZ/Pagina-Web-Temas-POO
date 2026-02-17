@@ -29,8 +29,590 @@
   </header>
 
   <main class="content">
-    <h1>Ejercicios Temas POO</h1>
-    <p class="lead">Contenido en desarrollo.</p>
+    <h1>Ejercicios Temas POO - Programación Orientada a Objetos</h1>
+    <p class="lead">Ejercicios prácticos sobre los principales temas de Programación Orientada a Objetos (POO) en Java.</p>
+    <p><strong>Nota:</strong> Estos ejercicios pueden ejecutarse en el navegador (botón "Ejecutar") o en <em>Online Java Compiler</em> (copiando el código).</p>
+    
+    <!-- Introducción a los Temas de POO -->
+    <section class="intro-section">
+      <h2>Temas de POO</h2>
+      <div class="temas-grid">
+        <div class="tema-card">
+          <h3>1. Clases y Objetos</h3>
+          <p>Una clase es una plantilla o modelo para crear objetos. Un objeto es una instancia de una clase que tiene estado (atributos) y comportamiento (métodos).</p>
+          <ul>
+            <li><strong>Clase:</strong> Define las propiedades y métodos</li>
+            <li><strong>Objeto:</strong> Instancia concreta de una clase</li>
+            <li><strong>Atributos:</strong> Variables que describen el objeto</li>
+            <li><strong>Métodos:</strong> Funciones que definen el comportamiento</li>
+          </ul>
+        </div>
+        <div class="tema-card">
+          <h3>2. Constructor</h3>
+          <p>El constructor es un método especial que se ejecuta al crear un objeto. Se usa para inicializar los atributos del objeto.</p>
+          <ul>
+            <li><strong>Nombre:</strong> Igual al nombre de la clase</li>
+            <li><strong>Se ejecuta:</strong> Al usar <code>new</code></li>
+            <li><strong>Tipos:</strong> Por defecto, parametrizado, sobrecargado</li>
+            <li><strong>this:</strong> Referencia al objeto actual</li>
+          </ul>
+        </div>
+        <div class="tema-card">
+          <h3>3. Herencia</h3>
+          <p>La herencia permite crear nuevas clases basadas en clases existentes, reutilizando código y estableciendo relaciones "es-un".</p>
+          <ul>
+            <li><strong>Clase padre:</strong> Superclase o clase base</li>
+            <li><strong>Clase hija:</strong> Subclase que hereda</li>
+            <li><strong>Palabra clave:</strong> <code>extends</code></li>
+            <li><strong>Super:</strong> Referencia a la clase padre</li>
+          </ul>
+        </div>
+        <div class="tema-card">
+          <h3>4. Interfaz</h3>
+          <p>Una interfaz es un contrato que define métodos sin implementación. Las clases pueden implementar múltiples interfaces.</p>
+          <ul>
+            <li><strong>Definición:</strong> <code>interface</code></li>
+            <li><strong>Implementación:</strong> <code>implements</code></li>
+            <li><strong>Métodos:</strong> Abstractos (sin cuerpo)</li>
+            <li><strong>Ventaja:</strong> Herencia múltiple</li>
+          </ul>
+        </div>
+        <div class="tema-card">
+          <h3>5. Clases Abstractas</h3>
+          <p>Una clase abstracta es una clase que no puede ser instanciada directamente. Se usa como base para otras clases y puede contener métodos abstractos (sin implementación).</p>
+          <ul>
+            <li><strong>Palabra clave:</strong> <code>abstract</code></li>
+            <li><strong>Métodos abstractos:</strong> Sin cuerpo, solo firma</li>
+            <li><strong>Herencia:</strong> Se extiende con <code>extends</code></li>
+            <li><strong>Utilidad:</strong> Definir estructuras comunes</li>
+          </ul>
+        </div>
+        <div class="tema-card">
+          <h3>6. Polimorfismo</h3>
+          <p>El polimorfismo permite que objetos de diferentes clases sean tratados de manera uniforme a través de una interfaz o clase común.</p>
+          <ul>
+            <li><strong>Tipos:</strong> Sobrecarga y sobreescritura</li>
+            <li><strong>Sobre carga:</strong> Mismo método, diferentes parámetros</li>
+            <li><strong>Sobre escritura:</strong> Redefinir método de padre</li>
+            <li><strong>Upcasting:</strong> Tratar subclase como superclase</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tema: Clases y Objetos -->
+    <section class="tema-section">
+      <h2 class="tema-title">Tema 1: Clases y Objetos</h2>
+    </section>
+
+    <!-- Actividad 1 -->
+    <section class="exercise-section">
+      <h2>Actividad 1: Crear Clase Estudiante con Propiedades y Método</h2>
+      <p>Crear una clase llamada <code>Estudiante</code> con 4 propiedades (nombre, edad, carrera, promedio) y un método que muestre todos los datos. Luego imprimir sus valores.</p>
+      
+      <div class="code-container">
+        <h3>Código Java (para Online Java Compiler):</h3>
+        <pre><code class="language-java">
+// Importamos la clase Scanner para leer datos del usuario
+import java.util.Scanner;
+
+// Definición de la clase Estudiante
+class Estudiante {
+    // Propiedades de la clase (atributos)
+    String nombre;
+    int edad;
+    String carrera;
+    double promedio;
+    
+    // Constructor de la clase
+    public Estudiante(String nombre, int edad, String carrera, double promedio) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.carrera = carrera;
+        this.promedio = promedio;
+    }
+    
+    // Método para mostrar todos los datos del estudiante
+    public void mostrarDatos() {
+        System.out.println("=== Datos del Estudiante ===");
+        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Edad: " + this.edad + " años");
+        System.out.println("Carrera: " + this.carrera);
+        System.out.println("Promedio: " + this.promedio);
+    }
+}
+
+// Clase principal para ejecutar el programa
+public class Main {
+    public static void main(String[] args) {
+        // Crear un objeto (instanciar la clase Estudiante)
+        Estudiante estudiante1 = new Estudiante("Juan Pérez", 20, "Ingeniería en Sistemas", 8.5);
+        
+        // Llamar al método para mostrar los datos
+        estudiante1.mostrarDatos();
+    }
+}
+        </code></pre>
+      </div>
+
+      <div class="copy-section">
+        <button class="btn-copy" onclick="copyCode('codigo-actividad1')">📋 Copiar Código Java</button>
+        <pre id="codigo-actividad1" style="display:none;">
+import java.util.Scanner;
+
+class Estudiante {
+    String nombre;
+    int edad;
+    String carrera;
+    double promedio;
+    
+    public Estudiante(String nombre, int edad, String carrera, double promedio) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.carrera = carrera;
+        this.promedio = promedio;
+    }
+    
+    public void mostrarDatos() {
+        System.out.println("=== Datos del Estudiante ===");
+        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Edad: " + this.edad + " años");
+        System.out.println("Carrera: " + this.carrera);
+        System.out.println("Promedio: " + this.promedio);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Estudiante estudiante1 = new Estudiante("Juan Pérez", 20, "Ingeniería en Sistemas", 8.5);
+        estudiante1.mostrarDatos();
+    }
+}</pre>
+      </div>
+
+      <button class="btn-run" onclick="ejecutarActividad1()">▶ Ejecutar Actividad 1</button>
+      
+      <div id="resultado-actividad1" class="result-box" style="display: none;"></div>
+    </section>
+
+    <!-- Actividad 2 -->
+    <section class="exercise-section">
+      <h2>Actividad 2: Reasignar Valores a las Propiedades</h2>
+      <p>Asignar nuevos valores a las propiedades creadas en el apartado anterior e imprimir los cambios.</p>
+      
+      <div class="code-container">
+        <h3>Código Java (para Online Java Compiler):</h3>
+        <pre><code class="language-java">
+// Usamos la misma clase Estudiante y reasignamos valores
+
+public class Main {
+    public static void main(String[] args) {
+        // Crear el objeto con valores iniciales
+        Estudiante estudiante1 = new Estudiante("Juan Pérez", 20, "Ingeniería en Sistemas", 8.5);
+        
+        System.out.println("=== Valores Originales ===");
+        estudiante1.mostrarDatos();
+        
+        // Reasignar nuevos valores a las propiedades
+        estudiante1.nombre = "María García";
+        estudiante1.edad = 22;
+        estudiante1.carrera = "Medicina";
+        estudiante1.promedio = 9.2;
+        
+        System.out.println("\n=== Valores Modificados ===");
+        estudiante1.mostrarDatos();
+    }
+}
+        </code></pre>
+      </div>
+
+      <div class="copy-section">
+        <button class="btn-copy" onclick="copyCode('codigo-actividad2')">📋 Copiar Código Java</button>
+        <pre id="codigo-actividad2" style="display:none;">
+import java.util.Scanner;
+
+class Estudiante {
+    String nombre;
+    int edad;
+    String carrera;
+    double promedio;
+    
+    public Estudiante(String nombre, int edad, String carrera, double promedio) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.carrera = carrera;
+        this.promedio = promedio;
+    }
+    
+    public void mostrarDatos() {
+        System.out.println("=== Datos del Estudiante ===");
+        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Edad: " + this.edad + " años");
+        System.out.println("Carrera: " + this.carrera);
+        System.out.println("Promedio: " + this.promedio);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Estudiante estudiante1 = new Estudiante("Juan Pérez", 20, "Ingeniería en Sistemas", 8.5);
+        
+        System.out.println("=== Valores Originales ===");
+        estudiante1.mostrarDatos();
+        
+        estudiante1.nombre = "María García";
+        estudiante1.edad = 22;
+        estudiante1.carrera = "Medicina";
+        estudiante1.promedio = 9.2;
+        
+        System.out.println("\n=== Valores Modificados ===");
+        estudiante1.mostrarDatos();
+    }
+}</pre>
+      </div>
+
+      <button class="btn-run" onclick="ejecutarActividad2()">▶ Ejecutar Actividad 2</button>
+      
+      <div id="resultado-actividad2" class="result-box" style="display: none;"></div>
+    </section>
+
+    <!-- Actividad 3 -->
+    <section class="exercise-section">
+      <h2>Actividad 3: Ingresar Datos con Scanner</h2>
+      <p>Reasignar el valor a las propiedades utilizando la clase Scanner para ingresar datos por parte del usuario e imprimir las propiedades del objeto.</p>
+      
+      <div class="code-container">
+        <h3>Código Java (para Online Java Compiler):</h3>
+        <pre><code class="language-java">
+// Usamos la clase Scanner para ingresar datos por teclado
+
+public class Main {
+    public static void main(String[] args) {
+        // Crear objeto Scanner para leer datos del usuario
+        Scanner scanner = new Scanner(System.in);
+        
+        // Pedir datos al usuario
+        System.out.println("=== Ingreso de Datos del Estudiante ===");
+        System.out.print("Ingrese el nombre: ");
+        String nombre = scanner.nextLine();
+        
+        System.out.print("Ingrese la edad: ");
+        int edad = scanner.nextInt();
+        scanner.nextLine(); // Limpiar el buffer
+        
+        System.out.print("Ingrese la carrera: ");
+        String carrera = scanner.nextLine();
+        
+        System.out.print("Ingrese el promedio: ");
+        double promedio = scanner.nextDouble();
+        
+        // Crear el objeto con los datos ingresados
+        Estudiante estudiante = new Estudiante(nombre, edad, carrera, promedio);
+        
+        // Mostrar los datos ingresados
+        System.out.println("\n=== Datos Ingresados ===");
+        estudiante.mostrarDatos();
+        
+        // Cerrar el scanner
+        scanner.close();
+    }
+}
+        </code></pre>
+      </div>
+
+      <div class="copy-section">
+        <button class="btn-copy" onclick="copyCode('codigo-actividad3')">📋 Copiar Código Java</button>
+        <pre id="codigo-actividad3" style="display:none;">
+import java.util.Scanner;
+
+class Estudiante {
+    String nombre;
+    int edad;
+    String carrera;
+    double promedio;
+    
+    public Estudiante(String nombre, int edad, String carrera, double promedio) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.carrera = carrera;
+        this.promedio = promedio;
+    }
+    
+    public void mostrarDatos() {
+        System.out.println("=== Datos del Estudiante ===");
+        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Edad: " + this.edad + " años");
+        System.out.println("Carrera: " + this.carrera);
+        System.out.println("Promedio: " + this.promedio);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("=== Ingreso de Datos del Estudiante ===");
+        System.out.print("Ingrese el nombre: ");
+        String nombre = scanner.nextLine();
+        
+        System.out.print("Ingrese la edad: ");
+        int edad = scanner.nextInt();
+        scanner.nextLine();
+        
+        System.out.print("Ingrese la carrera: ");
+        String carrera = scanner.nextLine();
+        
+        System.out.print("Ingrese el promedio: ");
+        double promedio = scanner.nextDouble();
+        
+        Estudiante estudiante = new Estudiante(nombre, edad, carrera, promedio);
+        
+        System.out.println("\n=== Datos Ingresados ===");
+        estudiante.mostrarDatos();
+        
+        scanner.close();
+    }
+}</pre>
+      </div>
+
+      <button class="btn-run" onclick="ejecutarActividad3()">▶ Ejecutar Actividad 3</button>
+      
+      <div id="resultado-actividad3" class="result-box" style="display: none;"></div>
+    </section>
+
+    <!-- Tema: Constructor -->
+    <section class="tema-section">
+      <h2 class="tema-title">Tema 2: Constructor</h2>
+    </section>
+
+    <!-- Actividad 1: Clase Estudiante con Constructor y Scanner -->    <section class="exercise-section">      <h2>Actividad 1: Clase Estudiante con Constructor y Scanner</h2>      <p>Crear una clase llamada <code>Estudiante</code> con tres atributos (nombre, carrera, promedio) y un constructor para inicializarlos. Los argumentos deben ser ingresados por el usuario utilizando Scanner.</p>            <div class="code-container">        <h3>Código Java (para Online Java Compiler):</h3>        <pre><code class="language-java">// Importamos la clase Scanner para leer datos del usuario
+import java.util.Scanner;
+
+// Definición de la clase Estudiante
+class Estudiante {
+    // Atributos de la clase
+    String nombre;
+    String carrera;
+    double promedio;
+    
+    // Constructor para inicializar los atributos
+    Estudiante(String nombre, String carrera, double promedio) {
+        this.nombre = nombre;
+        this.carrera = carrera;
+        this.promedio = promedio;
+    }
+    
+    // Método para mostrar los datos del estudiante
+    void mostrarDatos() {
+        System.out.println("=== Datos del Estudiante ===");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Carrera: " + carrera);
+        System.out.println("Promedio: " + promedio);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Crear objeto Scanner para leer datos del usuario
+        Scanner sc = new Scanner(System.in);
+        
+        // Solicitar datos al usuario
+        System.out.println("=== Registro de Estudiante ===");
+        System.out.print("Ingrese el nombre: ");
+        String nombre = sc.nextLine();
+        
+        System.out.print("Ingrese la carrera: ");
+        String carrera = sc.nextLine();
+        
+        System.out.print("Ingrese el promedio: ");
+        double promedio = sc.nextDouble();
+        
+        // Crear el objeto Estudiante con los datos ingresados
+        Estudiante estudiante = new Estudiante(nombre, carrera, promedio);
+        
+        // Mostrar los datos del estudiante
+        estudiante.mostrarDatos();
+        
+        // Cerrar el Scanner
+        sc.close();
+    }
+}
+        </code></pre>      </div>
+
+      <div class="copy-section">        <button class="btn-copy" onclick="copyCode('codigo-actividad4')">📋 Copiar Código Java</button>        <pre id="codigo-actividad4" style="display:none;">
+import java.util.Scanner;
+
+class Estudiante {
+    String nombre;
+    String carrera;
+    double promedio;
+    
+    Estudiante(String nombre, String carrera, double promedio) {
+        this.nombre = nombre;
+        this.carrera = carrera;
+        this.promedio = promedio;
+    }
+    
+    void mostrarDatos() {
+        System.out.println("=== Datos del Estudiante ===");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Carrera: " + carrera);
+        System.out.println("Promedio: " + promedio);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("=== Registro de Estudiante ===");
+        System.out.print("Ingrese el nombre: ");
+        String nombre = sc.nextLine();
+        
+        System.out.print("Ingrese la carrera: ");
+        String carrera = sc.nextLine();
+        
+        System.out.print("Ingrese el promedio: ");
+        double promedio = sc.nextDouble();
+        
+        Estudiante estudiante = new Estudiante(nombre, carrera, promedio);
+        estudiante.mostrarDatos();
+        
+        sc.close();
+    }
+}</pre>      </div>
+
+      <button class="btn-run" onclick="ejecutarActividad1Constructor()">▶ Ejecutar Actividad 1 (Constructor)</button>            <div id="resultado-actividad1Constructor" class="result-box" style="display: none;"></div>    </section>
+
+    <!-- Actividad 5 Nueva: Clase Persona con métodos estáticos -->    <section class="exercise-section">      <h2>Actividad 2: Métodos Estáticos para Constructor</h2>      <p>Crear dos métodos estáticos (<code>pedirNombre()</code> y <code>pedirEdad()</code>) que lean datos del usuario usando Scanner. Luego crear un objeto Persona usando estos métodos como argumentos del constructor: <code>Persona persona = new Persona(pedirNombre(), pedirEdad());</code></p>            <div class="code-container">        <h3>Código Java (para Online Java Compiler):</h3>        <pre><code class="language-java">// Importamos la clase Scanner para leer datos del usuario
+import java.util.Scanner;
+
+// Definición de la clase Persona
+class Persona {
+    // Atributos de la clase
+    String nombre;
+    int edad;
+    
+    // Constructor para inicializar los atributos
+    Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+    
+    // Método para mostrar los datos de la persona
+    void mostrarDatos() {
+        System.out.println("=== Datos de la Persona ===");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Edad: " + edad + " años");
+    }
+}
+
+public class Main {
+    
+    // Método estático para pedir el nombre
+    public static String pedirNombre() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Ingrese nombre: ");
+        return sc.nextLine();
+    }
+    
+    // Método estático para pedir la edad
+    public static int pedirEdad() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Ingrese edad: ");
+        return sc.nextInt();
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("=== Registro de Persona ===");
+        
+        // Crear un nuevo objeto utilizando los métodos como argumentos del constructor
+        Persona persona = new Persona(pedirNombre(), pedirEdad());
+        
+        // Mostrar los datos de la persona
+        persona.mostrarDatos();
+    }
+}
+        </code></pre>      </div>
+
+      <div class="copy-section">        <button class="btn-copy" onclick="copyCode('codigo-actividad5')">📋 Copiar Código Java</button>        <pre id="codigo-actividad5" style="display:none;">
+import java.util.Scanner;
+
+class Persona {
+    String nombre;
+    int edad;
+    
+    Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+    
+    void mostrarDatos() {
+        System.out.println("=== Datos de la Persona ===");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Edad: " + edad + " años");
+    }
+}
+
+public class Main {
+    
+    public static String pedirNombre() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Ingrese nombre: ");
+        return sc.nextLine();
+    }
+    
+    public static int pedirEdad() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Ingrese edad: ");
+        return sc.nextInt();
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("=== Registro de Persona ===");
+        Persona persona = new Persona(pedirNombre(), pedirEdad());
+        persona.mostrarDatos();
+    }
+}</pre>      </div>
+
+      <button class="btn-run" onclick="ejecutarActividad2Constructor()">▶ Ejecutar Actividad 2 (Constructor)</button>            <div id="resultado-actividad2Constructor" class="result-box" style="display: none;"></div>    </section>
+
+    <!-- Explicación adicional -->
+    <section class="exercise-section">
+      <h2>Explicación de Conceptos POO en Java</h2>
+      <div class="info-box">
+        <h3>Conceptos Aplicados:</h3>
+        <ul>
+          <li><strong>Clase:</strong> Plantilla o modelo para crear objetos. Se define con la palabra clave <code>class</code>.</li>
+          <li><strong>Objeto:</strong> Instancia de una clase. Se crea usando <code>new</code> seguido del constructor.</li>
+          <li><strong>Propiedades/Atributos:</strong> Variables que pertenecen a una clase. Ejemplo: <code>String nombre;</code></li>
+          <li><strong>Métodos:</strong> Funciones que pertenecen a una clase. Ejemplo: <code>mostrarDatos()</code></li>
+          <li><strong>Constructor:</strong> Método especial con el mismo nombre de la clase que se ejecuta al crear un objeto.</li>
+          <li><strong>this:</strong> Referencia al objeto actual.</li>
+          <li><strong>Scanner:</strong> Clase de Java para leer datos de entrada del usuario.</li>
+        </ul>
+        
+        <h3>Estructura de la Clase Estudiante:</h3>
+        <pre><code class="language-java">
+class NombreClase {
+    // Propiedades (atributos)
+    tipo propiedad1;
+    tipo propiedad2;
+    
+    // Constructor
+    public NombreClase(tipo param1, tipo param2) {
+        this.propiedad1 = param1;
+        this.propiedad2 = param2;
+    }
+    
+    // Métodos
+    public void nombreMetodo() {
+        // código
+    }
+}</code></pre>
+      </div>
+    </section>
+
   </main>
 
   <!-- Botones de navegación -->
@@ -42,6 +624,181 @@
   </div>
 
   <script>
+    // Definición de la clase Estudiante para ejecutar en el navegador
+    class Estudiante {
+      constructor(nombre, edad, carrera, promedio) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.carrera = carrera;
+        this.promedio = promedio;
+      }
+
+      mostrarDatos() {
+        return `=== Datos del Estudiante ===
+Nombre: ${this.nombre}
+Edad: ${this.edad} años
+Carrera: ${this.carrera}
+Promedio: ${this.promedio}`;
+      }
+    }
+
+    // Variable global para mantener el objeto entre actividades
+    let estudiante1;
+
+    // Función para ejecutar Actividad 1
+    function ejecutarActividad1() {
+      // Crear un objeto (instanciar la clase)
+      estudiante1 = new Estudiante("Juan Pérez", 20, "Ingeniería en Sistemas", 8.5);
+      
+      // Mostrar los datos
+      const resultado = estudiante1.mostrarDatos();
+      
+      // Mostrar en el elemento div
+      const divResultado = document.getElementById('resultado-actividad1');
+      divResultado.innerHTML = `<pre>${resultado}</pre>`;
+      divResultado.style.display = 'block';
+      
+      // También mostrar en consola
+      console.log(resultado);
+    }
+
+    // Función para ejecutar Actividad 2
+    function ejecutarActividad2() {
+      // Verificar si existe el objeto de la actividad 1
+      if (!estudiante1) {
+        // Si no existe, crear uno nuevo
+        estudiante1 = new Estudiante("Juan Pérez", 20, "Ingeniería en Sistemas", 8.5);
+      }
+      
+      // Mostrar valores originales
+      let resultado = "=== Valores Originales ===\n\n";
+      resultado += estudiante1.mostrarDatos();
+      
+      // Reasignar nuevos valores
+      estudiante1.nombre = "María García";
+      estudiante1.edad = 22;
+      estudiante1.carrera = "Medicina";
+      estudiante1.promedio = 9.2;
+      
+      // Mostrar los datos modificados
+      resultado += "\n\n=== Valores Modificados ===\n\n" + estudiante1.mostrarDatos();
+      
+      // Mostrar en el elemento div
+      const divResultado = document.getElementById('resultado-actividad2');
+      divResultado.innerHTML = `<pre>${resultado}</pre>`;
+      divResultado.style.display = 'block';
+      
+      // También mostrar en consola
+      console.log(resultado);
+    }
+
+    // Función para ejecutar Actividad 3
+    function ejecutarActividad3() {
+      // Pedir datos al usuario mediante prompt()
+      const nombre = prompt("Ingrese el nombre del estudiante:");
+      const edad = parseInt(prompt("Ingrese la edad del estudiante:"));
+      const carrera = prompt("Ingrese la carrera del estudiante:");
+      const promedio = parseFloat(prompt("Ingrese el promedio del estudiante:"));
+      
+      // Crear nuevo objeto con los datos ingresados
+      const estudianteNuevo = new Estudiante(nombre, edad, carrera, promedio);
+      
+      // Mostrar los datos ingresados
+      const resultado = "=== Datos Ingresados por el Usuario ===\n\n" + estudianteNuevo.mostrarDatos();
+      
+      // Mostrar en el elemento div
+      const divResultado = document.getElementById('resultado-actividad3');
+      divResultado.innerHTML = `<pre>${resultado}</pre>`;
+      divResultado.style.display = 'block';
+      
+      // También mostrar en consola
+      console.log(resultado);
+    }
+
+    // Definición de la clase Estudiante para Actividad 4 y 5
+    class EstudianteActividad4 {
+      constructor(nombre, carrera, promedio) {
+        this.nombre = nombre;
+        this.carrera = carrera;
+        this.promedio = promedio;
+      }
+
+      mostrarDatos() {
+        return `=== Datos del Estudiante ===
+Nombre: ${this.nombre}
+Carrera: ${this.carrera}
+Promedio: ${this.promedio}`;
+      }
+    }
+
+    // Función para ejecutar Actividad 1 del tema Constructor
+    function ejecutarActividad1Constructor() {
+      const nombre = prompt("Ingrese el nombre del estudiante:");
+      const carrera = prompt("Ingrese la carrera del estudiante:");
+      const promedio = parseFloat(prompt("Ingrese el promedio del estudiante:"));
+      
+      const estudiante = new EstudianteActividad4(nombre, carrera, promedio);
+      
+      const resultado = estudiante.mostrarDatos();
+      
+      const divResultado = document.getElementById('resultado-actividad1Constructor');
+      divResultado.innerHTML = `<pre>${resultado}</pre>`;
+      divResultado.style.display = 'block';
+      
+      console.log(resultado);
+    }
+
+    // Definición de la clase Persona para Actividad 5
+    class PersonaActividad5 {
+      constructor(nombre, edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+      }
+
+      mostrarDatos() {
+        return `=== Datos de la Persona ===
+Nombre: ${this.nombre}
+Edad: ${this.edad} años`;
+      }
+    }
+
+    // Método estático para pedir nombre (simulado)
+    function pedirNombre() {
+      return prompt("Ingrese nombre:");
+    }
+
+    // Método estático para pedir edad (simulado)
+    function pedirEdad() {
+      return parseInt(prompt("Ingrese edad:"));
+    }
+
+    // Función para ejecutar Actividad 2 del tema Constructor
+    function ejecutarActividad2Constructor() {
+      const nombre = pedirNombre();
+      const edad = pedirEdad();
+      
+      const persona = new PersonaActividad5(nombre, edad);
+      
+      const resultado = persona.mostrarDatos();
+      
+      const divResultado = document.getElementById('resultado-actividad2Constructor');
+      divResultado.innerHTML = `<pre>${resultado}</pre>`;
+      divResultado.style.display = 'block';
+      
+      console.log(resultado);
+    }
+
+    // Función para copiar código al portapapeles
+    function copyCode(elementId) {
+      const codeElement = document.getElementById(elementId);
+      const text = codeElement.textContent || codeElement.innerText;
+      navigator.clipboard.writeText(text).then(function() {
+        alert('¡Código copiado al portapapeles! Ahora puedes pegarlo en Online Java Compiler.');
+      }, function(err) {
+        console.error('Error al copiar: ', err);
+      });
+    }
+
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
