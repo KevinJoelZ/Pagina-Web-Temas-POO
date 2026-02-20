@@ -38,18 +38,28 @@
       <h2>Temas de POO</h2>
       <div class="temas-grid">
         <div class="tema-card">
-          <h3>1. Clases y Objetos</h3>
-          <p>Una clase es una plantilla o modelo para crear objetos. Un objeto es una instancia de una clase que tiene estado (atributos) y comportamiento (métodos).</p>
+          <h3>1. Clases</h3>
+          <p>Una clase es una plantilla o modelo para crear objetos. Define las propiedades y métodos que tendrán los objetos.</p>
           <ul>
-            <li><strong>Clase:</strong> Define las propiedades y métodos</li>
-            <li><strong>Objeto:</strong> Instancia concreta de una clase</li>
+            <li><strong>Definición:</strong> Con la palabra clave <code>class</code></li>
             <li><strong>Atributos:</strong> Variables que describen el objeto</li>
             <li><strong>Métodos:</strong> Funciones que definen el comportamiento</li>
+            <li><strong>Constructor:</strong> Método especial para inicializar</li>
           </ul>
         </div>
         <div class="tema-card">
-          <h3>2. Constructor</h3>
-          <p>El constructor es un método especial que se ejecuta al crear un objeto. Se usa para inicializar los atributos del objeto.</p>
+          <h3>2. Objetos</h3>
+          <p>Un objeto es una instancia concreta de una clase que tiene estado (atributos) y comportamiento (métodos).</p>
+          <ul>
+            <li><strong>Instanciación:</strong> Usando <code>new</code></li>
+            <li><strong>Estado:</strong> Valores de sus atributos</li>
+            <li><strong>Comportamiento:</strong> Métodos que puede ejecutar</li>
+            <li><strong>Identidad:</strong> Referencia única</li>
+          </ul>
+        </div>
+        <div class="tema-card">
+          <h3>3. Constructor</h3>
+          <p>El constructor es un método especial que se ejecuta al crear un objeto. Se usa para inicializar los atributos.</p>
           <ul>
             <li><strong>Nombre:</strong> Igual al nombre de la clase</li>
             <li><strong>Se ejecuta:</strong> Al usar <code>new</code></li>
@@ -58,7 +68,7 @@
           </ul>
         </div>
         <div class="tema-card">
-          <h3>3. Herencia</h3>
+          <h3>4. Herencia</h3>
           <p>La herencia permite crear nuevas clases basadas en clases existentes, reutilizando código y estableciendo relaciones "es-un".</p>
           <ul>
             <li><strong>Clase padre:</strong> Superclase o clase base</li>
@@ -68,7 +78,7 @@
           </ul>
         </div>
         <div class="tema-card">
-          <h3>4. Interfaz</h3>
+          <h3>5. Interfaz</h3>
           <p>Una interfaz es un contrato que define métodos sin implementación. Las clases pueden implementar múltiples interfaces.</p>
           <ul>
             <li><strong>Definición:</strong> <code>interface</code></li>
@@ -78,8 +88,8 @@
           </ul>
         </div>
         <div class="tema-card">
-          <h3>5. Clases Abstractas</h3>
-          <p>Una clase abstracta es una clase que no puede ser instanciada directamente. Se usa como base para otras clases y puede contener métodos abstractos (sin implementación).</p>
+          <h3>6. Clases Abstractas</h3>
+          <p>Una clase abstracta es una clase que no puede ser instanciada directamente. Se usa como base para otras clases.</p>
           <ul>
             <li><strong>Palabra clave:</strong> <code>abstract</code></li>
             <li><strong>Métodos abstractos:</strong> Sin cuerpo, solo firma</li>
@@ -88,7 +98,7 @@
           </ul>
         </div>
         <div class="tema-card">
-          <h3>6. Polimorfismo</h3>
+          <h3>7. Polimorfismo</h3>
           <p>El polimorfismo permite que objetos de diferentes clases sean tratados de manera uniforme a través de una interfaz o clase común.</p>
           <ul>
             <li><strong>Tipos:</strong> Sobrecarga y sobreescritura</li>
@@ -192,7 +202,7 @@ public class Main {
 
       <button class="btn-run" onclick="ejecutarActividad1()">▶ Ejecutar Actividad 1</button>
       
-      <div id="resultado-actividad1" class="result-box" style="display: none;"></div>
+      <div id="resultado-actividad1" class="result-box" style="display: none; background-color: #f5f5f5; color: #333; padding: 15px; border-radius: 5px; border: 1px solid #ccc; font-family: monospace; white-space: pre-wrap;"></div>
     </section>
 
     <!-- Actividad 2 -->
@@ -273,7 +283,7 @@ public class Main {
 
       <button class="btn-run" onclick="ejecutarActividad2()">▶ Ejecutar Actividad 2</button>
       
-      <div id="resultado-actividad2" class="result-box" style="display: none;"></div>
+      <div id="resultado-actividad2" class="result-box" style="display: none; background-color: #f5f5f5; color: #333; padding: 15px; border-radius: 5px; border: 1px solid #ccc; font-family: monospace; white-space: pre-wrap;"></div>
     </section>
 
     <!-- Actividad 3 -->
@@ -377,7 +387,7 @@ public class Main {
 
       <button class="btn-run" onclick="ejecutarActividad3()">▶ Ejecutar Actividad 3</button>
       
-      <div id="resultado-actividad3" class="result-box" style="display: none;"></div>
+      <div id="resultado-actividad3" class="result-box" style="display: none; background-color: #f5f5f5; color: #333; padding: 15px; border-radius: 5px; border: 1px solid #ccc; font-family: monospace; white-space: pre-wrap;"></div>
     </section>
 
     <!-- Tema: Constructor -->
@@ -482,7 +492,7 @@ public class Main {
     }
 }</pre>      </div>
 
-      <button class="btn-run" onclick="ejecutarActividad1Constructor()">▶ Ejecutar Actividad 1 (Constructor)</button>            <div id="resultado-actividad1Constructor" class="result-box" style="display: none;"></div>    </section>
+      <button class="btn-run" onclick="ejecutarActividad1Constructor()">▶ Ejecutar Actividad 1 (Constructor)</button>            <div id="resultado-actividad1Constructor" class="result-box" style="display: none; background-color: #f5f5f5; color: #333; padding: 15px; border-radius: 5px; border: 1px solid #ccc; font-family: monospace; white-space: pre-wrap;"></div>    </section>
 
     <!-- Actividad 5 Nueva: Clase Persona con métodos estáticos -->    <section class="exercise-section">      <h2>Actividad 2: Métodos Estáticos para Constructor</h2>      <p>Crear dos métodos estáticos (<code>pedirNombre()</code> y <code>pedirEdad()</code>) que lean datos del usuario usando Scanner. Luego crear un objeto Persona usando estos métodos como argumentos del constructor: <code>Persona persona = new Persona(pedirNombre(), pedirEdad());</code></p>            <div class="code-container">        <h3>Código Java (para Online Java Compiler):</h3>        <pre><code class="language-java">// Importamos la clase Scanner para leer datos del usuario
 import java.util.Scanner;
@@ -575,7 +585,7 @@ public class Main {
     }
 }</pre>      </div>
 
-      <button class="btn-run" onclick="ejecutarActividad2Constructor()">▶ Ejecutar Actividad 2 (Constructor)</button>            <div id="resultado-actividad2Constructor" class="result-box" style="display: none;"></div>    </section>
+      <button class="btn-run" onclick="ejecutarActividad2Constructor()">▶ Ejecutar Actividad 2 (Constructor)</button>            <div id="resultado-actividad2Constructor" class="result-box" style="display: none; background-color: #f5f5f5; color: #333; padding: 15px; border-radius: 5px; border: 1px solid #ccc; font-family: monospace; white-space: pre-wrap;"></div>    </section>
 
     <!-- Explicación adicional -->
     <section class="exercise-section">
@@ -611,6 +621,670 @@ class NombreClase {
     }
 }</code></pre>
       </div>
+    </section>
+
+    <!-- Nueva Actividad: Herencia con Constructor de Clase Hija -->
+    <!-- Tema: Herencia -->
+    <section class="tema-section">
+      <h2 class="tema-title">Tema 3: Herencia</h2>
+    </section>
+
+    <section class="exercise-section">
+      <h2>Actividad 1: Herencia - Constructor de Clase Hija con Scanner</h2>
+      <p>Crear una clase padre <code>Persona</code> con atributos (nombre, edad) y una clase hija <code>Estudiante</code> que hereda de Persona y agrega el atributo <code>carrera</code>. El constructor de la clase hija debe recibir los parámetros usando <code>super()</code> para los atributos heredados. Los datos deben ser ingresados por el usuario usando Scanner. Se deben crear <strong>dos objetos</strong> de tipo Estudiante.</p>
+      
+      <div class="code-container">
+        <h3>Código Java (para Online Java Compiler):</h3>
+        <pre><code class="language-java">
+// Importamos la clase Scanner para leer datos del usuario
+import java.util.Scanner;
+
+// Clase padre (superclase)
+class Persona {
+    // Atributos de la clase padre
+    String nombre;
+    int edad;
+    
+    // Constructor de la clase padre
+    Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+    
+    // Método para mostrar datos de la persona
+    void mostrarDatos() {
+        System.out.println("=== Datos de la Persona ===");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Edad: " + edad + " años");
+    }
+}
+
+// Clase hija (subclase) que hereda de Persona
+class Estudiante extends Persona {
+    // Atributo adicional de la clase hija
+    String carrera;
+    
+    // Constructor de la clase hija
+    // Usa super() para inicializar los atributos heredados
+    Estudiante(String nombre, int edad, String carrera) {
+        super(nombre, edad);  // Llama al constructor de la clase padre
+        this.carrera = carrera;
+    }
+    
+    // Método para mostrar todos los datos del estudiante
+    @Override
+    void mostrarDatos() {
+        System.out.println("=== Datos del Estudiante ===");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Edad: " + edad + " años");
+        System.out.println("Carrera: " + carrera);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Crear objeto Scanner para leer datos del usuario
+        Scanner sc = new Scanner(System.in);
+        
+        // ==================== PRIMER OBJETO ====================
+        System.out.println("=== Ingreso de Datos del Primer Estudiante ===");
+        System.out.print("Ingrese el nombre: ");
+        String nombre1 = sc.nextLine();
+        
+        System.out.print("Ingrese la edad: ");
+        int edad1 = sc.nextInt();
+        sc.nextLine(); // Limpiar el buffer
+        
+        System.out.print("Ingrese la carrera: ");
+        String carrera1 = sc.nextLine();
+        
+        // Crear el primer objeto Estudiante con los datos ingresados
+        Estudiante estudiante1 = new Estudiante(nombre1, edad1, carrera1);
+        
+        // ==================== SEGUNDO OBJETO ====================
+        System.out.println("\n=== Ingreso de Datos del Segundo Estudiante ===");
+        System.out.print("Ingrese el nombre: ");
+        String nombre2 = sc.nextLine();
+        
+        System.out.print("Ingrese la edad: ");
+        int edad2 = sc.nextInt();
+        sc.nextLine(); // Limpiar el buffer
+        
+        System.out.print("Ingrese la carrera: ");
+        String carrera2 = sc.nextLine();
+        
+        // Crear el segundo objeto Estudiante con los datos ingresados
+        Estudiante estudiante2 = new Estudiante(nombre2, edad2, carrera2);
+        
+        // ==================== MOSTRAR INFORMACIÓN ====================
+        System.out.println("\n" + "=".repeat(40));
+        System.out.println("        INFORMACIÓN DE LOS ESTUDIANTES");
+        System.out.println("=".repeat(40));
+        
+        // Mostrar datos del primer estudiante
+        System.out.println("\n--- Estudiante 1 ---");
+        estudiante1.mostrarDatos();
+        
+        // Mostrar datos del segundo estudiante
+        System.out.println("\n--- Estudiante 2 ---");
+        estudiante2.mostrarDatos();
+        
+        // Cerrar el Scanner
+        sc.close();
+    }
+}
+        </code></pre>
+      </div>
+
+      <div class="copy-section">
+        <button class="btn-copy" onclick="copyCode('codigo-herencia-constructor')">📋 Copiar Código Java</button>
+        <pre id="codigo-herencia-constructor" style="display:none;">
+import java.util.Scanner;
+
+// Clase padre (superclase)
+class Persona {
+    String nombre;
+    int edad;
+    
+    Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+    
+    void mostrarDatos() {
+        System.out.println("=== Datos de la Persona ===");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Edad: " + edad + " años");
+    }
+}
+
+// Clase hija (subclase) que hereda de Persona
+class Estudiante extends Persona {
+    String carrera;
+    
+    Estudiante(String nombre, int edad, String carrera) {
+        super(nombre, edad);
+        this.carrera = carrera;
+    }
+    
+    @Override
+    void mostrarDatos() {
+        System.out.println("=== Datos del Estudiante ===");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Edad: " + edad + " años");
+        System.out.println("Carrera: " + carrera);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // Primer objeto
+        System.out.println("=== Ingreso de Datos del Primer Estudiante ===");
+        System.out.print("Ingrese el nombre: ");
+        String nombre1 = sc.nextLine();
+        
+        System.out.print("Ingrese la edad: ");
+        int edad1 = sc.nextInt();
+        sc.nextLine();
+        
+        System.out.print("Ingrese la carrera: ");
+        String carrera1 = sc.nextLine();
+        
+        Estudiante estudiante1 = new Estudiante(nombre1, edad1, carrera1);
+        
+        // Segundo objeto
+        System.out.println("\n=== Ingreso de Datos del Segundo Estudiante ===");
+        System.out.print("Ingrese el nombre: ");
+        String nombre2 = sc.nextLine();
+        
+        System.out.print("Ingrese la edad: ");
+        int edad2 = sc.nextInt();
+        sc.nextLine();
+        
+        System.out.print("Ingrese la carrera: ");
+        String carrera2 = sc.nextLine();
+        
+        Estudiante estudiante2 = new Estudiante(nombre2, edad2, carrera2);
+        
+        // Mostrar información
+        System.out.println("\n" + "=".repeat(40));
+        System.out.println("        INFORMACIÓN DE LOS ESTUDIANTES");
+        System.out.println("=".repeat(40));
+        
+        System.out.println("\n--- Estudiante 1 ---");
+        estudiante1.mostrarDatos();
+        
+        System.out.println("\n--- Estudiante 2 ---");
+        estudiante2.mostrarDatos();
+        
+        sc.close();
+    }
+}</pre>
+      </div>
+
+      <button class="btn-run" onclick="ejecutarHerenciaConstructor()">▶ Ejecutar Actividad 3 (Herencia)</button>
+      
+      <div id="resultado-herencia-constructor" class="result-box" style="display: none; background-color: #f5f5f5; color: #333; padding: 15px; border-radius: 5px; border: 1px solid #ccc; font-family: monospace; white-space: pre-wrap;"></div>
+    </section>
+
+    <!-- Tema: Interfaz -->
+    <section class="tema-section">
+      <h2 class="tema-title">Tema 4: Interfaz</h2>
+    </section>
+
+    <!-- Actividad 1 del Tema Interfaz: CalculadoraCientifica -->
+    <section class="exercise-section">
+      <h2>Actividad 1: Interfaz Operacion - CalculadoraCientifica</h2>
+      <p>Completar la interfaz <code>Operacion</code> creando una clase diferente llamada <code>CalculadoraCientifica</code> que implemente los mismos métodos pero agregue funcionalidad para <strong>potencias</strong> y <strong>raíces cuadradas</strong>.</p>
+      
+      <div class="code-container">
+        <h3>Código Java (para Online Java Compiler):</h3>
+        <pre><code class="language-java">
+// Definición de la interfaz Operacion
+interface Operacion {
+    double sumar(double a, double b);
+    double restar(double a, double b);
+    double multiplicar(double a, double b);
+    double dividir(double a, double b);
+}
+
+// Clase CalculadoraBasica que implementa la interfaz
+class CalculadoraBasica implements Operacion {
+    @Override
+    public double sumar(double a, double b) {
+        return a + b;
+    }
+    
+    @Override
+    public double restar(double a, double b) {
+        return a - b;
+    }
+    
+    @Override
+    public double multiplicar(double a, double b) {
+        return a * b;
+    }
+    
+    @Override
+    public double dividir(double a, double b) {
+        if (b != 0) {
+            return a / b;
+        } else {
+            System.out.println("Error: No se puede dividir por cero");
+            return 0;
+        }
+    }
+}
+
+// Clase CalculadoraCientifica que implementa Operacion + métodos adicionales
+class CalculadoraCientifica implements Operacion {
+    // Implementación de los métodos de la interfaz
+    @Override
+    public double sumar(double a, double b) {
+        return a + b;
+    }
+    
+    @Override
+    public double restar(double a, double b) {
+        return a - b;
+    }
+    
+    @Override
+    public double multiplicar(double a, double b) {
+        return a * b;
+    }
+    
+    @Override
+    public double dividir(double a, double b) {
+        if (b != 0) {
+            return a / b;
+        } else {
+            System.out.println("Error: No se puede dividir por cero");
+            return 0;
+        }
+    }
+    
+    // Métodos adicionales para Calculadora Científica
+    public double potencia(double base, double exponente) {
+        return Math.pow(base, exponente);
+    }
+    
+    public double raizCuadrada(double numero) {
+        if (numero >= 0) {
+            return Math.sqrt(numero);
+        } else {
+            System.out.println("Error: No se puede calcular raíz de número negativo");
+            return 0;
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Crear objeto de Calculadora Científica
+        CalculadoraCientifica calc = new CalculadoraCientifica();
+        
+        // Usar los métodos básicos
+        System.out.println("=== Calculadora Científica ===");
+        System.out.println("Suma: " + calc.sumar(10, 5));
+        System.out.println("Resta: " + calc.restar(10, 5));
+        System.out.println("Multiplicación: " + calc.multiplicar(10, 5));
+        System.out.println("División: " + calc.dividir(10, 5));
+        
+        // Usar los métodos de potencia y raíz
+        System.out.println("\n=== Funciones Científicas ===");
+        System.out.println("Potencia (2^8): " + calc.potencia(2, 8));
+        System.out.println("Raíz cuadrada de 64: " + calc.raizCuadrada(64));
+        System.out.println("Raíz cuadrada de 25: " + calc.raizCuadrada(25));
+    }
+}
+        </code></pre>
+      </div>
+
+      <div class="copy-section">
+        <button class="btn-copy" onclick="copyCode('codigo-interfaz-calculadora')">📋 Copiar Código Java</button>
+        <pre id="codigo-interfaz-calculadora" style="display:none;">
+interface Operacion {
+    double sumar(double a, double b);
+    double restar(double a, double b);
+    double multiplicar(double a, double b);
+    double dividir(double a, double b);
+}
+
+class CalculadoraBasica implements Operacion {
+    @Override
+    public double sumar(double a, double b) { return a + b; }
+    @Override
+    public double restar(double a, double b) { return a - b; }
+    @Override
+    public double multiplicar(double a, double b) { return a * b; }
+    @Override
+    public double dividir(double a, double b) {
+        if (b != 0) return a / b;
+        else { System.out.println("Error: No se puede dividir por cero"); return 0; }
+    }
+}
+
+class CalculadoraCientifica implements Operacion {
+    @Override
+    public double sumar(double a, double b) { return a + b; }
+    @Override
+    public double restar(double a, double b) { return a - b; }
+    @Override
+    public double multiplicar(double a, double b) { return a * b; }
+    @Override
+    public double dividir(double a, double b) {
+        if (b != 0) return a / b;
+        else { System.out.println("Error: No se puede dividir por cero"); return 0; }
+    }
+    
+    public double potencia(double base, double exponente) {
+        return Math.pow(base, exponente);
+    }
+    
+    public double raizCuadrada(double numero) {
+        if (numero >= 0) return Math.sqrt(numero);
+        else { System.out.println("Error: No se puede calcular raíz de número negativo"); return 0; }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        CalculadoraCientifica calc = new CalculadoraCientifica();
+        
+        System.out.println("=== Calculadora Científica ===");
+        System.out.println("Suma: " + calc.sumar(10, 5));
+        System.out.println("Resta: " + calc.restar(10, 5));
+        System.out.println("Multiplicación: " + calc.multiplicar(10, 5));
+        System.out.println("División: " + calc.dividir(10, 5));
+        
+        System.out.println("\n=== Funciones Científicas ===");
+        System.out.println("Potencia (2^8): " + calc.potencia(2, 8));
+        System.out.println("Raíz cuadrada de 64: " + calc.raizCuadrada(64));
+    }
+}</pre>
+      </div>
+
+      <button class="btn-run" onclick="ejecutarInterfazCalculadora()">▶ Ejecutar Actividad 1 (Interfaz)</button>
+      
+      <div id="resultado-interfaz-calculadora" class="result-box" style="display: none; background-color: #f5f5f5; color: #333; padding: 15px; border-radius: 5px; border: 1px solid #ccc; font-family: monospace; white-space: pre-wrap;"></div>
+    </section>
+
+    <!-- Actividad 2 del Tema Interfaz: FiguraGeometrica -->
+    <section class="exercise-section">
+      <h2>Actividad 2: Interfaz FiguraGeometrica - Cuadrado y Rectangulo</h2>
+      <p>Crear una interfaz llamada <code>FiguraGeometrica</code> con métodos abstractos para calcular el <strong>área</strong> y <strong>perímetro</strong>. Luego, crear dos clases: <code>Cuadrado</code> y <code>Rectangulo</code> que implementen esta interfaz.</p>
+      
+      <div class="code-container">
+        <h3>Código Java (para Online Java Compiler):</h3>
+        <pre><code class="language-java">
+// Definición de la interfaz FiguraGeometrica
+interface FiguraGeometrica {
+    double calcularArea();
+    double calcularPerimetro();
+}
+
+// Clase Cuadrado que implementa la interfaz
+class Cuadrado implements FiguraGeometrica {
+    private double lado;
+    
+    // Constructor
+    Cuadrado(double lado) {
+        this.lado = lado;
+    }
+    
+    // Implementación del método para calcular área
+    @Override
+    public double calcularArea() {
+        return lado * lado; // lado^2
+    }
+    
+    // Implementación del método para calcular perímetro
+    @Override
+    public double calcularPerimetro() {
+        return 4 * lado;
+    }
+    
+    // Getter
+    public double getLado() {
+        return lado;
+    }
+}
+
+// Clase Rectangulo que implementa la interfaz
+class Rectangulo implements FiguraGeometrica {
+    private double base;
+    private double altura;
+    
+    // Constructor
+    Rectangulo(double base, double altura) {
+        this.base = base;
+        this.altura = altura;
+    }
+    
+    // Implementación del método para calcular área
+    @Override
+    public double calcularArea() {
+        return base * altura;
+    }
+    
+    // Implementación del método para calcular perímetro
+    @Override
+    public double calcularPerimetro() {
+        return 2 * (base + altura);
+    }
+    
+    // Getters
+    public double getBase() {
+        return base;
+    }
+    
+    public double getAltura() {
+        return altura;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Crear un cuadrado
+        Cuadrado cuadrado = new Cuadrado(5);
+        
+        // Crear un rectángulo
+        Rectangulo rectangulo = new Rectangulo(8, 4);
+        
+        // Mostrar datos del cuadrado
+        System.out.println("=== CUADRADO ===");
+        System.out.println("Lado: " + cuadrado.getLado());
+        System.out.println("Área: " + cuadrado.calcularArea());
+        System.out.println("Perímetro: " + cuadrado.calcularPerimetro());
+        
+        // Mostrar datos del rectángulo
+        System.out.println("\n=== RECTÁNGULO ===");
+        System.out.println("Base: " + rectangulo.getBase());
+        System.out.println("Altura: " + rectangulo.getAltura());
+        System.out.println("Área: " + rectangulo.calcularArea());
+        System.out.println("Perímetro: " + rectangulo.calcularPerimetro());
+    }
+}
+        </code></pre>
+      </div>
+
+      <div class="copy-section">
+        <button class="btn-copy" onclick="copyCode('codigo-interfaz-figura')">📋 Copiar Código Java</button>
+        <pre id="codigo-interfaz-figura" style="display:none;">
+interface FiguraGeometrica {
+    double calcularArea();
+    double calcularPerimetro();
+}
+
+class Cuadrado implements FiguraGeometrica {
+    private double lado;
+    
+    Cuadrado(double lado) {
+        this.lado = lado;
+    }
+    
+    @Override
+    public double calcularArea() {
+        return lado * lado;
+    }
+    
+    @Override
+    public double calcularPerimetro() {
+        return 4 * lado;
+    }
+    
+    public double getLado() {
+        return lado;
+    }
+}
+
+class Rectangulo implements FiguraGeometrica {
+    private double base;
+    private double altura;
+    
+    Rectangulo(double base, double altura) {
+        this.base = base;
+        this.altura = altura;
+    }
+    
+    @Override
+    public double calcularArea() {
+        return base * altura;
+    }
+    
+    @Override
+    public double calcularPerimetro() {
+        return 2 * (base + altura);
+    }
+    
+    public double getBase() { return base; }
+    public double getAltura() { return altura; }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Cuadrado cuadrado = new Cuadrado(5);
+        Rectangulo rectangulo = new Rectangulo(8, 4);
+        
+        System.out.println("=== CUADRADO ===");
+        System.out.println("Lado: " + cuadrado.getLado());
+        System.out.println("Área: " + cuadrado.calcularArea());
+        System.out.println("Perímetro: " + cuadrado.calcularPerimetro());
+        
+        System.out.println("\n=== RECTÁNGULO ===");
+        System.out.println("Base: " + rectangulo.getBase());
+        System.out.println("Altura: " + rectangulo.getAltura());
+        System.out.println("Área: " + rectangulo.calcularArea());
+        System.out.println("Perímetro: " + rectangulo.calcularPerimetro());
+    }
+}</pre>
+      </div>
+
+      <button class="btn-run" onclick="ejecutarInterfazFigura()">▶ Ejecutar Actividad 2 (Interfaz)</button>
+      
+      <div id="resultado-interfaz-figura" class="result-box" style="display: none; background-color: #f5f5f5; color: #333; padding: 15px; border-radius: 5px; border: 1px solid #ccc; font-family: monospace; white-space: pre-wrap;"></div>
+    </section>
+
+    <!-- Actividad 3 del Tema Interfaz: Error al no implementar todos los métodos -->
+    <section class="exercise-section">
+      <h2>Actividad 3: Error del Compilador - Interfaz No Implementada</h2>
+      <p>Investiga qué sucede si una clase implementa una interfaz pero no implementa todos sus métodos. <strong>Documenta el error que genera el compilador</strong>.</p>
+      
+      <div class="code-container">
+        <h3>Código Java con ERROR (para Online Java Compiler):</h3>
+        <pre><code class="language-java">
+// Definición de la interfaz
+interface FiguraGeometrica {
+    double calcularArea();
+    double calcularPerimetro();
+}
+
+// Clase que NO implementa todos los métodos - ¡GENERARÁ ERROR!
+class Triangulo implements FiguraGeometrica {
+    private double base;
+    private double altura;
+    
+    Triangulo(double base, double altura) {
+        this.base = base;
+        this.altura = altura;
+    }
+    
+    // Solo implementamos calcularArea() - ¡Falta calcularPerimetro()!
+    @Override
+    public double calcularArea() {
+        return (base * altura) / 2;
+    }
+    
+    // Falta implementar calcularPerimetro() - ¡Esto causará error!
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Triangulo triangulo = new Triangulo(10, 5);
+        System.out.println("Área: " + triangulo.calcularArea());
+    }
+}
+        </code></pre>
+      </div>
+
+      <div class="info-box">
+        <h3>📝 Error del Compilador Generado:</h3>
+        <pre><code class="language-text">
+error: Triangulo is not abstract and does not override abstract method calcularPerimetro() in FiguraGeometrica
+class Triangulo implements FiguraGeometrica {
+^
+1 error
+        </code></pre>
+        
+        <h3>Explicación del Error:</h3>
+        <ul>
+          <li><strong>Tipo de error:</strong> Error de compilación (compile-time error)</li>
+          <li><strong>Mensaje:</strong> "Triangulo is not abstract and does not override abstract method calcularPerimetro() in FiguraGeometrica"</li>
+          <li><strong>Causa:</strong> La clase <code>Triangulo</code> debe implementar <strong>TODOS</strong> los métodos abstractos de la interfaz <code>FiguraGeometrica</code></li>
+          <li><strong>Solución:</strong> Agregar el método <code>calcularPerimetro()</code> a la clase Triangulo</li>
+          <li><strong>Nota:</strong> En Java, una clase concreta (no abstracta) debe implementar todos los métodos de la interfaz; de lo contrario, debe declararse como clase abstracta</li>
+        </ul>
+      </div>
+
+      <div class="copy-section">
+        <button class="btn-copy" onclick="copyCode('codigo-interfaz-error')">📋 Copiar Código Java (Con Error)</button>
+        <pre id="codigo-interfaz-error" style="display:none;">
+interface FiguraGeometrica {
+    double calcularArea();
+    double calcularPerimetro();
+}
+
+class Triangulo implements FiguraGeometrica {
+    private double base;
+    private double altura;
+    
+    Triangulo(double base, double altura) {
+        this.base = base;
+        this.altura = altura;
+    }
+    
+    @Override
+    public double calcularArea() {
+        return (base * altura) / 2;
+    }
+    
+    // Falta implementar calcularPerimetro() - ¡ERROR!
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Triangulo triangulo = new Triangulo(10, 5);
+        System.out.println("Área: " + triangulo.calcularArea());
+    }
+}</pre>
+      </div>
+
+      <button class="btn-run" onclick="ejecutarInterfazError()">▶ Ejecutar (Mostrará el Error)</button>
+      
+      <div id="resultado-interfaz-error" class="result-box" style="display: none; background-color: #f5f5f5; color: #333; padding: 15px; border-radius: 5px; border: 1px solid #ccc; font-family: monospace; white-space: pre-wrap;"></div>
     </section>
 
   </main>
@@ -655,7 +1329,7 @@ Promedio: ${this.promedio}`;
       
       // Mostrar en el elemento div
       const divResultado = document.getElementById('resultado-actividad1');
-      divResultado.innerHTML = `<pre>${resultado}</pre>`;
+      divResultado.innerHTML = resultado;
       divResultado.style.display = 'block';
       
       // También mostrar en consola
@@ -685,7 +1359,7 @@ Promedio: ${this.promedio}`;
       
       // Mostrar en el elemento div
       const divResultado = document.getElementById('resultado-actividad2');
-      divResultado.innerHTML = `<pre>${resultado}</pre>`;
+      divResultado.innerHTML = resultado;
       divResultado.style.display = 'block';
       
       // También mostrar en consola
@@ -708,7 +1382,8 @@ Promedio: ${this.promedio}`;
       
       // Mostrar en el elemento div
       const divResultado = document.getElementById('resultado-actividad3');
-      divResultado.innerHTML = `<pre>${resultado}</pre>`;
+      divResultado.innerHTML = resultado;
+      divResultado.style.display = 'block';
       divResultado.style.display = 'block';
       
       // También mostrar en consola
@@ -742,7 +1417,7 @@ Promedio: ${this.promedio}`;
       const resultado = estudiante.mostrarDatos();
       
       const divResultado = document.getElementById('resultado-actividad1Constructor');
-      divResultado.innerHTML = `<pre>${resultado}</pre>`;
+      divResultado.innerHTML = resultado;
       divResultado.style.display = 'block';
       
       console.log(resultado);
@@ -782,9 +1457,168 @@ Edad: ${this.edad} años`;
       const resultado = persona.mostrarDatos();
       
       const divResultado = document.getElementById('resultado-actividad2Constructor');
-      divResultado.innerHTML = `<pre>${resultado}</pre>`;
+      divResultado.innerHTML = resultado;
       divResultado.style.display = 'block';
       
+      console.log(resultado);
+    }
+
+    // ==================== CLASES PARA ACTIVIDAD DE HERENCIA ====================
+    // Clase padre Persona
+    class PersonaHerencia {
+      constructor(nombre, edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+      }
+      
+      mostrarDatos() {
+        return `=== Datos de la Persona ===
+Nombre: ${this.nombre}
+Edad: ${this.edad} años`;
+      }
+    }
+    
+    // Clase hija Estudiante que hereda de Persona
+    class EstudianteHerencia extends PersonaHerencia {
+      constructor(nombre, edad, carrera) {
+        super(nombre, edad); // Usa super() para inicializar atributos heredados
+        this.carrera = carrera;
+      }
+      
+      mostrarDatos() {
+        return `=== Datos del Estudiante ===
+Nombre: ${this.nombre}
+Edad: ${this.edad} años
+Carrera: ${this.carrera}`;
+      }
+    }
+    
+    // Función para ejecutar la actividad de Herencia con Constructor
+    function ejecutarHerenciaConstructor() {
+      // ==================== PRIMER OBJETO ====================
+      const nombre1 = prompt("=== Primer Estudiante ===\nIngrese el nombre:");
+      const edad1 = parseInt(prompt("Ingrese la edad:"));
+      const carrera1 = prompt("Ingrese la carrera:");
+      
+      // Crear el primer objeto Estudiante
+      const estudiante1 = new EstudianteHerencia(nombre1, edad1, carrera1);
+      
+      // ==================== SEGUNDO OBJETO ====================
+      const nombre2 = prompt("=== Segundo Estudiante ===\nIngrese el nombre:");
+      const edad2 = parseInt(prompt("Ingrese la edad:"));
+      const carrera2 = prompt("Ingrese la carrera:");
+      
+      // Crear el segundo objeto Estudiante
+      const estudiante2 = new EstudianteHerencia(nombre2, edad2, carrera2);
+      
+      // ==================== MOSTRAR INFORMACIÓN ====================
+      const resultado = 
+        "========================================\n" +
+        "        INFORMACIÓN DE LOS ESTUDIANTES\n" +
+        "========================================\n\n" +
+        "--- Estudiante 1 ---\n" +
+        estudiante1.mostrarDatos() + 
+        "\n\n--- Estudiante 2 ---\n" +
+        estudiante2.mostrarDatos();
+      
+      // Mostrar en el elemento div
+      const divResultado = document.getElementById('resultado-herencia-constructor');
+      divResultado.innerHTML = resultado;
+      divResultado.style.display = 'block';
+      
+      // También mostrar en consola
+      console.log(resultado);
+    }
+
+    // ==================== ACTIVIDADES DE INTERFAZ ====================
+    // Actividad 1: CalculadoraCientifica
+    class CalculadoraCientificaJS {
+      sumar(a, b) { return a + b; }
+      restar(a, b) { return a - b; }
+      multiplicar(a, b) { return a * b; }
+      dividir(a, b) { 
+        if (b !== 0) return a / b; 
+        else return "Error: No se puede dividir por cero"; 
+      }
+      potencia(base, exp) { return Math.pow(base, exp); }
+      raizCuadrada(num) { 
+        if (num >= 0) return Math.sqrt(num); 
+        else return "Error: No se puede calcular raíz de número negativo"; 
+      }
+    }
+
+    function ejecutarInterfazCalculadora() {
+      const calc = new CalculadoraCientificaJS();
+      
+      const resultado = 
+        "=== Calculadora Científica ===\n" +
+        "Suma: " + calc.sumar(10, 5) + "\n" +
+        "Resta: " + calc.restar(10, 5) + "\n" +
+        "Multiplicación: " + calc.multiplicar(10, 5) + "\n" +
+        "División: " + calc.dividir(10, 5) + "\n\n" +
+        "=== Funciones Científicas ===\n" +
+        "Potencia (2^8): " + calc.potencia(2, 8) + "\n" +
+        "Raíz cuadrada de 64: " + calc.raizCuadrada(64) + "\n" +
+        "Raíz cuadrada de 25: " + calc.raizCuadrada(25);
+      
+      const divResultado = document.getElementById('resultado-interfaz-calculadora');
+      divResultado.innerHTML = resultado;
+      divResultado.style.display = 'block';
+      console.log(resultado);
+    }
+
+    // Actividad 2: FiguraGeometrica (Cuadrado y Rectangulo)
+    class CuadradoJS {
+      constructor(lado) { this.lado = lado; }
+      calcularArea() { return this.lado * this.lado; }
+      calcularPerimetro() { return 4 * this.lado; }
+    }
+
+    class RectanguloJS {
+      constructor(base, altura) { this.base = base; this.altura = altura; }
+      calcularArea() { return this.base * this.altura; }
+      calcularPerimetro() { return 2 * (this.base + this.altura); }
+    }
+
+    function ejecutarInterfazFigura() {
+      const cuadrado = new CuadradoJS(5);
+      const rectangulo = new RectanguloJS(8, 4);
+      
+      const resultado = 
+        "=== CUADRADO ===\n" +
+        "Lado: " + cuadrado.lado + "\n" +
+        "Área: " + cuadrado.calcularArea() + "\n" +
+        "Perímetro: " + cuadrado.calcularPerimetro() + "\n\n" +
+        "=== RECTÁNGULO ===\n" +
+        "Base: " + rectangulo.base + "\n" +
+        "Altura: " + rectangulo.altura + "\n" +
+        "Área: " + rectangulo.calcularArea() + "\n" +
+        "Perímetro: " + rectangulo.calcularPerimetro();
+      
+      const divResultado = document.getElementById('resultado-interfaz-figura');
+      divResultado.innerHTML = resultado;
+      divResultado.style.display = 'block';
+      console.log(resultado);
+    }
+
+    // Actividad 3: Error del compilador
+    function ejecutarInterfazError() {
+      const resultado = 
+        "📝 ERROR DEL COMPILADOR:\n\n" +
+        "error: Triangulo is not abstract and does not override\n" +
+        "abstract method calcularPerimetro() in FiguraGeometrica\n" +
+        "class Triangulo implements FiguraGeometrica {\n" +
+        "^\n\n" +
+        "1 error\n\n" +
+        "=== Explicación ===\n" +
+        "Cuando una clase implementa una interfaz pero no\n" +
+        "implementa todos sus métodos abstractos, el compilador\n" +
+        "Java genera un error de compilación indicando que la clase\n" +
+        "debe ser abstracta o implementar todos los métodos de la interfaz.";
+      
+      const divResultado = document.getElementById('resultado-interfaz-error');
+      divResultado.innerHTML = resultado;
+      divResultado.style.display = 'block';
       console.log(resultado);
     }
 

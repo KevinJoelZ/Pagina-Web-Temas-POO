@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Clase Práctica No. 1 - Sistema de Gestión de Pagos</title>
+  <title>Clase Práctica - Desarrollo de Programa</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
@@ -31,10 +31,10 @@
 
   <main class="content">
     <h1>
-      <i class="fas fa-credit-card" style="margin-right: 10px;"></i>
-      Clase Práctica No. 1: Sistema de Gestión de Pagos
+      <i class="fas fa-laptop-code" style="margin-right: 10px;"></i>
+      Clase Práctica - Desarrollo de Programa
     </h1>
-    <p class="lead">Implementación de Polimorfismo para diferentes métodos de pago</p>
+    <p class="lead">Ejemplo de código desarrollado durante la creación del Trabajo Autónomo 4. Demuestra la implementación práctica de conceptos POO.</p>
 
     <!-- Descripción del Sistema -->
     <section class="solution">
@@ -306,6 +306,10 @@ class PruebasFuncionales {
       <a href="sistema-pagos.java" download style="display: inline-block; background: var(--accent); color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600;">
         <i class="fas fa-download"></i> Descargar Sistema de Pagos
       </a>
+      <br><br>
+      <button class="btn-run" onclick="ejecutarSistemaPagos()">▶ Ejecutar Sistema de Pagos</button>
+      <br><br>
+      <div id="resultado-sistema-pagos" class="result-box" style="display: none; background-color: #f5f5f5; color: #333; padding: 15px; border-radius: 5px; border: 1px solid #ccc; font-family: monospace; white-space: pre-wrap; text-align: left; margin-top: 15px;"></div>
     </div>
 
   </main>
@@ -319,6 +323,135 @@ class PruebasFuncionales {
   </div>
 
   <script>
+    // ==================== SISTEMA DE PAGOS EN JAVASCRIPT ====================
+    // Clase Abstracta MetodoPago
+    class MetodoPago {
+      constructor(titular, monto) {
+        this.titular = titular;
+        this.monto = monto;
+        this.numeroReferencia = "";
+      }
+      
+      procesarPago(monto) {}
+      
+      mostrarInfo() {
+        return `Titular: ${this.titular}\nMonto: ${this.monto}`;
+      }
+    }
+    
+    // TarjetaCredito
+    class TarjetaCredito extends MetodoPago {
+      constructor(titular, monto, numeroTarjeta, fechaVencimiento, cvv) {
+        super(titular, monto);
+        this.numeroTarjeta = numeroTarjeta;
+        this.fechaVencimiento = fechaVencimiento;
+        this.cvv = cvv;
+        this.numeroReferencia = "TC-" + numeroTarjeta.substring(0, 4);
+      }
+      
+      procesarPago(monto) {
+        return `\n╔════════════════════════════════════════╗
+║  PROCESANDO PAGO CON TARJETA CRÉDITO  ║
+╚════════════════════════════════════════╝
+• Validando número de tarjeta: ${this.numeroTarjeta.substring(0, 4)}****
+• Verificando fecha de vencimiento: ${this.fechaVencimiento}
+• Validando código CVV: ***
+• Autorizando transacción...
+✓ Pago de ${monto} procesado exitosamente
+• Referencia: ${this.numeroReferencia}`;
+      }
+      
+      mostrarInfo() {
+        return super.mostrarInfo() + `\nTipo: Tarjeta de Crédito\nNúmero: ${this.numeroTarjeta}`;
+      }
+    }
+    
+    // PayPal
+    class PayPal extends MetodoPago {
+      constructor(titular, monto, email, contrasena) {
+        super(titular, monto);
+        this.email = email;
+        this.contrasena = contrasena;
+        this.numeroReferencia = "PP-" + email.substring(0, 4).toUpperCase();
+      }
+      
+      procesarPago(monto) {
+        return `\n╔════════════════════════════════════════╗
+║       PROCESANDO PAGO CON PAYPAL        ║
+╚════════════════════════════════════════╝
+• Iniciando sesión en PayPal: ${this.email}
+• Verificando cuenta...
+• Autorizando transacción...
+✓ Pago de ${monto} procesado exitosamente
+• Referencia: ${this.numeroReferencia}`;
+      }
+      
+      mostrarInfo() {
+        return super.mostrarInfo() + `\nTipo: PayPal\nEmail: ${this.email}`;
+      }
+    }
+    
+    // TransferenciaBancaria
+    class TransferenciaBancaria extends MetodoPago {
+      constructor(titular, monto, numeroCuenta, banco) {
+        super(titular, monto);
+        this.numeroCuenta = numeroCuenta;
+        this.banco = banco;
+        this.numeroReferencia = "TB-" + numeroCuenta.substring(0, 4);
+      }
+      
+      procesarPago(monto) {
+        return `\n╔════════════════════════════════════════╗
+║  PROCESANDO TRANSFERENCIA BANCARIA     ║
+╚════════════════════════════════════════╝
+• Validando cuenta: ${this.numeroCuenta.substring(0, 4)}****
+• Verificando banco: ${this.banco}
+• Iniciando transferencia...
+✓ Pago de ${monto} procesado exitosamente
+• Referencia: ${this.numeroReferencia}`;
+      }
+      
+      mostrarInfo() {
+        return super.mostrarInfo() + `\nTipo: Transferencia Bancaria\nCuenta: ${this.numeroCuenta}\nBanco: ${this.banco}`;
+      }
+    }
+    
+    // Función para ejecutar el sistema de pagos
+    function ejecutarSistemaPagos() {
+      // Crear métodos de pago
+      const pago1 = new TarjetaCredito("Juan Pérez", 1500, "4532123456789012", "12/25", "123");
+      const pago2 = new PayPal("Maria García", 750.50, "maria@email.com", "password123");
+      const pago3 = new TransferenciaBancaria("Carlos López", 2000, "1234567890", "Banco del Pichincha");
+      
+      // Procesar pagos
+      let resultado = "======================================\n";
+      resultado += "   SISTEMA DE GESTIÓN DE PAGOS\n";
+      resultado += "      DEMOSTRACIÓN DE POLIMORFISMO\n";
+      resultado += "======================================\n\n";
+      
+      resultado += "--- Pago con Tarjeta de Crédito ---\n";
+      resultado += pago1.mostrarInfo();
+      resultado += pago1.procesarPago(pago1.monto);
+      
+      resultado += "\n\n--- Pago con PayPal ---\n";
+      resultado += pago2.mostrarInfo();
+      resultado += pago2.procesarPago(pago2.monto);
+      
+      resultado += "\n\n--- Pago con Transferencia Bancaria ---\n";
+      resultado += pago3.mostrarInfo();
+      resultado += pago3.procesarPago(pago3.monto);
+      
+      resultado += "\n\n======================================\n";
+      resultado += "   TOTAL PROCESADO: $" + (pago1.monto + pago2.monto + pago3.monto).toFixed(2) + "\n";
+      resultado += "======================================";
+      
+      // Mostrar resultado
+      const divResultado = document.getElementById('resultado-sistema-pagos');
+      divResultado.innerHTML = resultado;
+      divResultado.style.display = 'block';
+      console.log(resultado);
+    }
+
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
