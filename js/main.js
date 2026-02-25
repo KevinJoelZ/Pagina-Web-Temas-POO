@@ -1,8 +1,18 @@
-// Inicializar highlight.js para resaltar sintaxis y comentarios en amarillo mostaza
-if(typeof hljs !== 'undefined'){
-  document.addEventListener('DOMContentLoaded', function(){
+// Inicializar highlight.js para resaltar sintaxis y comentarios
+function initHighlight() {
+  if (typeof hljs !== 'undefined') {
     hljs.highlightAll();
-  });
+  } else {
+    // Si no está disponible, esperar un poco e intentar de nuevo
+    setTimeout(initHighlight, 100);
+  }
+}
+
+// Ejecutar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initHighlight);
+} else {
+  initHighlight();
 }
 
 // Tarjetas generadas dinámicamente
@@ -57,16 +67,33 @@ pages.push({
   description: 'Ejemplo de código desarrollado durante la creación del Trabajo Autónomo 4.'
 });
 
+// Añadimos tarjeta para "Videos de Ejercicios en Clase" - Enlace a Google Drive
+pages.push({
+  title: 'Videos de Ejercicios Desarrollados en Clase',
+  href: 'https://drive.google.com/drive/folders/175wdD0Z5zasjrHCy6rzqJpAT-K2fHqBW?hl=es',
+  description: 'Accede a los videos de los ejercicios prácticos desarrollados durante las clases de POO.',
+  external: true,
+  isVideo: true
+});
+
 const container = document.getElementById('cards');
 if(container){
   pages.forEach(p => {
     const a = document.createElement('a');
     a.className = 'card-link';
     a.href = p.href;
+    // Si es un enlace externo, abrir en nueva pestaña
+    if (p.external) {
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    }
     a.setAttribute('aria-label', p.title);
 
+    // Agregar clase especial para tarjetas de video
+    const cardClass = p.isVideo ? 'card card-video' : 'card';
+
     a.innerHTML = `
-      <article class="card">
+      <article class="${cardClass}">
         <h3>${p.title}</h3>
         <p>${p.description}</p>
       </article>

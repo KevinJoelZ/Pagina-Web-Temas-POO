@@ -22,6 +22,7 @@
         <li><a href="ejercicios-temas-poo.html">Ejercicios Temas POO</a></li>
         <li><a href="trabajos-autonomos.html">Trabajos Autónomos</a></li>
         <li><a href="clase-practica.html">Clase Práctica</a></li>
+        <li><a href="https://drive.google.com/drive/folders/175wdD0Z5zasjrHCy6rzqJpAT-K2fHqBW?hl=es" target="_blank" class="nav-videos">🎬 Videos</a></li>
       </ul>
     </nav>
   </header>
@@ -187,108 +188,15 @@ public class Main {
 }
 </code></pre>
       </div>
-        // Crea e inmediatamente agrega un Vendedor
-        // Parámetros: nombre, apellido, edad, id, salario, departamento, ventasRealizadas
-        empresa.agregarEmpleado(new Vendedor("Carlos", "López", 40, "VEN001", 1200, "Ventas", 50000));
-        
-        // Crea e inmediatamente agrega un Ingeniero
-        // Parámetros: nombre, apellido, edad, id, salario, departamento, proyectosCompletos, lenguajePrincipal
-        empresa.agregarEmpleado(new Ingeniero("María", "Martínez", 28, "ING001", 2500, "Desarrollo", 5, "Java"));
-        
-        // Crea e inmediatamente agrega otro Administrativo con diferente ID
-        empresa.agregarEmpleado(new Administrativo("Juan", "Pérez", 32, "ADM002", 1400, "Administración", 5));
-        
-        // Crea e inmediatamente agrega otro Vendedor con diferente ID
-        empresa.agregarEmpleado(new Vendedor("Rosa", "Díaz", 38, "VEN002", 1300, "Ventas", 75000));
 
-        // Llama al método generarReporte() de la empresa
-        // Este método itera sobre todos los empleados e imprime información
-        // Demuestra polimorfismo: cada empleado calcula su bonus diferente            // Suma el bonus de este empleado al total
-            totalBonus += e.calcularBonus();
-        }
+      <h4>Salida Esperada</h4>
+      <pre style="background:#1d1f21;color:#e6eef8;padding:15px;border-radius:8px;overflow:auto;font-family:Consolas,'Courier New',monospace;font-size:0.9rem;">=== REPORTE EMPRESA ===
+Ana García - Salario: $1500.00 Bonus: $350.00
+Carlos López - Salario: $1200.00 Bonus: $4000.00
+María Martínez - Salario: $2500.00 Bonus: $1375.00
 
-        // Imprime separador para la sección de resumen
-        System.out.println("--- RESUMEN ---");
-        // Imprime total de todos los salarios (formateado a 2 decimales)
-        System.out.println("Salarios Totales: $" + String.format("%.2f", totalSalarios));
-        // Imprime total de todos los bonus
-        System.out.println("Bonus Total: $" + String.format("%.2f", totalBonus));
-        // Imprime costo mensual total (usando el método obtenerCostoMensual)
-        System.out.println("Costo Mensual Total: $" + String.format("%.2f", obtenerCostoMensual()));
-    }
-
-    // Getter: retorna una copia de la lista de empleados
-    public List&lt;Empleado&gt; obtenerEmpleados() {
-        // Retorna una nueva ArrayList con los empleados (copia para evitar modificaciones externas).util.ArrayList;
-import java.util.List;
-
-public class Empresa {
-    private String nombre;
-    private List&lt;Empleado&gt; empleados;
-
-    public Empresa(String nombre) {
-        this.nombre = nombre;
-        this.empleados = new ArrayList&lt;&gt;();
-    }
-
-    public void agregarEmpleado(Empleado e) {
-        empleados.add(e);
-        System.out.println(e.obtenerNombreCompleto() + " agregado a " + nombre);
-    }
-
-    public double obtenerCostoMensual() {
-        double total = 0;
-        for (Empleado e : empleados) {
-            total += e.obtenerCostoTotal();
-        }
-        return total;
-    }
-
-    public void generarReporte() {
-        System.out.println("=== REPORTE DE EMPRESA: " + nombre + " ===");
-        System.out.println("Total de empleados: " + empleados.size());
-        System.out.println();
-
-        double totalSalarios = 0, totalBonus = 0;
-
-        for (Empleado e : empleados) {
-            System.out.println(e);
-            System.out.println("  Bonus: $" + String.format("%.2f", e.calcularBonus()));
-            System.out.println("  Costo Total: $" + String.format("%.2f", e.obtenerCostoTotal()));
-            System.out.println();
-
-            totalSalarios += e.getSalario();
-            totalBonus += e.calcularBonus();
-        }
-
-        System.out.println("--- RESUMEN ---");
-        System.out.println("Salarios Totales: $" + String.format("%.2f", totalSalarios));
-        System.out.println("Bonus Total: $" + String.format("%.2f", totalBonus));
-        System.out.println("Costo Mensual Total: $" + String.format("%.2f", obtenerCostoMensual()));
-    }
-
-    public List&lt;Empleado&gt; obtenerEmpleados() {
-        return new ArrayList&lt;&gt;(empleados);
-    }
-}
-</code></pre>
-
-        <h4>5. Programa Principal</h4>
-        <pre><code class="language-java">public class Main {
-    public static void main(String[] args) {
-        Empresa empresa = new Empresa("TechCorp");
-
-        empresa.agregarEmpleado(new Administrativo("Ana", "García", 35, "ADM001", 1500, "Administración", 8));
-        empresa.agregarEmpleado(new Vendedor("Carlos", "López", 40, "VEN001", 1200, "Ventas", 50000));
-        empresa.agregarEmpleado(new Ingeniero("María", "Martínez", 28, "ING001", 2500, "Desarrollo", 5, "Java"));
-        empresa.agregarEmpleado(new Administrativo("Juan", "Pérez", 32, "ADM002", 1400, "Administración", 5));
-        empresa.agregarEmpleado(new Vendedor("Rosa", "Díaz", 38, "VEN002", 1300, "Ventas", 75000));
-
-        empresa.generarReporte();
-    }
-}
-</code></pre>
-      </div>
+--- RESUMEN ---
+Costo Total: $10925.00</pre>
 
       <h3>Puntos Clave del Ejercicio</h3>
       <div class="cards-grid-profesional">
@@ -438,6 +346,13 @@ public class Main {
 </code></pre>
       </div>
 
+      <h4>Salida Esperada</h4>
+      <pre style="background:#1d1f21;color:#e6eef8;padding:15px;border-radius:8px;overflow:auto;font-family:Consolas,'Courier New',monospace;font-size:0.9rem;">=== REPORTE TRANSPORTES ===
+BUS-001 - Ocupación: 30/40 - Tarifa: $1.50 - Ingresos: $45.00
+MTR-001 - Ocupación: 80/100 - Tarifa: $1.00 - Ingresos: $80.00
+TAX-001 - Ocupación: 3/4 - Tarifa: $4.75 - Ingresos: $14.25
+Ingresos Totales: $139.25</pre>
+
       <h3>Gestor del Sistema</h3>
       <p><strong>Explicación:</strong> Esta clase gestiona todos los vehículos del sistema. Demuestra polimorfismo: almacena vehículos de diferentes tipos (Autobús, Metro, Taxi) en una sola colección. Métodos como <code>obtenerIngresosTotales()</code> e <code>generarReporte()</code> funcionan con cualquier tipo de vehículo sin conocer cuál es.</p>
       <pre><code class="language-java">// Importar ArrayList y List
@@ -577,6 +492,18 @@ public class Main {
     }
 }
 </code></pre>
+      </div>
+
+      <h4>Salida Esperada</h4>
+      <pre style="background:#1d1f21;color:#e6eef8;padding:15px;border-radius:8px;overflow:auto;font-family:Consolas,'Courier New',monospace;font-size:0.9rem;">=== REPORTE ZOOLÓGICO: Zoológico Central ===
+León (Carnívoro) - Alimento diario: 9.00 kg
+Tigre (Carnívoro) - Alimento diario: 8.00 kg
+Elefante (Herbívoro) - Alimento diario: 400.00 kg
+Jirafa (Herbívoro) - Alimento diario: 64.00 kg
+
+--- RESUMEN ---
+Total de animales: 4
+Alimento total diario: 481.00 kg</pre>
     </section>
 
     <h3>Resumen de Patrones Aplicados</h3>
@@ -643,25 +570,29 @@ public class Main {
       <h2>Videos Educativos</h2>
       <div class="videos-grid">
         <div class="video-container">
-          <h3>Tutorial Java POO - Ejercicios Prácticos</h3>
+          <h3>Ejercicios de POO en Java</h3>
           <div class="video-wrapper">
             <video controls width="100%" height="400" class="video-player">
-              <source src="videos/Tutorial Java POO_ Ejemplo de Herencia y Polimorfismo en Programación Orientada .mp4" type="video/mp4">
-              Tu navegador no soporta la reproducción de video. <a href="videos/Tutorial Java POO_ Ejemplo de Herencia y Polimorfismo en Programación Orientada .mp4" download>Descargar video</a>
+              <source src="videos/ejercicios.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video. <a href="videos/ejercicios.mp4" download>Descargar video</a>
             </video>
           </div>
-          <p>Completa tutorial práctico de Programación Orientada a Objetos en Java con ejercicios resueltos, aplicando conceptos como herencia, polimorfismo y encapsulación en proyectos reales.</p>
+          <p>Videos de ejercicios prácticos de Programación Orientada a Objetos en Java.</p>
         </div>
       </div>
     </section>
 
-    <p class="muted">Recursos adicionales: <a href="https://docs.oracle.com/javase/tutorial/java/IandI/" target="_blank" rel="noopener">Interfaces and Classes (Oracle)</a> • <a href="https://www.geeksforgeeks.org/polymorphism-in-java/" target="_blank" rel="noopener">Polymorphism in Java (GeeksforGeeks)</a></p>
-
-    <p><a href="index.html">Volver al inicio</a></p>
+    <div style="text-align:center;margin:40px 0;padding:25px;background:linear-gradient(135deg,rgba(43,108,176,0.08),rgba(72,187,120,0.05));border-radius:12px;border:2px solid rgba(43,108,176,0.15);">
+      <p style="margin:0 0 15px 0;font-weight:600;color:var(--accent);">📚 Recursos adicionales</p>
+      <p class="muted" style="margin:0 0 20px 0;"><a href="https://docs.oracle.com/javase/tutorial/java/IandI/" target="_blank" rel="noopener">Interfaces and Classes (Oracle)</a> • <a href="https://www.geeksforgeeks.org/polymorphism-in-java/" target="_blank" rel="noopener">Polymorphism in Java (GeeksforGeeks)</a></p>
+      <a href="index.html" style="display:inline-block;background:linear-gradient(135deg,var(--accent),#0284c7);color:white;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;transition:all 0.3s ease;">🏠 Volver al inicio</a>
+    </div>
   </main>
 
   <footer class="site-footer">
-    <p>&copy; Página web POO 2026 - Todos los derechos reservados.</p>
+    <p>© Página web POO 2026 - Programación Orientada a Objetos</p>
+    <p>Kevin Zapata - Todos los derechos reservados</p>
+    <p>Educación Superior TSUDS - ITECSUR</p>
   </footer>
   
   <!-- Botones de navegación profesional -->
@@ -672,7 +603,7 @@ public class Main {
     <button class="nav-button bottom" data-tooltip="Ir al final" onclick="scrollToBottom()">↓</button>
   </div>
   
-  <script src="js/main.js" defer></script>
+  <script src="js/main.js"></script>
   <script>
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -29,7 +29,10 @@
       margin-bottom: 16px;
       box-shadow: 0 6px 18px rgba(11,15,30,0.06);
       border: 1px solid rgba(11,15,30,0.03);
+      animation: fadeInUp 0.5s ease-out backwards;
     }
+    .exercise-block:nth-child(odd) { animation-delay: 0.1s; }
+    .exercise-block:nth-child(even) { animation-delay: 0.2s; }
 
     .exercise-title {
       font-size: 1.4rem;
@@ -105,12 +108,12 @@
         <li><a href="ejercicios-temas-poo.html">Ejercicios Temas POO</a></li>
         <li><a href="trabajos-autonomos.html">Trabajos Autónomos</a></li>
         <li><a href="clase-practica.html">Clase Práctica</a></li>
+        <li><a href="https://drive.google.com/drive/folders/175wdD0Z5zasjrHCy6rzqJpAT-K2fHqBW?hl=es" target="_blank" class="nav-videos">🎬 Videos</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
-    <div class="content-container">
+  <main class="content">
       <h1 class="page-title">Ejercicios hechos en clase</h1>
 
       <!-- Ejercicio 1 -->
@@ -961,11 +964,17 @@ public class Main { // clase principal
         </div>
       </div>
 
-    </div>
-  </main>
+      <div style="text-align:center;margin:40px 0;padding:25px;background:linear-gradient(135deg,rgba(43,108,176,0.08),rgba(72,187,120,0.05));border-radius:12px;border:2px solid rgba(43,108,176,0.15);">
+        <p style="margin:0 0 15px 0;font-weight:600;color:var(--accent);">📚 Recursos adicionales</p>
+        <p class="muted" style="margin:0 0 20px 0;"><a href="https://docs.oracle.com/javase/tutorial/java/IandI/" target="_blank" rel="noopener">Interfaces and Classes (Oracle)</a> • <a href="https://www.geeksforgeeks.org/polymorphism-in-java/" target="_blank" rel="noopener">Polymorphism in Java (GeeksforGeeks)</a></p>
+        <a href="index.html" style="display:inline-block;background:linear-gradient(135deg,var(--accent),#0284c7);color:white;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;transition:all 0.3s ease;">🏠 Volver al inicio</a>
+      </div>
+    </main>
 
   <footer class="site-footer">
-    <p>&copy; Página web POO 2026 - Todos los derechos reservados.</p>
+    <p>© Página web POO 2026 - Programación Orientada a Objetos</p>
+    <p>Kevin Zapata - Todos los derechos reservados</p>
+    <p>Educación Superior TSUDS - ITECSUR</p>
   </footer>
   
   <!-- Botones de navegación profesional -->
@@ -976,7 +985,7 @@ public class Main { // clase principal
     <button class="nav-button bottom" data-tooltip="Ir al final" onclick="scrollToBottom()">↓</button>
   </div>
   
-  <script src="js/main.js" defer></script>
+  <script src="js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       hljs.highlightAll();
